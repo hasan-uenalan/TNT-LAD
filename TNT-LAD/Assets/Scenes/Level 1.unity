@@ -332,6 +332,8 @@ MonoBehaviour:
   gridZ: 5
   floor: {fileID: 5617804783886285068, guid: fc6656dbcc963c940824231257e2af05, type: 3}
   block: {fileID: 8408984061183288894, guid: da6a3be7359b1084eb194a7a43912a1f, type: 3}
+  blockHeight: 1
+  outerWall: {fileID: 0}
 --- !u!4 &2053562653
 Transform:
   m_ObjectHideFlags: 0
@@ -340,7 +342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053562651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1128342, y: -5.265621, z: 6.260186}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
