@@ -4,38 +4,44 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    [Header("Parameters")]
-    public int blockSize;
-    public float spacing;
-    public Vector3 startPos;
-    
-    [Header("Grid")]
-    public int gridX;
-    public int gridZ;
+  [Header("Parameters")]
+  public int blockSize;
+  public float spacing;
+  public Vector3 startPos;
 
-    [Header("Prefabs")]
-    public GameObject floor;
-    public GameObject block;
+  [Header("Grid")]
+  public int gridX;
+  public int gridZ;
 
-    private GameObject[][] map;
-    
+  [Header("Prefabs")]
+  public GameObject floor;
+  public GameObject block;
 
-    // Start is called before the first frame update
-    void Start()
+  private GameObject[,] map;
+
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    GenerateFloor();
+  }
+
+  private void GenerateFloor()
+  {
+    map = new GameObject[gridX, gridZ];
+    for (int x = 0; x < gridX; x++)
     {
-        for(int x=0; x < gridX; x++)
-        {
-            for(int y=0; x < gridZ; y++)
-            {
-                Vector3 pos = new Vector3(startPos.x + x * spacing, 0, startPos.y + y * spacing);
-                map[x][y] = Instantiate(floor, pos, Quaternion.identity) as GameObject;
-            }
-        }   
+      for (int z = 0; z < gridZ; z++)
+      {
+        Vector3 pos = new Vector3(startPos.x + x * spacing, 0, startPos.y + z * spacing);
+        map[x, z] = Instantiate(floor, pos, Quaternion.identity) as GameObject;
+      }
     }
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
 }
