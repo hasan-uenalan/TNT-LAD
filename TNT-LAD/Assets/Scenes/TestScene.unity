@@ -402,6 +402,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860540, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860540, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: players.Array.data[0].playerPrefab
+      value: 
+      objectReference: {fileID: 553224111478213788, guid: 261e8112944027644905f63d5f136738,
+        type: 3}
+    - target: {fileID: 4338849229032860540, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: players.Array.data[1].playerPrefab
+      value: 
+      objectReference: {fileID: 553224111478213788, guid: 261e8112944027644905f63d5f136738,
+        type: 3}
+    - target: {fileID: 4338849229032860540, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: players.Array.data[2].playerPrefab
+      value: 
+      objectReference: {fileID: 553224111478213788, guid: 261e8112944027644905f63d5f136738,
+        type: 3}
+    - target: {fileID: 4338849229032860540, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: players.Array.data[3].playerPrefab
+      value: 
+      objectReference: {fileID: 553224111478213788, guid: 261e8112944027644905f63d5f136738,
+        type: 3}
     - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
         type: 3}
       propertyPath: m_LocalPosition.x

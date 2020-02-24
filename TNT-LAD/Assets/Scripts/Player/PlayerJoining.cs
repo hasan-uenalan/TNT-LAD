@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class PlayerJoining : MonoBehaviour
 {
@@ -38,7 +39,8 @@ public class PlayerJoining : MonoBehaviour
   private void JoinPlayer(GameObject player, InputDevice device)
   {
     string controlScheme = (device is Gamepad) ? "Gamepad" : "Keyboard";
-    PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device.device);
+    PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
+    playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
   }
 }
 
