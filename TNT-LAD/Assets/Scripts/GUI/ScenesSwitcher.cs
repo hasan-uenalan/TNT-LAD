@@ -24,4 +24,9 @@ public class ScenesSwitcher : MonoBehaviour
   {
     SceneManager.LoadScene("PlaySettingsScreen");
   }
+
+  public void SwitchToControls()
+  {
+    SceneManager.LoadScene("ControlsScene");
+  }
 }

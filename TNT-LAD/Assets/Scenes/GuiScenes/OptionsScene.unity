@@ -1125,7 +1125,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1941841706}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2548088635057416889, guid: de9be5004b0395544bfb824dbd15a5a9,
+          type: 3}
+        m_MethodName: SwitchToControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1941841706
 MonoBehaviour:
   m_ObjectHideFlags: 0
