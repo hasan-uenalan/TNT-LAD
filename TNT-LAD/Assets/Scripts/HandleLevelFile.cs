@@ -15,7 +15,6 @@ public class HandleLevelFile : MonoBehaviour
       levelController = gameObject.GetComponent<LevelController>();
 
       InitPath();
-      Debug.Log(Application.dataPath);
       var sr = new StreamReader(filePath);
       var fileContents = sr.ReadToEnd();
       sr.Close();
