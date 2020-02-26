@@ -7,39 +7,18 @@ using System.IO;
 public class HandleLevelFile : MonoBehaviour
 {
 
-    private string filePath;
-    private LevelController levelController;
+  public string[] GetFileData()
+  {
+    var sr = new StreamReader(GetFilePath());
 
-    public void PlaceLevelBlocks()
-    {
-      levelController = gameObject.GetComponent<LevelController>();
+    var fileContents = sr.ReadToEnd();
+    sr.Close();
+    string[] blockLine = fileContents.Split("\n"[0]);
+    return blockLine;
+   }
 
-      InitPath();
-      var sr = new StreamReader(filePath);
-      var fileContents = sr.ReadToEnd();
-      sr.Close();
-
-      //reading content
-      var blockLine = fileContents.Split("\n"[0]);
-      for (int x = 0; x < blockLine.Length; x++)
-      {
-        char[] blocks = blockLine[x].ToCharArray();
-        for (int z = 0; z < blocks.Length; z++)
-        {
-          if (blocks[z] == '+')
-          {
-            levelController.SetBlock(x, z, LevelController.blockType.DESTRUCTIBLE);
-          }
-          if (blocks[z] == '*')
-          {
-            levelController.SetBlock(x, z, LevelController.blockType.DEFAULT);
-          }
-        }
-      }
-    }
-
-    private void InitPath()
-    {
-      filePath = Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt";
-    }
+  public string GetFilePath()
+  {
+    return Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt";
+  }
 }

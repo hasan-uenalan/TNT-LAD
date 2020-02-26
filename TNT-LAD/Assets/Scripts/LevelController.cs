@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 
 //[ExecuteInEditMode]
 public class LevelController : MonoBehaviour
@@ -115,12 +116,52 @@ public class LevelController : MonoBehaviour
   //clears field and reconstructs with new parameters
   public void Reconstruct()
   {
-    DestroyMap();
-    GenerateFloor();
-    GenerateWall();
+    //DestroyMap();
     blockMap = new GameObject[gridX, gridZ];
     //places the blocks in the according .txt file
-    handleLevelFile.PlaceLevelBlocks();
+    if (File.Exists(handleLevelFile.GetFilePath()))
+    {
+      updateMapParams();
+      PlaceLevelBlocks();
+    }
+    GenerateFloor();
+    GenerateWall();
+  }
+
+  private void updateMapParams()
+  {
+    string[] blockLine = handleLevelFile.GetFileData();
+    gridX = blockLine.Length;
+    gridZ = blockLine[0].ToCharArray().Length - 1; //whitespace is also part of the array
+
+    foreach(char c in blockLine[0].ToCharArray())
+    {
+      Debug.Log(c);
+    }
+
+    Debug.Log("x: " + gridX + " z: " + gridZ);
+  }
+
+  private void PlaceLevelBlocks()
+  {
+
+    string[] blockLine = handleLevelFile.GetFileData();
+
+    for (int x = 0; x < blockLine.Length; x++)
+    {
+      char[] blocks = blockLine[x].ToCharArray();
+      for (int z = 0; z < blocks.Length; z++)
+      {
+        if (blocks[z] == '+')
+        {
+          SetBlock(x, z, blockType.DESTRUCTIBLE);
+        }
+        if (blocks[z] == '*')
+        {
+          SetBlock(x, z, blockType.DEFAULT);
+        }
+      }
+    }
   }
 
   private void DestroyMap()
