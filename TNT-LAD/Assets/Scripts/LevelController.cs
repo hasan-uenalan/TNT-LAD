@@ -86,11 +86,23 @@ public class LevelController : MonoBehaviour
   //Generates outer wall of play area
   private void GenerateWall()
   {
-    //for (int x = -1; x < gridX+1; x++)
-    //{
-    //  Vector3 pos = new Vector3(startPos.x + x * spacing, 0, startPos.z - spacing);
-    //  Instantiate(outerWall, pos, Quaternion.identity);
-    //}
+    for(int z = -1; z < gridZ+1; z++)
+    {
+      if(z != -1 && z != gridZ)
+      {
+        Vector3 leftWallPos = new Vector3(startPos.x + -1 * spacing, blockHeight / 2, startPos.z + z * spacing);
+        Vector3 rightWallPos = new Vector3(startPos.x + gridX * spacing, blockHeight / 2, startPos.z + z * spacing);
+        Instantiate(outerWall, leftWallPos, Quaternion.identity);
+        Instantiate(outerWall, rightWallPos, Quaternion.identity);
+        continue;
+      }
+
+      for(int x = -1; x < gridX+1; x++)
+      {
+        Vector3 frameWallPos = new Vector3(startPos.x + x * spacing, blockHeight / 2, startPos.z + z * spacing);
+        Instantiate(outerWall, frameWallPos, Quaternion.identity);
+      }
+    }
   }
 
   //generates the Floor of the Gamefield
