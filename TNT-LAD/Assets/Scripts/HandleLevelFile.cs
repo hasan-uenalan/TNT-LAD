@@ -26,7 +26,7 @@ public class HandleLevelFile : MonoBehaviour
     return Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt";
   }
 
-  public void saveMapFile(GameObject[,] blocks)
+  public void SaveMapFile(GameObject[,] blocks)
   {
     if (File.Exists(GetFilePath()))
     {
@@ -34,15 +34,32 @@ public class HandleLevelFile : MonoBehaviour
     }
     else
     {
-      Debug.Log("Test");
-      var sr = File.CreateText(Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name); //creates file with scene name
+      var sr = File.CreateText(Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt"); //creates file with scene name
       for(int x = 0; x < blocks.GetLength(0); x++)
       {
         for(int z = 0; z < blocks.GetLength(1); z++)
         {
-
+          if(blocks[x,z] == null)
+          {
+            sr.Write(charNone);
+          }
+          else
+          {           
+            //if(blocks[x, z].gameObject == destructibleBlock)
+            //{
+            //  sr.Write(charDestructible);
+            //}
+            //if (blocks[x, z].gameObject == defaultBlock)
+            //{
+            //  sr.Write(charDefault);
+            //}
+          }
+          
         }
+        sr.Write("\n");
       }
+
+      sr.Close();
     }
   }
 

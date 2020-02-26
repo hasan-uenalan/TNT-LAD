@@ -202,82 +202,78 @@ public class LevelController : MonoBehaviour
     }
   }
 
-
-
   [CustomEditor(typeof(LevelController))]
   class DecalMeshHelperEditor : Editor
   {
     LevelController levelController;
-    HandleLevelFile levelFile;
+    HandleLevelFile handleLevelFile;
     int xBlock = 0;
     int zBlock = 0;
 
     private void OnEnable()
     {
       levelController = (LevelController)target;
-      levelFile = (HandleLevelFile)target;
+      handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
     }
     
     public override void OnInspectorGUI()
     {
       DrawDefaultInspector();
-      if (GUILayout.Button("Reconstruct"))
+
+      //Seperator
+      Rect rect = EditorGUILayout.GetControlRect(false, 1);
+      rect.height = 1;
+      EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
+
+
+      if (Application.isPlaying)
       {
-        if (Application.isPlaying)
+        if (GUILayout.Button("Reconstruct"))
         {
           levelController.Construct();
         }
-      }
 
-      //GUILayout.BeginHorizontal();
-      xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
-      zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
-      //GUILayout.EndHorizontal();
+        //GUILayout.BeginHorizontal();
+        xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
+        zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
+        //GUILayout.EndHorizontal();
 
-      GUILayout.BeginHorizontal();
-      if (GUILayout.Button("Default")) 
-      {
-        if (Application.isPlaying)
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Default"))
         {
+
           levelController.SetBlock(xBlock, zBlock, blockType.DEFAULT);
+
         }
-      }
-      if (GUILayout.Button("Destructible"))
-      {
-        if (Application.isPlaying)
+        if (GUILayout.Button("Destructible"))
         {
+         
           levelController.SetBlock(xBlock, zBlock, blockType.DESTRUCTIBLE);
+
         }
-      }
-      if (GUILayout.Button("Delete"))
-      {
-        if (Application.isPlaying)
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Delete"))
         {
           levelController.deleteBlock(xBlock, zBlock);
         }
-      }
-      GUILayout.EndHorizontal();
-      if(GUILayout.Button("Clear Blocks"))
-      {
-        if (Application.isPlaying)
+        GUILayout.EndHorizontal();
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Clear Blocks"))
         {
           levelController.ClearBlocks(false);
         }
-      }
-      if (GUILayout.Button("Clear All"))
-      {
-        if (Application.isPlaying)
+        GUI.backgroundColor = Color.red;
+        if (GUILayout.Button("Clear All"))
         {
           levelController.ClearBlocks(true);
         }
-      }
-      if (GUILayout.Button("Save Map"))
-      {
-        if (Application.isPlaying)
+        GUI.backgroundColor = Color.green;
+        if (GUILayout.Button("Save Map"))
         {
-          
+          handleLevelFile.SaveMapFile(levelController.blockMap);
         }
       }
+
     }
   }
 
