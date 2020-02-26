@@ -1,5 +1,5 @@
 {
-    "name": "InputSystem",
+    "name": "MasterInputSystem",
     "maps": [
         {
             "name": "Player",
@@ -9,6 +9,14 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "d1c0f6c1-b9ea-480b-aade-6d529d3843c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DropBomb",
+                    "type": "Button",
+                    "id": "e89a7836-b00c-435b-9f3b-57fbf5677710",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -124,6 +132,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "47c95c45-2705-45dd-9191-66f1180e22db",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DropBomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c6aba3f-235b-4702-a887-ee1e75e062d1",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DropBomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
