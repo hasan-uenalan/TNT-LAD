@@ -43,7 +43,7 @@ public class LevelController : MonoBehaviour
     handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
 
     CreateSceneStructure();
-    Reconstruct();
+    Construct();
   }
 
   //creating scene structure
@@ -54,6 +54,33 @@ public class LevelController : MonoBehaviour
     floorBlocks.transform.parent = levelObjects.transform;
     levelBlocks = new GameObject("Level Blocks");
     levelBlocks.transform.parent = levelObjects.transform;
+  }
+
+  //constructs the map
+  public void Construct()
+  {
+    if (File.Exists(handleLevelFile.GetFilePath()))
+    {
+      updateMapParams();
+      blockMap = new GameObject[gridX, gridZ];
+      floorMap = new GameObject[gridX, gridZ];
+
+      PlaceLevelBlocks();
+    }
+    else
+    {
+      blockMap = new GameObject[gridX, gridZ];
+      floorMap = new GameObject[gridX, gridZ];
+    }
+    GenerateFloor();
+    GenerateWall();
+  }
+
+  private void updateMapParams()
+  {
+    string[] blockLine = handleLevelFile.GetFileData();
+    gridX = blockLine.Length;
+    gridZ = blockLine[0].ToCharArray().Length - 1; //whitespace is also part of the array
   }
 
   //Generates outer wall of play area
@@ -69,7 +96,6 @@ public class LevelController : MonoBehaviour
   //generates the Floor of the Gamefield
   private void GenerateFloor()
   {
-    floorMap = new GameObject[gridX, gridZ];
     for (int x = 0; x < gridX; x++)
     {
       for (int z = 0; z < gridZ; z++)
@@ -113,35 +139,8 @@ public class LevelController : MonoBehaviour
       Debug.LogError("No Space available");
     }
   }
-  //clears field and reconstructs with new parameters
-  public void Reconstruct()
-  {
-    //DestroyMap();
-    blockMap = new GameObject[gridX, gridZ];
-    //places the blocks in the according .txt file
-    if (File.Exists(handleLevelFile.GetFilePath()))
-    {
-      updateMapParams();
-      PlaceLevelBlocks();
-    }
-    GenerateFloor();
-    GenerateWall();
-  }
 
-  private void updateMapParams()
-  {
-    string[] blockLine = handleLevelFile.GetFileData();
-    gridX = blockLine.Length;
-    gridZ = blockLine[0].ToCharArray().Length - 1; //whitespace is also part of the array
-
-    foreach(char c in blockLine[0].ToCharArray())
-    {
-      Debug.Log(c);
-    }
-
-    Debug.Log("x: " + gridX + " z: " + gridZ);
-  }
-
+  //places the blocks in the according .txt file
   private void PlaceLevelBlocks()
   {
 
@@ -152,11 +151,11 @@ public class LevelController : MonoBehaviour
       char[] blocks = blockLine[x].ToCharArray();
       for (int z = 0; z < blocks.Length; z++)
       {
-        if (blocks[z] == '+')
+        if (blocks[z] == handleLevelFile.GetCharDestructible())
         {
           SetBlock(x, z, blockType.DESTRUCTIBLE);
         }
-        if (blocks[z] == '*')
+        if (blocks[z] == handleLevelFile.GetCharDefault())
         {
           SetBlock(x, z, blockType.DEFAULT);
         }
@@ -164,18 +163,20 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  private void DestroyMap()
+  public void deleteBlock(int x, int z)
   {
-    if(floorMap != null)
+    if(blockMap[x, z] != null)
     {
-      for(int x=0; x < floorMap.GetLength(0); x++)
-      {
-        for(int z=0; z < floorMap.GetLength(1); z++)
-        {
-          Destroy(floorMap[x, z]);
-        }
-      }
+      Destroy(blockMap[x, z]);
     }
+    else
+    {
+      Debug.LogError("No block at those coordinates");
+    }
+  }
+
+  private void ClearBlocks(bool clearAll)
+  {
     if (blockMap != null)
     {
       for (int x = 0; x < blockMap.GetLength(0); x++)
@@ -186,19 +187,35 @@ public class LevelController : MonoBehaviour
         }
       }
     }
+    if (clearAll)
+    {
+      if (floorMap != null)
+      {
+        for (int x = 0; x < floorMap.GetLength(0); x++)
+        {
+          for (int z = 0; z < floorMap.GetLength(1); z++)
+          {
+            Destroy(floorMap[x, z]);
+          }
+        }
+      }
+    }
   }
+
 
 
   [CustomEditor(typeof(LevelController))]
   class DecalMeshHelperEditor : Editor
   {
     LevelController levelController;
+    HandleLevelFile levelFile;
     int xBlock = 0;
     int zBlock = 0;
 
     private void OnEnable()
     {
       levelController = (LevelController)target;
+      levelFile = (HandleLevelFile)target;
     }
     
     public override void OnInspectorGUI()
@@ -208,7 +225,7 @@ public class LevelController : MonoBehaviour
       {
         if (Application.isPlaying)
         {
-          levelController.Reconstruct();
+          levelController.Construct();
         }
       }
 
@@ -232,12 +249,33 @@ public class LevelController : MonoBehaviour
           levelController.SetBlock(xBlock, zBlock, blockType.DESTRUCTIBLE);
         }
       }
-      GUILayout.EndHorizontal();
-      if(GUILayout.Button("Destroy Map"))
+      if (GUILayout.Button("Delete"))
       {
         if (Application.isPlaying)
         {
-          levelController.DestroyMap();
+          levelController.deleteBlock(xBlock, zBlock);
+        }
+      }
+      GUILayout.EndHorizontal();
+      if(GUILayout.Button("Clear Blocks"))
+      {
+        if (Application.isPlaying)
+        {
+          levelController.ClearBlocks(false);
+        }
+      }
+      if (GUILayout.Button("Clear All"))
+      {
+        if (Application.isPlaying)
+        {
+          levelController.ClearBlocks(true);
+        }
+      }
+      if (GUILayout.Button("Save Map"))
+      {
+        if (Application.isPlaying)
+        {
+          
         }
       }
     }
