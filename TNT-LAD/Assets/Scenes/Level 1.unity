@@ -306,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053562653}
   - component: {fileID: 2053562652}
+  - component: {fileID: 2053562654}
   m_Layer: 0
   m_Name: MapController
   m_TagString: Untagged
@@ -351,3 +352,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053562654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053562651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9d4ee39596b9d4c9dc9eaeb2936768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
