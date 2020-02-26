@@ -1097,7 +1097,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2819808368554127269}
-        m_MethodName: SwitchToGame
+        m_MethodName: SwitchToPlaySettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
