@@ -21,10 +21,6 @@ public class HandleLevelFile : MonoBehaviour
 
       //reading content
       var blockLine = fileContents.Split("\n"[0]);
-      foreach (string line in blockLine)
-      {
-        print(line);
-      }
       for (int x = 0; x < blockLine.Length; x++)
       {
         char[] blocks = blockLine[x].ToCharArray();

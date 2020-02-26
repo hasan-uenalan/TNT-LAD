@@ -329,8 +329,8 @@ MonoBehaviour:
   blockSize: 1
   spacing: 1
   startPos: {x: 0.5, y: 0, z: 0.5}
-  gridX: 20
-  gridZ: 20
+  gridX: 21
+  gridZ: 21
   floor: {fileID: 5617804783886285068, guid: fc6656dbcc963c940824231257e2af05, type: 3}
   defaultBlock: {fileID: 1748031504211757037, guid: cf93201e4c3297d48b378dc0687d15de,
     type: 3}

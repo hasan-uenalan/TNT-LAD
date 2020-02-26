@@ -86,7 +86,7 @@ public class LevelController : MonoBehaviour
     //out of bounds check
     if(x >= gridX || z >= gridZ)
     {
-      Debug.LogError("Out of bounds!");
+      Debug.LogError("Out of bounds! x:" + x + " z: " + z);
       return;
     }
     //placing block only of there is space available
@@ -119,6 +119,7 @@ public class LevelController : MonoBehaviour
     GenerateFloor();
     GenerateWall();
     blockMap = new GameObject[gridX, gridZ];
+    //places the blocks in the according .txt file
     handleLevelFile.PlaceLevelBlocks();
   }
 
@@ -200,4 +201,5 @@ public class LevelController : MonoBehaviour
       }
     }
   }
+
 }
