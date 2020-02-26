@@ -14,4 +14,9 @@ public class ScenesSwitcher : MonoBehaviour
   {
     SceneManager.LoadScene("MainMenu");
   }
+
+  public void SwitchToOptions()
+  {
+    SceneManager.LoadScene("OptionsScene");
+  }
 }
