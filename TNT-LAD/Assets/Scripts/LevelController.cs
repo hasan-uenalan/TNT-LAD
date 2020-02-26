@@ -32,11 +32,15 @@ public class LevelController : MonoBehaviour
   private GameObject floorBlocks;
   private GameObject levelBlocks;
 
-  private enum blockType {DESTRUCTIBLE, DEFAULT};
+  private HandleLevelFile handleLevelFile;
+
+  public enum blockType {DESTRUCTIBLE, DEFAULT};
 
   // Start is called before the first frame update
   void Start()
   {
+    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
+
     CreateSceneStructure();
     Reconstruct();
   }
@@ -77,7 +81,7 @@ public class LevelController : MonoBehaviour
   }
 
   //sets the block at specified location
-  private void SetBlock(int x, int z, LevelController.blockType blockType)
+  public void SetBlock(int x, int z, LevelController.blockType blockType)
   {
     //out of bounds check
     if(x >= gridX || z >= gridZ)
@@ -115,6 +119,7 @@ public class LevelController : MonoBehaviour
     GenerateFloor();
     GenerateWall();
     blockMap = new GameObject[gridX, gridZ];
+    handleLevelFile.PlaceLevelBlocks();
   }
 
   private void DestroyMap()
