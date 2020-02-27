@@ -20,13 +20,18 @@ public class ScenesSwitcher : MonoBehaviour
     SceneManager.LoadScene("OptionsScene");
   }
 
-  public void SwitchToPlaySettings()
+  public void SwitchToPlayerSettings()
   {
-    SceneManager.LoadScene("PlaySettingsScreen");
+    SceneManager.LoadScene("PlayerJoinScreen");
   }
 
   public void SwitchToControls()
   {
     SceneManager.LoadScene("ControlsScene");
+  }
+
+  public void SwitchToLevelSettings()
+  {
+    SceneManager.LoadScene("LevelSelectionScene");
   }
 }
