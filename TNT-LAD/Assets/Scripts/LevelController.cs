@@ -29,7 +29,8 @@ public class LevelController : MonoBehaviour
 
   private GameObject[,] floorMap;
   private GameObject[,] blockMap;
-
+  
+  //For scene  structure
   private GameObject floorBlocks;
   private GameObject levelBlocks;
 
@@ -121,13 +122,21 @@ public class LevelController : MonoBehaviour
     if(blockMap[x, z] == null)
     {
       Vector3 pos = new Vector3(startPos.x + x * spacing, blockHeight / 2, startPos.z + z * spacing);
+      GameObject tmp;
       switch (blockType)
       {
+
         case Types.blockType.DEFAULT:
-          blockMap[x, z] = Instantiate(defaultBlock, pos, Quaternion.identity) as GameObject;
+          tmp = Instantiate(defaultBlock, pos, Quaternion.identity) as GameObject;
+          tmp.AddComponent<BlockWrapper>();
+          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DEFAULT);
+          blockMap[x, z] = tmp;
           break;
         case Types.blockType.DESTRUCTIBLE:
-          blockMap[x, z] = Instantiate(destructibleBlock, pos, Quaternion.identity) as GameObject;
+          tmp = Instantiate(destructibleBlock, pos, Quaternion.identity) as GameObject;
+          tmp.AddComponent<BlockWrapper>();
+          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DESTRUCTIBLE);
+          blockMap[x, z] = tmp;
           break;
         default:
 

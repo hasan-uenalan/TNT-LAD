@@ -41,15 +41,15 @@ public class HandleLevelFile : MonoBehaviour
             sr.Write(charNone);
           }
           else
-          {           
-            //if(blocks[x, z].gameObject == destructibleBlock)
-            //{
-            //  sr.Write(charDestructible);
-            //}
-            //if (blocks[x, z].gameObject == defaultBlock)
-            //{
-            //  sr.Write(charDefault);
-            //}
+          {
+            if (blocks[x, z].gameObject.GetComponent<BlockWrapper>().GetBlockType() == Types.blockType.DESTRUCTIBLE)
+            {
+              sr.Write(charDestructible);
+            }
+            if (blocks[x, z].gameObject.GetComponent<BlockWrapper>().GetBlockType() == Types.blockType.DEFAULT)
+            {
+              sr.Write(charDefault);
+            }
           }
           
         }
