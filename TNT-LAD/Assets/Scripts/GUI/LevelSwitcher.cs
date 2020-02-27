@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class LevelSwitcher : MonoBehaviour
 {
+  public GameObject LevelInformation;
+
   private List<Object> LevelImageList;
 
   private int curLevelNumber = 1;
@@ -16,8 +18,9 @@ public class LevelSwitcher : MonoBehaviour
     LevelImageList = Resources.LoadAll("Levels", typeof(Sprite)).ToList();
   }
 
-  private void ChangeButtonName()
+  private void ChangeLevelSelectionValues()
   {
+    LevelInformation.GetComponent<LevelValues>().SetLevelNumber(curLevelNumber);
     string levelName = "Level " + curLevelNumber;
     GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = levelName;
     foreach (Sprite curLevelImage in LevelImageList) {
@@ -31,12 +34,12 @@ public class LevelSwitcher : MonoBehaviour
   {
     if (curLevelNumber < LevelImageList.Count) {
       curLevelNumber++;
-      ChangeButtonName();
+      ChangeLevelSelectionValues();
 
     }
     else {
       curLevelNumber = 1;
-      ChangeButtonName();
+      ChangeLevelSelectionValues();
     }
   }
 
@@ -44,11 +47,11 @@ public class LevelSwitcher : MonoBehaviour
   {
     if (curLevelNumber > 1) {
       curLevelNumber--;
-      ChangeButtonName();
+      ChangeLevelSelectionValues();
     }
     else {
       curLevelNumber = LevelImageList.Count;
-      ChangeButtonName();
+      ChangeLevelSelectionValues();
     }
   }
 }
