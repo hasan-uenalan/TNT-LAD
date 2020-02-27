@@ -29,9 +29,11 @@ public class LevelController : MonoBehaviour
 
   private GameObject[,] floorMap;
   private GameObject[,] blockMap;
+  private GameObject[,] wallMap;
 
   private GameObject floorBlocks;
   private GameObject levelBlocks;
+  private GameObject wallBlocks;
 
   private HandleLevelFile handleLevelFile;
 
@@ -54,6 +56,8 @@ public class LevelController : MonoBehaviour
     floorBlocks.transform.parent = levelObjects.transform;
     levelBlocks = new GameObject("Level Blocks");
     levelBlocks.transform.parent = levelObjects.transform;
+    wallBlocks = new GameObject("Wall Blocks");
+    wallBlocks.transform.parent = levelObjects.transform;
   }
 
   //constructs the map
@@ -64,13 +68,14 @@ public class LevelController : MonoBehaviour
       updateMapParams();
       blockMap = new GameObject[gridX, gridZ];
       floorMap = new GameObject[gridX, gridZ];
-
+      wallMap = new GameObject[gridX + 2, gridZ + 2];
       PlaceLevelBlocks();
     }
     else
     {
       blockMap = new GameObject[gridX, gridZ];
       floorMap = new GameObject[gridX, gridZ];
+      wallMap = new GameObject[gridX + 2, gridZ + 2];
     }
     GenerateFloor();
     GenerateWall();
@@ -86,21 +91,20 @@ public class LevelController : MonoBehaviour
   //Generates outer wall of play area
   private void GenerateWall()
   {
-    for(int z = -1; z < gridZ+1; z++)
+    for (int z = 0; z < wallMap.GetLength(1); z++)
     {
-      if(z != -1 && z != gridZ)
+      if(z != 0 && z != (wallMap.GetLength(1)-1))
       {
-        Vector3 leftWallPos = new Vector3(startPos.x + -1 * spacing, blockHeight / 2, startPos.z + z * spacing);
-        Vector3 rightWallPos = new Vector3(startPos.x + gridX * spacing, blockHeight / 2, startPos.z + z * spacing);
-        Instantiate(outerWall, leftWallPos, Quaternion.identity);
-        Instantiate(outerWall, rightWallPos, Quaternion.identity);
+        Vector3 leftWallPos = new Vector3((startPos.x + -1) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
+        Vector3 rightWallPos = new Vector3((startPos.x + wallMap.GetLength(1) - 2) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
+        wallMap[0, z] = Instantiate(outerWall, leftWallPos, Quaternion.identity, wallBlocks.transform);
+        wallMap[wallMap.GetLength(1)-1, z] = Instantiate(outerWall, rightWallPos, Quaternion.identity, wallBlocks.transform);
         continue;
       }
-
-      for(int x = -1; x < gridX+1; x++)
+      for (int x = 0; x < wallMap.GetLength(0); x++)
       {
-        Vector3 frameWallPos = new Vector3(startPos.x + x * spacing, blockHeight / 2, startPos.z + z * spacing);
-        Instantiate(outerWall, frameWallPos, Quaternion.identity);
+        Vector3 frameWallPos = new Vector3((startPos.x + x - 1) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
+        wallMap[x, z] = Instantiate(outerWall, frameWallPos, Quaternion.identity, wallBlocks.transform);
       }
     }
   }
@@ -208,6 +212,16 @@ public class LevelController : MonoBehaviour
           for (int z = 0; z < floorMap.GetLength(1); z++)
           {
             Destroy(floorMap[x, z]);
+          }
+        }
+      }
+      if(wallMap != null)
+      {
+        for (int x = 0; x < wallMap.GetLength(0); x++)
+        {
+          for (int z = 0; z < wallMap.GetLength(1); z++)
+          {
+            Destroy(wallMap[x, z]);
           }
         }
       }
