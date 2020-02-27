@@ -66,6 +66,7 @@ public class LevelController : MonoBehaviour
   //constructs the map
   public void Construct()
   {
+    ClearBlocks(true);
     if (File.Exists(handleLevelFile.GetFilePath()))
     {
       updateMapParams();
