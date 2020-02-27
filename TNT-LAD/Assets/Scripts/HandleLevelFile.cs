@@ -28,11 +28,8 @@ public class HandleLevelFile : MonoBehaviour
 
   public void SaveMapFile(GameObject[,] blocks)
   {
-    if (File.Exists(GetFilePath()))
-    {
-      File.Delete(GetFilePath());
-    }
-    else
+    deleteFile();
+    if(!File.Exists(GetFilePath()))
     {
       var sr = File.CreateText(Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt"); //creates file with scene name
       for(int x = 0; x < blocks.GetLength(0); x++)
@@ -56,10 +53,22 @@ public class HandleLevelFile : MonoBehaviour
           }
           
         }
-        sr.Write("\n");
+        if(x < blocks.GetLength(0) - 1) //not starting a new line at the end of document
+        {
+          sr.Write("\n");
+        }
       }
 
       sr.Close();
+    }
+  }
+  //deletes the level file if it exists
+  public void deleteFile()
+  {
+    if (File.Exists(GetFilePath()))
+    {
+      File.Delete(GetFilePath());
+      File.Delete(GetFilePath() + ".meta");
     }
   }
 
