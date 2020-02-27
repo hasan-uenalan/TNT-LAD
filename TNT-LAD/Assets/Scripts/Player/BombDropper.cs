@@ -6,16 +6,6 @@ public class BombDropper : MonoBehaviour
 {
   public GameObject bomb;
 
-  void Start()
-  {
-
-  }
-
-  void Update()
-  {
-
-  }
-
   void OnDropBomb()
   {
     Vector3 placementPosition = new Vector3(
