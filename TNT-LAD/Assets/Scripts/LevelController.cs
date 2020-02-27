@@ -31,18 +31,21 @@ public class LevelController : MonoBehaviour
   private GameObject[,] blockMap;
   private GameObject[,] wallMap;
 
+  
+  //For scene  structure
   private GameObject floorBlocks;
   private GameObject levelBlocks;
   private GameObject wallBlocks;
 
   private HandleLevelFile handleLevelFile;
 
-  public enum blockType {DESTRUCTIBLE, DEFAULT};
+  //public enum blockType {DESTRUCTIBLE, DEFAULT};
 
   // Start is called before the first frame update
   void Start()
   {
     handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
+    
 
     CreateSceneStructure();
     Construct();
@@ -85,7 +88,7 @@ public class LevelController : MonoBehaviour
   {
     string[] blockLine = handleLevelFile.GetFileData();
     gridX = blockLine.Length;
-    gridZ = blockLine[0].ToCharArray().Length - 1; //whitespace is also part of the array
+    gridZ = blockLine[0].ToCharArray().Length; //whitespace is also part of the array
   }
 
   //Generates outer wall of play area
@@ -124,7 +127,7 @@ public class LevelController : MonoBehaviour
   }
 
   //sets the block at specified location
-  public void SetBlock(int x, int z, LevelController.blockType blockType)
+  public void SetBlock(int x, int z, Types.blockType blockType)
   {
     //out of bounds check
     if(x >= gridX || z >= gridZ)
@@ -136,13 +139,21 @@ public class LevelController : MonoBehaviour
     if(blockMap[x, z] == null)
     {
       Vector3 pos = new Vector3(startPos.x + x * spacing, blockHeight / 2, startPos.z + z * spacing);
+      GameObject tmp;
       switch (blockType)
       {
-        case blockType.DEFAULT:
-          blockMap[x, z] = Instantiate(defaultBlock, pos, Quaternion.identity) as GameObject;
+
+        case Types.blockType.DEFAULT:
+          tmp = Instantiate(defaultBlock, pos, Quaternion.identity) as GameObject;
+          tmp.AddComponent<BlockWrapper>();
+          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DEFAULT);
+          blockMap[x, z] = tmp;
           break;
-        case blockType.DESTRUCTIBLE:
-          blockMap[x, z] = Instantiate(destructibleBlock, pos, Quaternion.identity) as GameObject;
+        case Types.blockType.DESTRUCTIBLE:
+          tmp = Instantiate(destructibleBlock, pos, Quaternion.identity) as GameObject;
+          tmp.AddComponent<BlockWrapper>();
+          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DESTRUCTIBLE);
+          blockMap[x, z] = tmp;
           break;
         default:
 
@@ -169,11 +180,11 @@ public class LevelController : MonoBehaviour
       {
         if (blocks[z] == handleLevelFile.GetCharDestructible())
         {
-          SetBlock(x, z, blockType.DESTRUCTIBLE);
+          SetBlock(x, z, Types.blockType.DESTRUCTIBLE);
         }
         if (blocks[z] == handleLevelFile.GetCharDefault())
         {
-          SetBlock(x, z, blockType.DEFAULT);
+          SetBlock(x, z, Types.blockType.DEFAULT);
         }
       }
     }
@@ -268,13 +279,13 @@ public class LevelController : MonoBehaviour
         if (GUILayout.Button("Default"))
         {
 
-          levelController.SetBlock(xBlock, zBlock, blockType.DEFAULT);
+          levelController.SetBlock(xBlock, zBlock, Types.blockType.DEFAULT);
 
         }
         if (GUILayout.Button("Destructible"))
         {
          
-          levelController.SetBlock(xBlock, zBlock, blockType.DESTRUCTIBLE);
+          levelController.SetBlock(xBlock, zBlock, Types.blockType.DESTRUCTIBLE);
 
         }
         GUI.backgroundColor = Color.red;
@@ -292,6 +303,10 @@ public class LevelController : MonoBehaviour
         if (GUILayout.Button("Clear All"))
         {
           levelController.ClearBlocks(true);
+        }
+        if (GUILayout.Button("Delete Level File"))
+        {
+          handleLevelFile.deleteFile();
         }
         GUI.backgroundColor = Color.green;
         if (GUILayout.Button("Save Map"))
