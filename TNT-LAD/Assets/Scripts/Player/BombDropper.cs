@@ -21,6 +21,7 @@ public class BombDropper : MonoBehaviour
         return; //Don't drop Bomb if one is already there.
       }
     }
-    Instantiate(bomb, placementPosition, Quaternion.identity);
+    var bombGameObject = Instantiate(bomb, placementPosition, Quaternion.identity);
+    bombGameObject.GetComponent<BombExploder>().bombOwner = gameObject;
   }
 }

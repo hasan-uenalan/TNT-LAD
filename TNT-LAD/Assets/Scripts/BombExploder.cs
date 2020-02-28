@@ -7,10 +7,31 @@ public class BombExploder : MonoBehaviour
   public float fuseTimeSeconds;
   public int explosionRange;
   public GameObject explosion;
+  [HideInInspector] public GameObject bombOwner;
+  private BoxCollider playerExitTrigger;
 
   void Start()
   {
+    var bombCollider = gameObject.GetComponent<BoxCollider>();
+    Physics.IgnoreCollision(bombCollider, bombOwner.GetComponent<CharacterController>(), true);
+    
+    //Additional trigger just to detect when player leaves bomb collider
+    playerExitTrigger = (BoxCollider)gameObject.AddComponent(typeof(BoxCollider));
+    playerExitTrigger.isTrigger = true;
+    playerExitTrigger.center = bombCollider.center;
+    playerExitTrigger.size = bombCollider.size;
+
     Invoke("ExplodeBomb", fuseTimeSeconds);
+  }
+
+  void OnTriggerExit(Collider col)
+  {
+    if(col.gameObject == bombOwner)
+    {
+      Destroy(playerExitTrigger);
+      Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), bombOwner.GetComponent<CharacterController>(), false);
+      bombOwner = null;
+    }
   }
 
   void ExplodeBomb()

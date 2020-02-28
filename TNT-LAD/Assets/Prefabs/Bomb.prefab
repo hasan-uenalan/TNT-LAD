@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccd952441d488b4eac7723037a19de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseTimeSeconds: 1.5
+  fuseTimeSeconds: 7
   explosionRange: 3
   explosion: {fileID: 2113370622594540845, guid: ae8dc787ba51e6a449dc9066ae1e1202,
     type: 3}
+  bombOwner: {fileID: 0}
