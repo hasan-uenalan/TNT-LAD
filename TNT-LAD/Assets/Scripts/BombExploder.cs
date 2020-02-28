@@ -13,6 +13,7 @@ public class BombExploder : MonoBehaviour
   void Start()
   {
     var bombCollider = gameObject.GetComponent<BoxCollider>();
+    bombCollider.enabled = true;
     Physics.IgnoreCollision(bombCollider, bombOwner.GetComponent<CharacterController>(), true);
     
     //Additional trigger just to detect when player leaves bomb collider
@@ -59,7 +60,6 @@ public class BombExploder : MonoBehaviour
         {
           if (collider.gameObject.tag != "Bomb" && collider.gameObject.tag != "Player") //TODO: tags of blocks that stop explosions
           {
-            Debug.Log(dir + " " + curRange);
             positionValid = false;
           }
         }
