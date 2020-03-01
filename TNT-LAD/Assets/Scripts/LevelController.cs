@@ -128,7 +128,7 @@ public class LevelController : MonoBehaviour
   }
 
   //sets the block at specified location
-  public void SetBlock(int x, int z, Types.blockType blockType)
+  public void SetBlock(int x, int z, BlockData.BlockType blockType)
   {
     //out of bounds check
     if(x >= gridX || z >= gridZ)
@@ -144,16 +144,12 @@ public class LevelController : MonoBehaviour
       switch (blockType)
       {
 
-        case Types.blockType.DEFAULT:
+        case BlockData.BlockType.DEFAULT:
           tmp = Instantiate(defaultBlock, pos, Quaternion.identity) as GameObject;
-          tmp.AddComponent<BlockWrapper>();
-          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DEFAULT);
           blockMap[x, z] = tmp;
           break;
-        case Types.blockType.DESTRUCTIBLE:
+        case BlockData.BlockType.DESTRUCTIBLE:
           tmp = Instantiate(destructibleBlock, pos, Quaternion.identity) as GameObject;
-          tmp.AddComponent<BlockWrapper>();
-          tmp.GetComponent<BlockWrapper>().init(Types.blockType.DESTRUCTIBLE);
           blockMap[x, z] = tmp;
           break;
         default:
@@ -181,11 +177,11 @@ public class LevelController : MonoBehaviour
       {
         if (blocks[z] == handleLevelFile.GetCharDestructible())
         {
-          SetBlock(x, z, Types.blockType.DESTRUCTIBLE);
+          SetBlock(x, z, BlockData.BlockType.DESTRUCTIBLE);
         }
         if (blocks[z] == handleLevelFile.GetCharDefault())
         {
-          SetBlock(x, z, Types.blockType.DEFAULT);
+          SetBlock(x, z, BlockData.BlockType.DEFAULT);
         }
       }
     }
@@ -280,13 +276,13 @@ public class LevelController : MonoBehaviour
         if (GUILayout.Button("Default"))
         {
 
-          levelController.SetBlock(xBlock, zBlock, Types.blockType.DEFAULT);
+          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
 
         }
         if (GUILayout.Button("Destructible"))
         {
          
-          levelController.SetBlock(xBlock, zBlock, Types.blockType.DESTRUCTIBLE);
+          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
 
         }
         GUI.backgroundColor = Color.red;

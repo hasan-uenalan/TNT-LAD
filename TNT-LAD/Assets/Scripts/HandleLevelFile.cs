@@ -42,11 +42,11 @@ public class HandleLevelFile : MonoBehaviour
           }
           else
           {
-            if (blocks[x, z].gameObject.GetComponent<BlockWrapper>().GetBlockType() == Types.blockType.DESTRUCTIBLE)
+            if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DESTRUCTIBLE)
             {
               sr.Write(charDestructible);
             }
-            if (blocks[x, z].gameObject.GetComponent<BlockWrapper>().GetBlockType() == Types.blockType.DEFAULT)
+            if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DEFAULT)
             {
               sr.Write(charDefault);
             }

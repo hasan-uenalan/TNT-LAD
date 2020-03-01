@@ -5,15 +5,23 @@ using System;
 
 //Class used to add additional information for blocks
 [Serializable]
-public class BlockWrapper : MonoBehaviour
+public class BlockData : MonoBehaviour
 {
-  private Types.blockType blockType;
-  public void init(Types.blockType blockType)
+  public enum BlockType 
+  { 
+    DEFAULT, 
+    DESTRUCTIBLE,
+    WALL
+  };
+
+  public BlockType blockType;
+
+  public void Init(BlockType blockType)
   {
     this.blockType = blockType;
   }
 
-  public Types.blockType GetBlockType()
+  public BlockType GetBlockType()
   {
     return blockType;
   }

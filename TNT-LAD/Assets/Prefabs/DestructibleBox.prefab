@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 180583561197487071}
   - component: {fileID: 3238168828264207823}
   - component: {fileID: 5304900980795423733}
+  - component: {fileID: -7410537885914863424}
   m_Layer: 0
   m_Name: DestructibleBox
   m_TagString: Untagged
@@ -112,3 +113,16 @@ MonoBehaviour:
     type: 3}
   randomForceMultiplier: 1
   explosionForce: 4
+--- !u!114 &-7410537885914863424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926794924618004227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97136fb07c355b443b76363260710679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockType: 1
