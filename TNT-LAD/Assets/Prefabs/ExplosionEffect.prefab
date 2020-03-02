@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2113370622594540842}
   - component: {fileID: -2872537797491024569}
   - component: {fileID: -8655693628508011057}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4855,7 +4855,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113370622594540845}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.001

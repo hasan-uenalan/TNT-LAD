@@ -35,7 +35,15 @@ public class ExplosionBehaviour : MonoBehaviour
       return;
     }
     StopExplosion();
-  } 
+  }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if(other.gameObject.tag == "Player")
+    {
+
+    }
+  }
 
   private void StartExplosion()
   {
