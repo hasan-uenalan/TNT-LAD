@@ -35,7 +35,7 @@ public class BombExploder : MonoBehaviour
     }
   }
 
-  void ExplodeBomb()
+  public void ExplodeBomb()
   {
     foreach(Vector3 pos in GetExplosionPositions())
     {

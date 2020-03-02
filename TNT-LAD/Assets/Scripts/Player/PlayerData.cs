@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-
   public enum status 
   {
     alive,
@@ -14,21 +13,21 @@ public class PlayerData : MonoBehaviour
 
   public int playerIndex;
   public Vector3 spawnPoint;
-  //public float health;
+  public float invincibilityTime;
 
   private int score { get; set; }
 
   //Bomb data
   public List<GameObject> placedBombs = new List<GameObject>();
-  private int bombCount { get; set; }
-  private int bombStrength { get; set; }
+  public int bombCount { get; set; }
+  public int bombStrength { get; set; }
 
   //player status data
-  private int lifes { get; set; }
+  public int lifes { get; set; }
 
-  private bool powerUpMoveBombs;
+  public bool powerUpMoveBombs;
 
-  private status playerStatus { get; set; }
+  public status playerStatus { get; set; }
 
   void Start()
   {
@@ -62,10 +61,31 @@ public class PlayerData : MonoBehaviour
     lifes -= 1;
     if(lifes == 0)
     {
-      playerStatus = status.dead;
+      KillPlayer();
     }
+    Debug.Log("lifes: " + lifes);
+    SetInvincible();
   }
 
+  private void KillPlayer()
+  {
+    playerStatus = status.dead;
+    gameObject.SetActive(false);
+  }
+
+  private void SetInvincible()
+  {
+    this.playerStatus = status.invincible;
+    Debug.Log("player is invincible");
+    StartCoroutine(setStatusTime(status.alive, invincibilityTime));
+  }
+
+  IEnumerator setStatusTime(PlayerData.status playerStatus, float delay)
+  {
+    yield return new WaitForSeconds(delay);
+    this.playerStatus = playerStatus;
+    Debug.Log("player not invincible anymore");
+  }
 
   //void Update()
   //{

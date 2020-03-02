@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 566321044282450254}
   - component: {fileID: 221916024824020315}
   - component: {fileID: -5848957913213248601}
+  - component: {fileID: -311673743023022739}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Bomb
@@ -106,8 +107,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccd952441d488b4eac7723037a19de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseTimeSeconds: 2
+  fuseTimeSeconds: 4
   explosionRange: 6
   explosion: {fileID: 2113370622594540845, guid: ae8dc787ba51e6a449dc9066ae1e1202,
     type: 3}
   bombOwner: {fileID: 0}
+--- !u!54 &-311673743023022739
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2298858851037517202}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

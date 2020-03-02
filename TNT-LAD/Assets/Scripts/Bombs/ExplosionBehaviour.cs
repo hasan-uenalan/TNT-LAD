@@ -12,6 +12,9 @@ public class ExplosionBehaviour : MonoBehaviour
   private SphereCollider explosionCollider;
   private bool isExploding;
 
+  //Components
+  private PlayerData playerData;
+
   void Start()
   {
     explosionCollider = gameObject.GetComponent<SphereCollider>();
@@ -41,7 +44,16 @@ public class ExplosionBehaviour : MonoBehaviour
   {
     if(other.gameObject.tag == "Player")
     {
-
+      playerData = other.gameObject.GetComponent<PlayerData>();
+      if (playerData.playerStatus != PlayerData.status.invincible)
+      {
+        playerData.RemoveLife();      
+      }
+    }
+    if(other.gameObject.tag == "Bomb")
+    {
+      BombExploder bombExplosion = other.gameObject.GetComponent<BombExploder>();
+      bombExplosion.ExplodeBomb();
     }
   }
 
