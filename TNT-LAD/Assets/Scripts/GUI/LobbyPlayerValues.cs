@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LobbyPlayerValues : MonoBehaviour
 {
-  private bool IsSelectedByPlayer { get; set; }
+  private bool isSelectedByPlayer { get; set; }
+
+  private InputDevice inputDevice { get; set; }
 
   private void Start()
   {
@@ -13,12 +16,21 @@ public class LobbyPlayerValues : MonoBehaviour
 
   public bool getIsSelected()
   {
-    return IsSelectedByPlayer;
+    return isSelectedByPlayer;
   }
 
   public void SetIsSelected(bool isSelectedByPlayer)
   {
-    IsSelectedByPlayer = isSelectedByPlayer;
+    this.isSelectedByPlayer = isSelectedByPlayer;
   }
 
+  public InputDevice GetInputDevice()
+  {
+    return inputDevice;
+  }
+
+  public void SetInputDevice(InputDevice inputDevice)
+  {
+    this.inputDevice = inputDevice;
+  }
 }

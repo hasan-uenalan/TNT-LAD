@@ -1,30 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterJoiner : MonoBehaviour
 {
-  public List<GameObject> PlayerList;
+  private Dictionary<int, LobbyPlayerValues> playerDict;
 
   private int playerCount = 1;
 
   private void Start()
   {
-    PlayerList = new List<GameObject>();
+    playerDict = new Dictionary<int, LobbyPlayerValues>();
   }
 
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Joystick1Button10)) 
+    if (IsConnectionButtonIsPressed())
     {
-      PlayerList.Add(ActivateNewPlayer());
-
+      LobbyPlayerValues newPlayer = GetNewPlayerValues();
+      if (newPlayer != null) {
+        playerDict.Add(playerCount, newPlayer);
+        
+      }
     }
   }
 
-  private GameObject ActivateNewPlayer()
+  private LobbyPlayerValues GetNewPlayerValues()
   {
     foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer")) 
     {
@@ -35,9 +40,26 @@ public class CharacterJoiner : MonoBehaviour
         curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + playerCount;
         playerCount++;
         curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false;
-        return curPlayerSelection;
+        return valuesOfCurPlayer;
       }
     }
     return null;
   }
+
+  private bool IsConnectionButtonIsPressed()
+  {
+    foreach (InputDevice curInputDevice in InputDevice.all) {
+      if(curInputDevice is Keyboard) {
+        if (((Keyboard)curInputDevice).spaceKey.wasPressedThisFrame) {
+          return true;
+        }
+      }
+      else if (curInputDevice is Gamepad) {
+        if (((Gamepad)curInputDevice).startButton.wasPressedThisFrame) {
+          return true;
+        }
+      }
+    }
+    return false;
+  } 
 }
