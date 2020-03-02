@@ -77,7 +77,10 @@ public class PlayerData : MonoBehaviour
   {
     this.playerStatus = status.invincible;
     Debug.Log("player is invincible");
-    StartCoroutine(setStatusTime(status.alive, invincibilityTime));
+    if (isActiveAndEnabled) //start only if the player is active
+    {
+      StartCoroutine(setStatusTime(status.alive, invincibilityTime));
+    }
   }
 
   IEnumerator setStatusTime(PlayerData.status playerStatus, float delay)
@@ -87,19 +90,4 @@ public class PlayerData : MonoBehaviour
     Debug.Log("player not invincible anymore");
   }
 
-  //void Update()
-  //{
-  //  if(health <= 0 && !isDead)
-  //  {
-  //    isDead = true;
-  //    //Kill player
-  //  }
-  //}
-
-  //void Respawn()
-  //{
-  //  gameObject.transform.position = spawnPoint;
-  //  health = 100;
-  //  isDead = false;
-  //}
 }
