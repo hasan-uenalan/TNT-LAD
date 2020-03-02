@@ -14,23 +14,48 @@ public class PlayerData : MonoBehaviour
   private int bombCount;
   private int bombStrength;
 
-  private int lives;
+  private int lifes;
   private bool isDead;
 
   private bool powerUpMoveBombs;
 
   void Start()
   {
+    initPlayerData();
+  }
+
+  public void initPlayerData()
+  {
     score = 0;
 
     bombCount = 1;
     bombStrength = 1;
 
-    lives = 3;
+    lifes = 3;
     isDead = false;
 
     powerUpMoveBombs = false;
   }
+
+  //checks if player can place more bombs
+  public bool CanPlaceBombs()
+  {
+    if(placedBombs.Count < bombCount)
+    {
+      return true;
+    }
+    return false;
+  }
+  //removes a life and checks if player is dead
+  public void RemoveLife()
+  {
+    lifes -= 1;
+    if(lifes == 0)
+    {
+      isDead = true;
+    }
+  }
+
 
   //void Update()
   //{
