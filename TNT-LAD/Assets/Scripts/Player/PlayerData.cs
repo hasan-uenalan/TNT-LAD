@@ -5,17 +5,32 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
   public int playerIndex;
-  public float health;
-  public int score;
-  public List<GameObject> placedBombs = new List<GameObject>();
   public Vector3 spawnPoint;
+  //public float health;
 
+  public int score;
+
+  public List<GameObject> placedBombs = new List<GameObject>();
+  private int bombCount;
+  private int bombStrength;
+
+  private int lives;
   private bool isDead;
 
-  //void Start()
-  //{
-  //  health = 100;
-  //}
+  private bool powerUpMoveBombs;
+
+  void Start()
+  {
+    score = 0;
+
+    bombCount = 1;
+    bombStrength = 1;
+
+    lives = 3;
+    isDead = false;
+
+    powerUpMoveBombs = false;
+  }
 
   //void Update()
   //{
