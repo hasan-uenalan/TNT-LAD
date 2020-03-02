@@ -19,12 +19,13 @@ public class CharacterJoiner : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (IsConnectionButtonIsPressed())
+    InputDevice curInputDevice = null;
+    if (IsConnectionButtonIsPressed(ref curInputDevice))
     {
       LobbyPlayerValues newPlayer = GetNewPlayerValues();
       if (newPlayer != null) {
-        playerDict.Add(playerCount, newPlayer);
-        
+        newPlayer.SetInputDevice(curInputDevice);
+        playerDict.Add(playerCount, newPlayer);        
       }
     }
   }
@@ -46,16 +47,18 @@ public class CharacterJoiner : MonoBehaviour
     return null;
   }
 
-  private bool IsConnectionButtonIsPressed()
+  private bool IsConnectionButtonIsPressed(ref InputDevice inputDevice)
   {
     foreach (InputDevice curInputDevice in InputDevice.all) {
       if(curInputDevice is Keyboard) {
         if (((Keyboard)curInputDevice).spaceKey.wasPressedThisFrame) {
+          inputDevice = curInputDevice;
           return true;
         }
       }
       else if (curInputDevice is Gamepad) {
         if (((Gamepad)curInputDevice).startButton.wasPressedThisFrame) {
+          inputDevice = curInputDevice;
           return true;
         }
       }
