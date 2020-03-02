@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class CharacterJoiner : MonoBehaviour
 {
-  private Dictionary<int, LobbyPlayerValues> playerDict;
+  private List<LobbyPlayerValues> playerList;
 
   private int playerCount = 1;
 
   private void Start()
   {
-    playerDict = new Dictionary<int, LobbyPlayerValues>();
+    playerList = new List<LobbyPlayerValues>();
   }
 
   // Update is called once per frame
@@ -22,29 +22,55 @@ public class CharacterJoiner : MonoBehaviour
     InputDevice curInputDevice = null;
     if (IsConnectionButtonIsPressed(ref curInputDevice))
     {
-      LobbyPlayerValues newPlayer = GetNewPlayerValues();
+      LobbyPlayerValues newPlayer = GetNewPlayerValues(curInputDevice);
       if (newPlayer != null) {
         newPlayer.SetInputDevice(curInputDevice);
-        playerDict.Add(playerCount, newPlayer);        
+        playerList.Add(newPlayer);        
       }
     }
   }
 
-  private LobbyPlayerValues GetNewPlayerValues()
+  private LobbyPlayerValues GetNewPlayerValues(InputDevice inputDevice)
   {
     foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer")) 
     {
       LobbyPlayerValues valuesOfCurPlayer = curPlayerSelection.GetComponent<LobbyPlayerValues>();
-      if (!valuesOfCurPlayer.getIsSelected())
+      if (valuesOfCurPlayer.getIsSelected())
       {
-        valuesOfCurPlayer.SetIsSelected(true);
-        curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + playerCount;
-        playerCount++;
-        curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false;
+        if(valuesOfCurPlayer.GetInputDevice() == inputDevice) 
+        {
+          playerList.Remove(valuesOfCurPlayer);
+          updatePlayerOrder(valuesOfCurPlayer);
+          playerCount--;
+        }
+      }
+      else 
+      {
+        SetGUIComponentsForActivePlayer(valuesOfCurPlayer, curPlayerSelection);
         return valuesOfCurPlayer;
       }
     }
     return null;
+  }
+
+  private void updatePlayerOrder(LobbyPlayerValues valuesOfCurPlayer)
+  {
+    foreach (LobbyPlayerValues lobbyPlayer in playerList) {
+      int lobbyPlayerNumber = lobbyPlayer.GetPlayerNumber();
+      if (lobbyPlayerNumber > valuesOfCurPlayer.GetPlayerNumber()) {
+        lobbyPlayer.SetPlayerNumber(lobbyPlayerNumber - 1);
+      }
+    }
+  }
+
+  //TODO: besser rausrefactoren
+  private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer, GameObject curPlayerSelection)
+  {
+    valuesOfCurPlayer.SetIsSelected(true);
+    valuesOfCurPlayer.SetPlayerNumber(playerCount);
+    curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + playerCount;
+    playerCount++;
+    curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false;
   }
 
   private bool IsConnectionButtonIsPressed(ref InputDevice inputDevice)

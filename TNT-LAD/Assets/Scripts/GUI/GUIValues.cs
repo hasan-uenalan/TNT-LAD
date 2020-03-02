@@ -7,7 +7,7 @@ public static class GUIValues
 {
   private static int levelNumber { get; set; }
 
-  private static Dictionary<int, LobbyPlayerValues> playerDict { get; set; }
+  private static List<LobbyPlayerValues> playerList { get; set; }
 
   public static void SetLevelNumber(int value)
   {

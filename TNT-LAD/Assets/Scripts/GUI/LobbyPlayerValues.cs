@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class LobbyPlayerValues : MonoBehaviour
 {
+  private int playerNumber { get; set; }
+
   private bool isSelectedByPlayer { get; set; }
 
   private InputDevice inputDevice { get; set; }
@@ -32,5 +34,15 @@ public class LobbyPlayerValues : MonoBehaviour
   public void SetInputDevice(InputDevice inputDevice)
   {
     this.inputDevice = inputDevice;
+  }
+
+  public void SetPlayerNumber(int playerNumber)
+  {
+    this.playerNumber = playerNumber;
+  }
+
+  public int GetPlayerNumber()
+  {
+    return playerNumber;
   }
 }
