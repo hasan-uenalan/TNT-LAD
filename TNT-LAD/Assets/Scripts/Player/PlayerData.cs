@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
+
+  public enum status 
+  {
+    alive,
+    dead,
+    invincible
+  };
+
   public int playerIndex;
   public Vector3 spawnPoint;
   //public float health;
 
-  public int score;
+  private int score { get; set; }
 
+  //Bomb data
   public List<GameObject> placedBombs = new List<GameObject>();
-  private int bombCount;
-  private int bombStrength;
+  private int bombCount { get; set; }
+  private int bombStrength { get; set; }
 
-  private int lifes;
-  private bool isDead;
+  //player status data
+  private int lifes { get; set; }
 
   private bool powerUpMoveBombs;
+
+  private status playerStatus { get; set; }
 
   void Start()
   {
@@ -30,9 +41,8 @@ public class PlayerData : MonoBehaviour
 
     bombCount = 1;
     bombStrength = 1;
-
+    playerStatus = status.alive;
     lifes = 3;
-    isDead = false;
 
     powerUpMoveBombs = false;
   }
@@ -52,7 +62,7 @@ public class PlayerData : MonoBehaviour
     lifes -= 1;
     if(lifes == 0)
     {
-      isDead = true;
+      playerStatus = status.dead;
     }
   }
 
