@@ -15,7 +15,7 @@ public class BoxDestroyer : MonoBehaviour
   }
 
   [ContextMenu("Destroy Box")]
-  void DestroyBox()
+  public void DestroyBox()
   {
     GameObject destroyedBox = Instantiate(preShatteredObj, gameObject.transform.position, Quaternion.identity);
     foreach(Transform boxPart in destroyedBox.transform)

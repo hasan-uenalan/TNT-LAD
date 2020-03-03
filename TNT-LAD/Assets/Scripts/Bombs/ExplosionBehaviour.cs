@@ -55,6 +55,15 @@ public class ExplosionBehaviour : MonoBehaviour
       BombExploder bombExplosion = other.gameObject.GetComponent<BombExploder>();
       bombExplosion.ExplodeBomb();
     }
+
+    BlockData blockdata;
+    if (other.gameObject.TryGetComponent<BlockData>(out blockdata))
+    {
+      if(blockdata.blockType == BlockData.BlockType.DESTRUCTIBLE)
+      {
+        other.gameObject.GetComponent<BoxDestroyer>().DestroyBox();
+      }
+    }
   }
 
   private void StartExplosion()
