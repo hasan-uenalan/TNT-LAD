@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 914204532}
   - component: {fileID: 914204531}
   m_Layer: 0
-  m_Name: InputField
+  m_Name: InputFieldMapX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 928496040}
   - component: {fileID: 928496039}
   m_Layer: 0
-  m_Name: InputField (1)
+  m_Name: InputFieldMapZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
