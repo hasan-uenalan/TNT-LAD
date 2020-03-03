@@ -24,7 +24,7 @@ public class CharacterJoiner : MonoBehaviour
     {
       LobbyPlayerValues newPlayer = GetNewPlayerValues(curInputDevice);
       if (newPlayer != null) {
-        newPlayer.SetInputDevice(curInputDevice);
+        newPlayer.PlayerInputDevice = curInputDevice;
         playerList.Add(newPlayer);        
       }
     }
@@ -35,9 +35,9 @@ public class CharacterJoiner : MonoBehaviour
     foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer")) 
     {
       LobbyPlayerValues valuesOfCurPlayer = curPlayerSelection.GetComponent<LobbyPlayerValues>();
-      if (valuesOfCurPlayer.getIsSelected())
+      if (valuesOfCurPlayer.IsSelectedByPlayer)
       {
-        if(valuesOfCurPlayer.GetInputDevice() == inputDevice) 
+        if(valuesOfCurPlayer.PlayerInputDevice == inputDevice) 
         {
           playerList.Remove(valuesOfCurPlayer);
           updatePlayerOrder(valuesOfCurPlayer);
@@ -46,7 +46,10 @@ public class CharacterJoiner : MonoBehaviour
       }
       else 
       {
+        valuesOfCurPlayer.IsSelectedByPlayer = true;
+        valuesOfCurPlayer.PlayerNumber = playerCount;
         SetGUIComponentsForActivePlayer(valuesOfCurPlayer, curPlayerSelection);
+        playerCount++;
         return valuesOfCurPlayer;
       }
     }
@@ -56,20 +59,16 @@ public class CharacterJoiner : MonoBehaviour
   private void updatePlayerOrder(LobbyPlayerValues valuesOfCurPlayer)
   {
     foreach (LobbyPlayerValues lobbyPlayer in playerList) {
-      int lobbyPlayerNumber = lobbyPlayer.GetPlayerNumber();
-      if (lobbyPlayerNumber > valuesOfCurPlayer.GetPlayerNumber()) {
-        lobbyPlayer.SetPlayerNumber(lobbyPlayerNumber - 1);
+      int lobbyPlayerNumber = lobbyPlayer.PlayerNumber;
+      if (lobbyPlayerNumber > valuesOfCurPlayer.PlayerNumber) {
+        lobbyPlayer.PlayerNumber = lobbyPlayerNumber - 1;
       }
     }
   }
 
-  //TODO: besser rausrefactoren
   private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer, GameObject curPlayerSelection)
   {
-    valuesOfCurPlayer.SetIsSelected(true);
-    valuesOfCurPlayer.SetPlayerNumber(playerCount);
-    curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + playerCount;
-    playerCount++;
+    curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
     curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false;
   }
 

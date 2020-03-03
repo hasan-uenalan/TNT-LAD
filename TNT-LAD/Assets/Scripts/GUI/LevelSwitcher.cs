@@ -16,12 +16,12 @@ public class LevelSwitcher : MonoBehaviour
   {
     LevelImageList = new List<Object>();
     LevelImageList = Resources.LoadAll("LevelImages", typeof(Sprite)).ToList();
-    GUIValues.SetLevelNumber(curLevelNumber);
+    GUIValues.LevelNumber = curLevelNumber;
   }
 
   private void ChangeLevelSelectionValues()
   {
-    GUIValues.SetLevelNumber(curLevelNumber);
+    GUIValues.LevelNumber = curLevelNumber;
     string levelName = "Level " + curLevelNumber;
     GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = levelName;
     foreach (Sprite curLevelImage in LevelImageList) {

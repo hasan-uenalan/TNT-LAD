@@ -5,44 +5,16 @@ using UnityEngine.InputSystem;
 
 public class LobbyPlayerValues : MonoBehaviour
 {
-  private int playerNumber { get; set; }
+  public int PlayerNumber { get; set; }
 
-  private bool isSelectedByPlayer { get; set; }
+  public bool IsSelectedByPlayer { get; set; }
 
-  private InputDevice inputDevice { get; set; }
+  public InputDevice PlayerInputDevice { get; set; }
 
-  private void Start()
+  public GameObject JoinPLayerGameObject { get; set; }
+
+  void Start()
   {
-    SetIsSelected(false);
-  }
-
-  public bool getIsSelected()
-  {
-    return isSelectedByPlayer;
-  }
-
-  public void SetIsSelected(bool isSelectedByPlayer)
-  {
-    this.isSelectedByPlayer = isSelectedByPlayer;
-  }
-
-  public InputDevice GetInputDevice()
-  {
-    return inputDevice;
-  }
-
-  public void SetInputDevice(InputDevice inputDevice)
-  {
-    this.inputDevice = inputDevice;
-  }
-
-  public void SetPlayerNumber(int playerNumber)
-  {
-    this.playerNumber = playerNumber;
-  }
-
-  public int GetPlayerNumber()
-  {
-    return playerNumber;
+    IsSelectedByPlayer = false;
   }
 }
