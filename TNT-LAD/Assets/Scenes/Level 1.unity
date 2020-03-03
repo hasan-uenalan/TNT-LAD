@@ -197,13 +197,82 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311159791}
-  m_LocalRotation: {x: 0.49668127, y: -0.50328344, z: 0.49579042, w: 0.5041878}
+  m_LocalRotation: {x: 0.7017864, y: 0, z: 0, w: 0.7123875}
   m_LocalPosition: {x: 10.826904, y: 23.110853, z: 12.857044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.14101, y: 0, z: 0}
+--- !u!1001 &1240251315
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4338849229032860539, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4338849229032860541, guid: 90574d25a29447442993a5a9ee593617,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90574d25a29447442993a5a9ee593617, type: 3}
 --- !u!1 &1245375951
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1512167554, guid: efbac6f3614ce8147a70e1ace24be0ce, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 311159794}
     - target: {fileID: 8980669213659470632, guid: efbac6f3614ce8147a70e1ace24be0ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -358,12 +431,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
-        type: 3}
-      propertyPath: destructibleBlock
-      value: 
-      objectReference: {fileID: 1926794924618004227, guid: 7b260c6a926286e498cbb413ffa2cbd1,
-        type: 3}
     - target: {fileID: 8980669213659470638, guid: efbac6f3614ce8147a70e1ace24be0ce,
         type: 3}
       propertyPath: m_Name
