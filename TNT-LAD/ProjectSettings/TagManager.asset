@@ -9,6 +9,7 @@ TagManager:
   - GUILevelPreview
   - GUIValues
   - Bomb
+  - Floor
   layers:
   - Default
   - TransparentFX

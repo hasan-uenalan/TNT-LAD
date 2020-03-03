@@ -31,7 +31,6 @@ public class LevelController : MonoBehaviour
   private GameObject[,] blockMap;
   private GameObject[,] wallMap;
 
-  
   //For scene  structure
   private GameObject floorBlocks;
   private GameObject levelBlocks;
@@ -259,7 +258,6 @@ public class LevelController : MonoBehaviour
       rect.height = 1;
       EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
 
-
       if (Application.isPlaying)
       {
         if (GUILayout.Button("Reconstruct"))
@@ -313,6 +311,8 @@ public class LevelController : MonoBehaviour
       }
 
     }
+
+
   }
 
 }
