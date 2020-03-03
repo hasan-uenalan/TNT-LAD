@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bomb
+  - GUIPlayer
+  - GUILevelButton
+  - GUILevelPreview
+  - GUIValues
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - Explosion
+  - 
   - 
   - 
   - 
