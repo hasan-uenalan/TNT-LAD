@@ -58,8 +58,12 @@ public class BombExploder : MonoBehaviour
         Vector3 position = gameObject.transform.position + GetExplosionPointAddition(dir, curRange);
         foreach (var collider in Physics.OverlapSphere(position, 0.01f))
         {
-          if (collider.gameObject.tag != "Bomb" && collider.gameObject.tag != "Player") //TODO: tags of blocks that stop explosions
+          if(collider.gameObject.TryGetComponent(out BlockData blockData))
           {
+            if(blockData.blockType == BlockData.BlockType.DESTRUCTIBLE)
+            {
+              explosionPositions.Add(position);
+            }
             positionValid = false;
           }
         }
