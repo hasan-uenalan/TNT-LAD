@@ -26,10 +26,6 @@ namespace MLAgents
 
     void Awake()
     {
-      Debug.Log("FlyCamera Awake() - RESETTING CAMERA POSITION"); // nop?
-                                                                  // nop:
-                                                                  // transform.position.Set(0,8,-32);
-                                                                  // transform.rotation.Set(15,0,0,1);
       transform.position = new Vector3(0, 8, -32);
       //transform.rotation = Quaternion.Euler(25, 0, 0);
     }

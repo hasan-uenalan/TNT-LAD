@@ -68,7 +68,7 @@ public class LevelController : MonoBehaviour
     ClearBlocks(true);
     if (File.Exists(handleLevelFile.GetFilePath()))
     {
-      updateMapParams();
+      UpdateMapParams();
       blockMap = new GameObject[gridX, gridZ];
       floorMap = new GameObject[gridX, gridZ];
       wallMap = new GameObject[gridX + 2, gridZ + 2];
@@ -84,7 +84,7 @@ public class LevelController : MonoBehaviour
     GenerateWall();
   }
 
-  private void updateMapParams()
+  private void UpdateMapParams()
   {
     string[] blockLine = handleLevelFile.GetFileData();
     gridX = blockLine.Length;
@@ -124,6 +124,15 @@ public class LevelController : MonoBehaviour
         floorMap[x, z].transform.parent = floorBlocks.transform;
       }
     }
+  }
+
+  public bool OutOfBoundsCheck(int x, int z)
+  {
+    if(x >= gridX || z >= gridZ)
+    {
+      return true;
+    }
+    return false;
   }
 
   //sets the block at specified location
@@ -186,7 +195,7 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  public void deleteBlock(int x, int z)
+  public void DeleteBlock(int x, int z)
   {
     if(blockMap[x, z] != null)
     {
@@ -198,7 +207,7 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  private void ClearBlocks(bool clearAll)
+  public void ClearBlocks(bool clearAll)
   {
     if (blockMap != null)
     {
@@ -286,7 +295,7 @@ public class LevelController : MonoBehaviour
         GUI.backgroundColor = Color.red;
         if (GUILayout.Button("Delete"))
         {
-          levelController.deleteBlock(xBlock, zBlock);
+          levelController.DeleteBlock(xBlock, zBlock);
         }
         GUILayout.EndHorizontal();
         GUI.backgroundColor = Color.red;
