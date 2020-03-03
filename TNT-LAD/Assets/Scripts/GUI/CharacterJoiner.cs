@@ -20,8 +20,7 @@ public class CharacterJoiner : MonoBehaviour
   void Update()
   {
     InputDevice curInputDevice = null;
-    if (IsConnectionButtonPressed(ref curInputDevice))
-    {
+    if (IsConnectionButtonPressed(ref curInputDevice)) {
       LobbyPlayerValues newPlayer = GetNewPlayerValues(curInputDevice);
       if (newPlayer != null) {
         newPlayer.PlayerInputDevice = curInputDevice;
@@ -32,73 +31,78 @@ public class CharacterJoiner : MonoBehaviour
 
   private LobbyPlayerValues GetNewPlayerValues(InputDevice inputDevice)
   {
-    foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer"))
+    LobbyPlayerValues valuesOfCurPlayer = new LobbyPlayerValues();
+    foreach (LobbyPlayerValues curLobbyPlayer in playerList) 
     {
-      LobbyPlayerValues valuesOfCurPlayer = curPlayerSelection.GetComponent<LobbyPlayerValues>();
-      if (valuesOfCurPlayer.IsSelectedByPlayer)
-      {
-        if(valuesOfCurPlayer.PlayerInputDevice == inputDevice)
-        {
-          playerList.Remove(valuesOfCurPlayer);
-          UpdatePlayerOrder(valuesOfCurPlayer);
+      if (IsInputDeviceUnused(inputDevice)) {
+        valuesOfCurPlayer.IsSelectedByPlayer = true;
+        valuesOfCurPlayer.PlayerNumber = playerCount;
+        valuesOfCurPlayer.PlayerInputDevice = inputDevice;
+        SetGUIComponentsForActivePlayer(valuesOfCurPlayer);
+        playerCount++;
+        return valuesOfCurPlayer;
+      }
+      else {
+        if (curLobbyPlayer.PlayerInputDevice == inputDevice) {
+          int lobbyPlayerNumber = curLobbyPlayer.PlayerNumber;
+          playerList.Remove(curLobbyPlayer);
+          UpdatePlayerOrder(lobbyPlayerNumber);
           UpdateGUI();
           playerCount--;
           return null; //not good to return Null (mahu)
         }
-      }
-      else
-      {
-        if (IsInputDeviceUnused(valuesOfCurPlayer))
-        {
-          valuesOfCurPlayer.IsSelectedByPlayer = true;
-          valuesOfCurPlayer.PlayerNumber = playerCount;
-          SetGUIComponentsForActivePlayer(valuesOfCurPlayer, curPlayerSelection);
-          playerCount++;
-          return valuesOfCurPlayer;
-        }
-      }
+      }     
+    }
+    if (playerList.Count <= 0) {
+      valuesOfCurPlayer.IsSelectedByPlayer = true;
+      valuesOfCurPlayer.PlayerNumber = playerCount;
+      valuesOfCurPlayer.PlayerInputDevice = inputDevice;
+      SetGUIComponentsForActivePlayer(valuesOfCurPlayer);
+      playerCount++;
+      return valuesOfCurPlayer;
     }
     return null;
   }
 
   private void UpdateGUI()
   {
+    var guiPlayer = GameObject.FindGameObjectsWithTag("GUIPlayer");
     foreach (LobbyPlayerValues lobbyPlayer in playerList) {
-      GameObject gameObject = GameObject.FindGameObjectsWithTag("GUIPlayer")[lobbyPlayer.PlayerNumber];
-      SetGUIComponentsForActivePlayer(lobbyPlayer, gameObject);
+      GameObject gameObject = guiPlayer[lobbyPlayer.PlayerNumber - 1];
+      SetGUIComponentsForActivePlayer(lobbyPlayer);
     }
-    RestoreDefaultGUI(GameObject.FindGameObjectsWithTag("GUIPlayer")[playerList.Count]);
+    RestoreDefaultGUI(guiPlayer[playerList.Count]);
   }
 
   private void RestoreDefaultGUI(GameObject targetGameObject)
   {
     targetGameObject.transform.GetChild(0).GetComponent<Text>().text = "Press Space/Start\nto Join";
     targetGameObject.transform.GetChild(1).GetComponent<Image>().enabled = true;
-    targetGameObject.GetComponent<LobbyPlayerValues>().RestoreDefault();
   }
 
-  private bool IsInputDeviceUnused(LobbyPlayerValues valuesOfCurPlayer)
+  private bool IsInputDeviceUnused(InputDevice playerInputDevice)
   {
     foreach (LobbyPlayerValues curLobbyPlayer in playerList) {
-      if (curLobbyPlayer.PlayerInputDevice == valuesOfCurPlayer.PlayerInputDevice) {
+      if (curLobbyPlayer.PlayerInputDevice == playerInputDevice) {
         return false;
       }
     }
     return true;
   }
 
-  private void UpdatePlayerOrder(LobbyPlayerValues valuesOfCurPlayer)
+  private void UpdatePlayerOrder(int lobbyPlayerInt)
   {
     foreach (LobbyPlayerValues lobbyPlayer in playerList) {
       int lobbyPlayerNumber = lobbyPlayer.PlayerNumber;
-      if (lobbyPlayerNumber > valuesOfCurPlayer.PlayerNumber) {
-        lobbyPlayer.PlayerNumber = lobbyPlayerNumber - 1;
+      if (lobbyPlayerNumber > lobbyPlayerInt) {
+        lobbyPlayer.PlayerNumber -= 1;
       }
     }
   }
 
-  private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer, GameObject curPlayerSelection)
+  private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer)
   {
+    GameObject curPlayerSelection = GameObject.FindGameObjectsWithTag("GUIPlayer")[valuesOfCurPlayer.PlayerNumber - 1];
     curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
     curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false; //TODO: picture of character
     valuesOfCurPlayer.JoinPlayerGameObject = curPlayerSelection;
@@ -107,7 +111,7 @@ public class CharacterJoiner : MonoBehaviour
   private bool IsConnectionButtonPressed(ref InputDevice inputDevice)
   {
     foreach (InputDevice curInputDevice in InputDevice.all) {
-      if(curInputDevice is Keyboard) {
+      if (curInputDevice is Keyboard) {
         if (((Keyboard)curInputDevice).spaceKey.wasPressedThisFrame) {
           inputDevice = curInputDevice;
           return true;
@@ -121,5 +125,5 @@ public class CharacterJoiner : MonoBehaviour
       }
     }
     return false;
-  } 
+  }
 }

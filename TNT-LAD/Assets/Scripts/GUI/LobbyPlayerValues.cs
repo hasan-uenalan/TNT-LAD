@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LobbyPlayerValues : MonoBehaviour
+public class LobbyPlayerValues
 {
   public int PlayerNumber { get; set; }
 
@@ -13,7 +13,7 @@ public class LobbyPlayerValues : MonoBehaviour
 
   public GameObject JoinPlayerGameObject { get; set; }
 
-  void Start()
+  public LobbyPlayerValues()
   {
     IsSelectedByPlayer = false;
   }
