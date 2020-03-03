@@ -20,43 +20,74 @@ public class CharacterJoiner : MonoBehaviour
   void Update()
   {
     InputDevice curInputDevice = null;
-    if (IsConnectionButtonIsPressed(ref curInputDevice))
+    if (IsConnectionButtonPressed(ref curInputDevice))
     {
       LobbyPlayerValues newPlayer = GetNewPlayerValues(curInputDevice);
       if (newPlayer != null) {
         newPlayer.PlayerInputDevice = curInputDevice;
-        playerList.Add(newPlayer);        
+        playerList.Add(newPlayer);
       }
     }
   }
 
   private LobbyPlayerValues GetNewPlayerValues(InputDevice inputDevice)
   {
-    foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer")) 
+    foreach (GameObject curPlayerSelection in GameObject.FindGameObjectsWithTag("GUIPlayer"))
     {
       LobbyPlayerValues valuesOfCurPlayer = curPlayerSelection.GetComponent<LobbyPlayerValues>();
       if (valuesOfCurPlayer.IsSelectedByPlayer)
       {
-        if(valuesOfCurPlayer.PlayerInputDevice == inputDevice) 
+        if(valuesOfCurPlayer.PlayerInputDevice == inputDevice)
         {
           playerList.Remove(valuesOfCurPlayer);
-          updatePlayerOrder(valuesOfCurPlayer);
+          UpdatePlayerOrder(valuesOfCurPlayer);
+          UpdateGUI();
           playerCount--;
+          return null; //not good to return Null (mahu)
         }
       }
-      else 
+      else
       {
-        valuesOfCurPlayer.IsSelectedByPlayer = true;
-        valuesOfCurPlayer.PlayerNumber = playerCount;
-        SetGUIComponentsForActivePlayer(valuesOfCurPlayer, curPlayerSelection);
-        playerCount++;
-        return valuesOfCurPlayer;
+        if (IsInputDeviceUnused(valuesOfCurPlayer))
+        {
+          valuesOfCurPlayer.IsSelectedByPlayer = true;
+          valuesOfCurPlayer.PlayerNumber = playerCount;
+          SetGUIComponentsForActivePlayer(valuesOfCurPlayer, curPlayerSelection);
+          playerCount++;
+          return valuesOfCurPlayer;
+        }
       }
     }
     return null;
   }
 
-  private void updatePlayerOrder(LobbyPlayerValues valuesOfCurPlayer)
+  private void UpdateGUI()
+  {
+    foreach (LobbyPlayerValues lobbyPlayer in playerList) {
+      GameObject gameObject = GameObject.FindGameObjectsWithTag("GUIPlayer")[lobbyPlayer.PlayerNumber];
+      SetGUIComponentsForActivePlayer(lobbyPlayer, gameObject);
+    }
+    RestoreDefaultGUI(GameObject.FindGameObjectsWithTag("GUIPlayer")[playerList.Count]);
+  }
+
+  private void RestoreDefaultGUI(GameObject targetGameObject)
+  {
+    targetGameObject.transform.GetChild(0).GetComponent<Text>().text = "Press Space/Start\nto Join";
+    targetGameObject.transform.GetChild(1).GetComponent<Image>().enabled = true;
+    targetGameObject.GetComponent<LobbyPlayerValues>().RestoreDefault();
+  }
+
+  private bool IsInputDeviceUnused(LobbyPlayerValues valuesOfCurPlayer)
+  {
+    foreach (LobbyPlayerValues curLobbyPlayer in playerList) {
+      if (curLobbyPlayer.PlayerInputDevice == valuesOfCurPlayer.PlayerInputDevice) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private void UpdatePlayerOrder(LobbyPlayerValues valuesOfCurPlayer)
   {
     foreach (LobbyPlayerValues lobbyPlayer in playerList) {
       int lobbyPlayerNumber = lobbyPlayer.PlayerNumber;
@@ -69,10 +100,11 @@ public class CharacterJoiner : MonoBehaviour
   private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer, GameObject curPlayerSelection)
   {
     curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
-    curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false;
+    curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false; //TODO: picture of character
+    valuesOfCurPlayer.JoinPlayerGameObject = curPlayerSelection;
   }
 
-  private bool IsConnectionButtonIsPressed(ref InputDevice inputDevice)
+  private bool IsConnectionButtonPressed(ref InputDevice inputDevice)
   {
     foreach (InputDevice curInputDevice in InputDevice.all) {
       if(curInputDevice is Keyboard) {
