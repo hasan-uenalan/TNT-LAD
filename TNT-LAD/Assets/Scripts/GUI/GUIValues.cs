@@ -19,13 +19,13 @@ public static class GUIValues
     return levelNumber;
   }
 
-  public static void SetPlayerDict(Dictionary<int, LobbyPlayerValues> value)
+  public static void SetPlayerDict(List<LobbyPlayerValues> value)
   {
-    playerDict = value;
+    playerList = value;
   }
 
-  public static Dictionary<int, LobbyPlayerValues> GetPlayerDict()
+  public static List<LobbyPlayerValues> GetPlayerDict()
   {
-    return playerDict;
+    return playerList;
   }
 }
