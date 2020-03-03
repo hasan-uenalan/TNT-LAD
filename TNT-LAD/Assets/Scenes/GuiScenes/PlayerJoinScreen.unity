@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc86ad33cf150f9479d84e7755e70482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartGame: {fileID: 1094571442}
 --- !u!1 &184220336
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +883,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1094571443}
   m_OnClick:
     m_PersistentCalls:

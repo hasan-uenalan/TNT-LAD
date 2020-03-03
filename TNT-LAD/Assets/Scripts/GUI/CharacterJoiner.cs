@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class CharacterJoiner : MonoBehaviour
 {
+  public Button StartGame; 
+
   private List<LobbyPlayerValues> playerList;
 
   private int playerCount = 1;
@@ -27,6 +29,12 @@ public class CharacterJoiner : MonoBehaviour
         playerList.Add(newPlayer);
       }
       GUIValues.PlayerList = playerList;
+    }
+    if (playerList.Count >= 2) {
+      StartGame.interactable = true;
+    }
+    else {
+      StartGame.interactable = false;
     }
   }
 
