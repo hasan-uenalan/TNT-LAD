@@ -26,9 +26,11 @@ public class CharacterJoiner : MonoBehaviour
         newPlayer.PlayerInputDevice = curInputDevice;
         playerList.Add(newPlayer);
       }
+      GUIValues.PlayerList = playerList;
     }
   }
 
+  //TODO: REFACTORING
   private LobbyPlayerValues GetNewPlayerValues(InputDevice inputDevice)
   {
     LobbyPlayerValues valuesOfCurPlayer = new LobbyPlayerValues();
