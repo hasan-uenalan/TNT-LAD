@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 //[ExecuteInEditMode]
 public class LevelController : MonoBehaviour
@@ -44,10 +45,11 @@ public class LevelController : MonoBehaviour
   void Start()
   {
     handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
-    
-
     CreateSceneStructure();
-    Construct();
+    if (SceneManager.GetActiveScene().name == "Editor")
+    {
+      Construct();
+    }
   }
 
   //creating scene structure
@@ -66,22 +68,30 @@ public class LevelController : MonoBehaviour
   public void Construct()
   {
     ClearBlocks(true);
+    blockMap = new GameObject[gridX, gridZ];
+    floorMap = new GameObject[gridX, gridZ];
+    wallMap = new GameObject[gridX + 2, gridZ + 2];
+    GenerateFloor();
+    GenerateWall();
+  }
+
+  public void ConstructByFile()
+  {
     if (File.Exists(handleLevelFile.GetFilePath()))
     {
+      ClearBlocks(true);
       UpdateMapParams();
       blockMap = new GameObject[gridX, gridZ];
       floorMap = new GameObject[gridX, gridZ];
       wallMap = new GameObject[gridX + 2, gridZ + 2];
       PlaceLevelBlocks();
+      GenerateFloor();
+      GenerateWall();
     }
     else
     {
-      blockMap = new GameObject[gridX, gridZ];
-      floorMap = new GameObject[gridX, gridZ];
-      wallMap = new GameObject[gridX + 2, gridZ + 2];
+      Debug.LogError("Level file doesn't exist");
     }
-    GenerateFloor();
-    GenerateWall();
   }
 
   private void UpdateMapParams()
@@ -183,11 +193,11 @@ public class LevelController : MonoBehaviour
       char[] blocks = blockLine[x].ToCharArray();
       for (int z = 0; z < blocks.Length; z++)
       {
-        if (blocks[z] == handleLevelFile.GetCharDestructible())
+        if (blocks[z] == handleLevelFile.charDestructible)
         {
           SetBlock(x, z, BlockData.BlockType.DESTRUCTIBLE);
         }
-        if (blocks[z] == handleLevelFile.GetCharDefault())
+        if (blocks[z] == handleLevelFile.charDefault)
         {
           SetBlock(x, z, BlockData.BlockType.DEFAULT);
         }
@@ -273,11 +283,13 @@ public class LevelController : MonoBehaviour
         {
           levelController.Construct();
         }
+        if (GUILayout.Button("Construct By File"))
+        {
+          levelController.ConstructByFile();
+        }
 
-        //GUILayout.BeginHorizontal();
         xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
         zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
-        //GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Default"))

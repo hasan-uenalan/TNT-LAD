@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class LevelEditor : MonoBehaviour
 {
 
@@ -9,21 +9,37 @@ public class LevelEditor : MonoBehaviour
   public bool placeBlocksActive = true;
   private BlockData.BlockType activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
 
+  private string currentFileName = null;
+
   //necessary components
   private LevelController levelController;
 
+  //Pos for mouse pointer
   private int posX;
   private int posZ;
 
   void Start()
   {
     levelController = gameObject.GetComponent<LevelController>();
+
+    LoadUIValues();
   }
 
   // Update is called once per frame
   void Update()
   {
     SelectObjectMouse();
+  }
+
+  private void LoadUIValues()
+  {
+    InputField inputFieldX = GameObject.Find("InputFieldMapX").GetComponent<InputField>();
+    InputField inputFieldZ = GameObject.Find("InputFieldMapZ").GetComponent<InputField>();
+
+    inputFieldX.text = levelController.gridX + "";
+    inputFieldZ.text = levelController.gridZ + "";
+
+    //File Name if it's a new file
   }
 
   private void SelectObjectMouse()
@@ -75,4 +91,43 @@ public class LevelEditor : MonoBehaviour
     activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
   }
 
+  public void UpdateMapSize()
+  {
+    InputField inputFieldX = GameObject.Find("InputFieldMapX").GetComponent<InputField>();
+    InputField inputFieldZ = GameObject.Find("InputFieldMapZ").GetComponent<InputField>();
+
+    int oldGridX = levelController.gridX;
+    int oldGridZ = levelController.gridZ;
+
+    int newGridX = int.Parse(inputFieldX.text);
+    int newGridZ = int.Parse(inputFieldZ.text);
+
+    if(newGridX <= 0 || newGridZ <= 0)
+    {
+      inputFieldX.text = oldGridX + "";
+      inputFieldZ.text = oldGridZ + "";
+      return;
+    }
+
+    levelController.gridX = newGridX;
+    levelController.gridZ = newGridZ;
+
+    levelController.Construct(); 
+  }
+
+  public void SaveFile()
+  {
+    //Reads name of map, saves file and updates currently loaded map
+  }
+
+  public void UpdateCurrentFile()
+  {
+
+    LoadUIValues();
+  }
+
+  public void DeleteFile()
+  {
+
+  }
 }

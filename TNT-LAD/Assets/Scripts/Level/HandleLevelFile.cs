@@ -7,33 +7,18 @@ using System.IO;
 public class HandleLevelFile : MonoBehaviour
 {
 
-  private char charDestructible = '+';
-  private char charDefault = '*';
-  private char charNone = '-';
+  public char charDestructible { set; get; } = '+';
+  public char charDefault { set; get; } = '*';
+  public char charNone { set; get; } = '-';
+
+  public string levelFileName { set; get; }
+
 
   public void SaveMapFile(GameObject[,] blocks)
   {
     CreateDir();
     DeleteFile();
     OverwriteFile(blocks);
-  }
-  //Creates dir if it doesn't exist
-  private void CreateDir()
-  {
-    if (!Directory.Exists(GetDirPath()))
-    {
-      Directory.CreateDirectory(GetDirPath());
-    }
-  }
-
-  public string[] GetFileData()
-  {
-    var sr = new StreamReader(GetFilePath());
-
-    var fileContents = sr.ReadToEnd();
-    sr.Close();
-    string[] blockLine = fileContents.Split("\n"[0]);
-    return blockLine;
   }
 
   private void OverwriteFile(GameObject[,] blocks)
@@ -52,7 +37,15 @@ public class HandleLevelFile : MonoBehaviour
     }
   }
 
-  public void CreateFile(GameObject[,] blocks)
+  //Creates dir if it doesn't exist
+  private void CreateDir()
+  {
+    if (!Directory.Exists(GetDirPath()))
+    {
+      Directory.CreateDirectory(GetDirPath());
+    }
+  }
+  private void CreateFile(GameObject[,] blocks)
   {
     var sr = File.CreateText(GetFilePath()); //creates file with scene name
     for (int x = 0; x < blocks.GetLength(0); x++)
@@ -83,28 +76,31 @@ public class HandleLevelFile : MonoBehaviour
     }
       sr.Close();
   }
+
+  public string[] GetFileData()
+  {
+    var sr = new StreamReader(GetFilePath());
+
+    var fileContents = sr.ReadToEnd();
+    sr.Close();
+    string[] blockLine = fileContents.Split("\n"[0]);
+    return blockLine;
+  }
+
   //TODO: Delete those
-  public char GetCharDestructible() 
-  {
-    return charDestructible;    
-  }
-  public char GetCharDefault()
-  {
-    return charDefault;
-  }
-  public char GetCharNone()
-  {
-    return charNone;
-  }
 
   public string GetFilePath()
   {
-    return Application.dataPath + "/Resources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt";
+    return Application.dataPath + "/Resources/LevelFiles/" + levelFileName + ".txt";
+  }
+
+  public string GetFilePath(string fileName)
+  {
+    return Application.dataPath + "/Resources/LevelFiles/" + fileName + ".txt";
   }
 
   public string GetDirPath()
   {
-    return Application.dataPath + "Ressources/LevelFiles";
+    return Application.dataPath + "/Resources/LevelFiles";
   }
-
 }
