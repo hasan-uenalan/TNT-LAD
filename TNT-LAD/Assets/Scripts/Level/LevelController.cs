@@ -310,7 +310,7 @@ public class LevelController : MonoBehaviour
         }
         if (GUILayout.Button("Delete Level File"))
         {
-          handleLevelFile.deleteFile();
+          handleLevelFile.DeleteFile();
         }
         GUI.backgroundColor = Color.green;
         if (GUILayout.Button("Save Map"))
