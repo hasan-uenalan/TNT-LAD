@@ -8,16 +8,14 @@ public class LevelLoader : MonoBehaviour
 
   //components
   private LevelController levelController;
-  private HandleLevelFile handleLevelFile;
 
   void Start()
   {
     levelFileName = SceneLoader.levelFileName;
 
     levelController = gameObject.GetComponent<LevelController>();
-    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
 
-    handleLevelFile.levelFileName = levelFileName;
+    levelController.currentFile = levelFileName;
     levelController.ConstructByFile();
   }
 

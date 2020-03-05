@@ -11,29 +11,25 @@ public class HandleLevelFile : MonoBehaviour
   public char charDefault { set; get; } = '*';
   public char charNone { set; get; } = '-';
 
-  public string levelFileName { set; get; }
-
-
-  public void SaveMapFile(GameObject[,] blocks)
+  public void SaveMapFile(GameObject[,] blocks, string fileName)
   {
     CreateDir();
-    DeleteFile();
-    OverwriteFile(blocks);
+    OverwriteFile(blocks, fileName);
   }
 
-  private void OverwriteFile(GameObject[,] blocks)
+  private void OverwriteFile(GameObject[,] blocks, string fileName)
   {
-    DeleteFile();
-    CreateFile(blocks);
+    DeleteFile(fileName);
+    CreateFile(blocks, fileName);
   }
 
   //deletes the level file if it exists
-  public void DeleteFile()
+  public void DeleteFile(string fileName)
   {
-    if (File.Exists(GetFilePath()))
+    if (File.Exists(GetFilePath(fileName)))
     {
-      File.Delete(GetFilePath());
-      File.Delete(GetFilePath() + ".meta");
+      File.Delete(GetFilePath(fileName));
+      File.Delete(GetFilePath(fileName) + ".meta");
     }
   }
 
@@ -45,9 +41,9 @@ public class HandleLevelFile : MonoBehaviour
       Directory.CreateDirectory(GetDirPath());
     }
   }
-  private void CreateFile(GameObject[,] blocks)
+  private void CreateFile(GameObject[,] blocks, string fileName)
   {
-    var sr = File.CreateText(GetFilePath()); //creates file with scene name
+    var sr = File.CreateText(GetFilePath(fileName)); //creates file with scene name
     for (int x = 0; x < blocks.GetLength(0); x++)
     {
       for (int z = 0; z < blocks.GetLength(1); z++)
@@ -77,21 +73,14 @@ public class HandleLevelFile : MonoBehaviour
       sr.Close();
   }
 
-  public string[] GetFileData()
+  public string[] GetFileData(string fileName)
   {
-    var sr = new StreamReader(GetFilePath());
+    var sr = new StreamReader(GetFilePath(fileName));
 
     var fileContents = sr.ReadToEnd();
     sr.Close();
     string[] blockLine = fileContents.Split("\n"[0]);
     return blockLine;
-  }
-
-  //TODO: Delete those
-
-  public string GetFilePath()
-  {
-    return Application.dataPath + "/Resources/LevelFiles/" + levelFileName + ".txt";
   }
 
   public string GetFilePath(string fileName)

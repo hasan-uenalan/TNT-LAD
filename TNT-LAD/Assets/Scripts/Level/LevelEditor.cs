@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 public class LevelEditor : MonoBehaviour
 {
 
@@ -13,6 +14,7 @@ public class LevelEditor : MonoBehaviour
 
   //necessary components
   private LevelController levelController;
+  private HandleLevelFile handleLevelFile;
 
   //Pos for mouse pointer
   private int posX;
@@ -21,6 +23,7 @@ public class LevelEditor : MonoBehaviour
   void Start()
   {
     levelController = gameObject.GetComponent<LevelController>();
+    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
 
     LoadUIValues();
   }
@@ -115,14 +118,24 @@ public class LevelEditor : MonoBehaviour
     levelController.Construct(); 
   }
 
+  private string ReadInputFileName()
+  {
+    Regex lettersNumbers = new Regex("[A-Za-z0-9]*");
+    string fileName;
+    InputField newFileName = GameObject.Find("InputFieldLevelName").GetComponent<InputField>();
+
+    fileName = lettersNumbers.Match(newFileName.text).ToString();
+    return fileName;
+  }
+
+  //Reads name of map, saves file and updates currently loaded map
   public void SaveFile()
   {
-    //Reads name of map, saves file and updates currently loaded map
+    handleLevelFile.SaveMapFile(levelController.blockMap, ReadInputFileName());
   }
 
   public void UpdateCurrentFile()
   {
-
     LoadUIValues();
   }
 

@@ -29,7 +29,7 @@ public class LevelController : MonoBehaviour
   public GameObject outerWall;
 
   private GameObject[,] floorMap;
-  private GameObject[,] blockMap;
+  public GameObject[,] blockMap { set; get; }
   private GameObject[,] wallMap;
 
   //For scene  structure
@@ -38,6 +38,8 @@ public class LevelController : MonoBehaviour
   private GameObject wallBlocks;
 
   private HandleLevelFile handleLevelFile;
+
+  public string currentFile { get; set; }
 
   //public enum blockType {DESTRUCTIBLE, DEFAULT};
 
@@ -77,7 +79,7 @@ public class LevelController : MonoBehaviour
 
   public void ConstructByFile()
   {
-    if (File.Exists(handleLevelFile.GetFilePath()))
+    if (File.Exists(handleLevelFile.GetFilePath(currentFile)))
     {
       ClearBlocks(true);
       UpdateMapParams();
@@ -96,7 +98,7 @@ public class LevelController : MonoBehaviour
 
   private void UpdateMapParams()
   {
-    string[] blockLine = handleLevelFile.GetFileData();
+    string[] blockLine = handleLevelFile.GetFileData(currentFile);
     gridX = blockLine.Length;
     gridZ = blockLine[0].ToCharArray().Length; //whitespace is also part of the array
   }
@@ -186,7 +188,7 @@ public class LevelController : MonoBehaviour
   private void PlaceLevelBlocks()
   {
 
-    string[] blockLine = handleLevelFile.GetFileData();
+    string[] blockLine = handleLevelFile.GetFileData(currentFile);
 
     for (int x = 0; x < blockLine.Length; x++)
     {
@@ -254,86 +256,86 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  [CustomEditor(typeof(LevelController))]
-  class DecalMeshHelperEditor : Editor
-  {
-    LevelController levelController;
-    HandleLevelFile handleLevelFile;
-    int xBlock = 0;
-    int zBlock = 0;
+  //[CustomEditor(typeof(LevelController))]
+  //class DecalMeshHelperEditor : Editor
+  //{
+  //  LevelController levelController;
+  //  HandleLevelFile handleLevelFile;
+  //  int xBlock = 0;
+  //  int zBlock = 0;
 
-    private void OnEnable()
-    {
-      levelController = (LevelController)target;
-      handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
-    }
-    
-    public override void OnInspectorGUI()
-    {
-      DrawDefaultInspector();
+  //  private void OnEnable()
+  //  {
+  //    levelController = (LevelController)target;
+  //    handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
+  //  }
 
-      //Seperator
-      Rect rect = EditorGUILayout.GetControlRect(false, 1);
-      rect.height = 1;
-      EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
+  //  public override void OnInspectorGUI()
+  //  {
+  //    DrawDefaultInspector();
 
-      if (Application.isPlaying)
-      {
-        if (GUILayout.Button("Reconstruct"))
-        {
-          levelController.Construct();
-        }
-        if (GUILayout.Button("Construct By File"))
-        {
-          levelController.ConstructByFile();
-        }
+  //    //Seperator
+  //    Rect rect = EditorGUILayout.GetControlRect(false, 1);
+  //    rect.height = 1;
+  //    EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
 
-        xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
-        zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
+  //    if (Application.isPlaying)
+  //    {
+  //      if (GUILayout.Button("Reconstruct"))
+  //      {
+  //        levelController.Construct();
+  //      }
+  //      if (GUILayout.Button("Construct By File"))
+  //      {
+  //        levelController.ConstructByFile();
+  //      }
 
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Default"))
-        {
+  //      xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
+  //      zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
 
-          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
+  //      GUILayout.BeginHorizontal();
+  //      if (GUILayout.Button("Default"))
+  //      {
 
-        }
-        if (GUILayout.Button("Destructible"))
-        {
-         
-          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
+  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
 
-        }
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Delete"))
-        {
-          levelController.DeleteBlock(xBlock, zBlock);
-        }
-        GUILayout.EndHorizontal();
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Clear Blocks"))
-        {
-          levelController.ClearBlocks(false);
-        }
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Clear All"))
-        {
-          levelController.ClearBlocks(true);
-        }
-        if (GUILayout.Button("Delete Level File"))
-        {
-          handleLevelFile.DeleteFile();
-        }
-        GUI.backgroundColor = Color.green;
-        if (GUILayout.Button("Save Map"))
-        {
-          handleLevelFile.SaveMapFile(levelController.blockMap);
-        }
-      }
+  //      }
+  //      if (GUILayout.Button("Destructible"))
+  //      {
 
-    }
+  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
+
+  //      }
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Delete"))
+  //      {
+  //        levelController.DeleteBlock(xBlock, zBlock);
+  //      }
+  //      GUILayout.EndHorizontal();
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Clear Blocks"))
+  //      {
+  //        levelController.ClearBlocks(false);
+  //      }
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Clear All"))
+  //      {
+  //        levelController.ClearBlocks(true);
+  //      }
+  //      if (GUILayout.Button("Delete Level File"))
+  //      {
+  //        handleLevelFile.DeleteFile();
+  //      }
+  //      GUI.backgroundColor = Color.green;
+  //      if (GUILayout.Button("Save Map"))
+  //      {
+  //        handleLevelFile.SaveMapFile(levelController.blockMap);
+  //      }
+  //    }
+
+  //  }
 
 
-  }
+  //}
 
 }
