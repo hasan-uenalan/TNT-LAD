@@ -15,14 +15,14 @@ public class PlayerData : MonoBehaviour
   public Vector3 spawnPoint;
   public float invincibilityTime;
 
-  private int score { get; set; }
-
   //Bomb data
   public List<GameObject> placedBombs = new List<GameObject>();
   public int bombCount { get; set; }
   public int bombStrength { get; set; }
 
-  //player status data
+  /// <summary>
+  /// player status data
+  /// </summary>
   public int lifes { get; set; }
 
   public bool powerUpMoveBombs;
@@ -32,12 +32,11 @@ public class PlayerData : MonoBehaviour
   void Start()
   {
     initPlayerData();
+    StaticPlayers.staticPlayers.Add(new StaticPlayerData(playerIndex,0));
   }
 
   public void initPlayerData()
-  {
-    score = 0;
-
+  { 
     bombCount = 1;
     bombStrength = 1;
     playerStatus = status.alive;
