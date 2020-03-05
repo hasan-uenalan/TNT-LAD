@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class CameraPositioning : MonoBehaviour
 {
-  public Transform cam;
-  public float distance;
-
-  private LevelController levelController;
-
-  // Start is called before the first frame update
   void Start()
   {
-    levelController = gameObject.GetComponent<LevelController>();
-    cam.position = new Vector3(levelController.gridX / 2, distance, levelController.gridZ / 2);
+    CenterCameraPosition();
+  }
+
+  private void CenterCameraPosition()
+  {
+    LevelController lvlController = gameObject.GetComponent<LevelController>();
+    float maxExtends = Mathf.Max(lvlController.gridX, lvlController.gridZ) / 2;
+    maxExtends += 2.5f;
+    float angle = (Camera.main.fieldOfView / 2) * Mathf.Deg2Rad;
+    float hyp = maxExtends / Mathf.Sin(angle);
+    float height = Mathf.Sqrt((Mathf.Pow(hyp, 2) - Mathf.Pow(maxExtends, 2)));
+    Camera.main.transform.position = new Vector3(lvlController.gridX / 2, height, lvlController.gridZ / 2);
   }
 }
