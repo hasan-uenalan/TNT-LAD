@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScoreHandler : MonoBehaviour
 {
+  public int WinCOndition = 3;
 
   private int playerCount;
 
@@ -18,8 +19,27 @@ public class PlayerScoreHandler : MonoBehaviour
       gameObject.transform.GetChild(i).gameObject.SetActive(true);
     }
     foreach (StaticPlayerData staticPlayer in StaticPlayers.staticPlayers) {
-      Debug.Log("Player " + staticPlayer.PlayerIndex + " has " + staticPlayer.PlayerScore + " points");
+      CheckIfPlayerWon(staticPlayer);
+      AddPlayerImages();
+      SpawnStars(staticPlayer);
     }
+  }
+
+  private void CheckIfPlayerWon(StaticPlayerData staticPlayer)
+  {
+    if (staticPlayer.PlayerScore >= 3) {
+      SceneManager.LoadScene("WinScreen");
+    }
+  }
+
+  private void AddPlayerImages()
+  {
+
+  }
+
+  private void SpawnStars(StaticPlayerData staticPlayer)
+  {
+
   }
 
   void Update()
