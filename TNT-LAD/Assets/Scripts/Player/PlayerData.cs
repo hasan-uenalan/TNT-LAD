@@ -11,7 +11,7 @@ public class PlayerData : MonoBehaviour
     invincible
   };
 
-  public int playerIndex;
+  public StaticPlayerData playerData;
   public Vector3 spawnPoint;
   public float invincibilityTime;
 
@@ -32,11 +32,13 @@ public class PlayerData : MonoBehaviour
   void Start()
   {
     initPlayerData();
-    StaticPlayers.staticPlayers.Add(new StaticPlayerData(playerIndex,0));
+    StaticPlayers.staticPlayers.Add(playerData);
   }
 
   public void initPlayerData()
-  { 
+  {
+    //PlayerIndex has to be set
+    playerData = new StaticPlayerData( 1, 0);
     bombCount = 1;
     bombStrength = 1;
     playerStatus = status.alive;
