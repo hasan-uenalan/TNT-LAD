@@ -5,7 +5,6 @@ using System.IO;
 
 public class FetchLevels : MonoBehaviour
 {
-  private List<string> levelNames;
 
   //needed components
   HandleLevelFile handleLevelFile;
@@ -18,6 +17,7 @@ public class FetchLevels : MonoBehaviour
 
   public List<string> LoadLevelNames()
   {
+    List<string> levelNames;
     levelNames = new List<string>();
     DirectoryInfo dirInfo = new DirectoryInfo(handleLevelFile.GetDirPath());
     FileInfo[] files = dirInfo.GetFiles("*.*");

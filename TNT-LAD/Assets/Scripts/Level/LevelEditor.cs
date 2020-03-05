@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Text.RegularExpressions;
 public class LevelEditor : MonoBehaviour
 {
 
@@ -15,6 +14,8 @@ public class LevelEditor : MonoBehaviour
   //necessary components
   private LevelController levelController;
   private HandleLevelFile handleLevelFile;
+  private FetchLevels fetchLevels;
+  private SceneLoader sceneLoader;
 
   //Pos for mouse pointer
   private int posX;
@@ -24,6 +25,8 @@ public class LevelEditor : MonoBehaviour
   {
     levelController = gameObject.GetComponent<LevelController>();
     handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
+    fetchLevels = gameObject.GetComponent<FetchLevels>();
+    sceneLoader = gameObject.GetComponent<SceneLoader>();
 
     LoadUIValues();
   }
@@ -34,16 +37,22 @@ public class LevelEditor : MonoBehaviour
     SelectObjectMouse();
   }
 
+  #region UIStuff (should be eventually moved to own script)
   private void LoadUIValues()
+  {
+    LoadUIGridSize();
+    LoadUIDropdownOptions();
+  }
+
+  private void LoadUIGridSize()
   {
     InputField inputFieldX = GameObject.Find("InputFieldMapX").GetComponent<InputField>();
     InputField inputFieldZ = GameObject.Find("InputFieldMapZ").GetComponent<InputField>();
 
     inputFieldX.text = levelController.gridX + "";
     inputFieldZ.text = levelController.gridZ + "";
-
-    //File Name if it's a new file
   }
+  #endregion
 
   private void SelectObjectMouse()
   {
@@ -132,11 +141,32 @@ public class LevelEditor : MonoBehaviour
   public void SaveFile()
   {
     handleLevelFile.SaveMapFile(levelController.blockMap, ReadInputFileName());
+    LoadUIValues();
   }
 
   public void UpdateCurrentFile()
   {
     LoadUIValues();
+  }
+
+  public void LoadLevel()
+  {
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    string levelName = dropDownLevels.options[dropDownLevels.value].text;
+    sceneLoader.LoadLevel(levelName);
+  }
+
+  private void LoadUIDropdownOptions()
+  {
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    dropDownLevels.ClearOptions();
+    List<string> fileNames = fetchLevels.LoadLevelNames();
+    foreach(string fileName in fileNames)
+    {
+      Dropdown.OptionData option = new Dropdown.OptionData();
+      option.text = fileName;
+      dropDownLevels.options.Add(option);
+    }
   }
 
   public void DeleteFile()
