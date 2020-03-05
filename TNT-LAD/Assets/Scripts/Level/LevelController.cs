@@ -100,9 +100,9 @@ public class LevelController : MonoBehaviour
       if(z != 0 && z != (wallMap.GetLength(1)-1))
       {
         Vector3 leftWallPos = new Vector3((startPos.x + -1) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
-        Vector3 rightWallPos = new Vector3((startPos.x + wallMap.GetLength(1) - 2) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
+        Vector3 rightWallPos = new Vector3((startPos.x + wallMap.GetLength(0) - 2) * spacing, blockHeight / 2, (startPos.z + z - 1) * spacing);
         wallMap[0, z] = Instantiate(outerWall, leftWallPos, Quaternion.identity, wallBlocks.transform);
-        wallMap[wallMap.GetLength(1)-1, z] = Instantiate(outerWall, rightWallPos, Quaternion.identity, wallBlocks.transform);
+        wallMap[wallMap.GetLength(0)-1, z] = Instantiate(outerWall, rightWallPos, Quaternion.identity, wallBlocks.transform);
         continue;
       }
       for (int x = 0; x < wallMap.GetLength(0); x++)
