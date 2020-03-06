@@ -4,16 +4,78 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class HandleLevelFile : MonoBehaviour
+public class HandleLevelFile
 {
 
-  private char charDestructible = '+';
-  private char charDefault = '*';
-  private char charNone = '-';
+  public char charDestructible { set; get; } = '+';
+  public char charDefault { set; get; } = '*';
+  public char charNone { set; get; } = '-';
 
-  public string[] GetFileData()
+  public void SaveMapFile(GameObject[,] blocks, string fileName)
   {
-    var sr = new StreamReader(GetFilePath());
+    CreateDir();
+    OverwriteFile(blocks, fileName);
+  }
+
+  private void OverwriteFile(GameObject[,] blocks, string fileName)
+  {
+    DeleteFile(fileName);
+    CreateFile(blocks, fileName);
+  }
+
+  //deletes the level file if it exists
+  public void DeleteFile(string fileName)
+  {
+    if (File.Exists(GetFilePath(fileName)))
+    {
+      File.Delete(GetFilePath(fileName));
+      File.Delete(GetFilePath(fileName) + ".meta");
+    }
+  }
+
+  //Creates dir if it doesn't exist
+  private void CreateDir()
+  {
+    if (!Directory.Exists(GetDirPath()))
+    {
+      Directory.CreateDirectory(GetDirPath());
+    }
+  }
+  private void CreateFile(GameObject[,] blocks, string fileName)
+  {
+    var sr = File.CreateText(GetFilePath(fileName)); //creates file with scene name
+    for (int x = 0; x < blocks.GetLength(0); x++)
+    {
+      for (int z = 0; z < blocks.GetLength(1); z++)
+      {
+        if (blocks[x, z] == null)
+        {
+          sr.Write(charNone);
+        }
+        else
+        {
+          if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DESTRUCTIBLE)
+          {
+            sr.Write(charDestructible);
+          }
+          if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DEFAULT)
+          {
+            sr.Write(charDefault);
+          }
+        }
+
+      }
+      if (x < blocks.GetLength(0) - 1) //not starting a new line at the end of document
+      {
+        sr.Write("\n");
+      }
+    }
+      sr.Close();
+  }
+
+  public string[] GetFileData(string fileName)
+  {
+    var sr = new StreamReader(GetFilePath(fileName));
 
     var fileContents = sr.ReadToEnd();
     sr.Close();
@@ -21,68 +83,13 @@ public class HandleLevelFile : MonoBehaviour
     return blockLine;
   }
 
-  public string GetFilePath()
+  public string GetFilePath(string fileName)
   {
-    return Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt";
+    return Application.dataPath + "/Resources/LevelFiles/" + fileName + ".txt";
   }
 
-  public void SaveMapFile(GameObject[,] blocks)
+  public static string GetDirPath()
   {
-    deleteFile();
-    if(!File.Exists(GetFilePath()))
-    {
-      var sr = File.CreateText(Application.dataPath + "/Ressources/LevelFiles/" + SceneManager.GetActiveScene().name + ".txt"); //creates file with scene name
-      for(int x = 0; x < blocks.GetLength(0); x++)
-      {
-        for(int z = 0; z < blocks.GetLength(1); z++)
-        {
-          if(blocks[x,z] == null)
-          {
-            sr.Write(charNone);
-          }
-          else
-          {
-            if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DESTRUCTIBLE)
-            {
-              sr.Write(charDestructible);
-            }
-            if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DEFAULT)
-            {
-              sr.Write(charDefault);
-            }
-          }
-          
-        }
-        if(x < blocks.GetLength(0) - 1) //not starting a new line at the end of document
-        {
-          sr.Write("\n");
-        }
-      }
-
-      sr.Close();
-    }
+    return Application.dataPath + "/Resources/LevelFiles";
   }
-  //deletes the level file if it exists
-  public void deleteFile()
-  {
-    if (File.Exists(GetFilePath()))
-    {
-      File.Delete(GetFilePath());
-      File.Delete(GetFilePath() + ".meta");
-    }
-  }
-
-  public char GetCharDestructible() 
-  {
-    return charDestructible;    
-  }
-  public char GetCharDefault()
-  {
-    return charDefault;
-  }
-  public char GetCharNone()
-  {
-    return charNone;
-  }
-
 }

@@ -9,10 +9,10 @@ public class BoxDestroyer : MonoBehaviour
   public bool randomForceMultiplier;
   public float explosionForce;
 
-  public void OnMouseDown()
-  {
-    DestroyBox();
-  }
+  //public void OnMouseDown()
+  //{
+  //  DestroyBox();
+  //}
 
   [ContextMenu("Destroy Box")]
   public void DestroyBox()

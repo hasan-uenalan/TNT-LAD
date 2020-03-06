@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8980669213659470632}
   - component: {fileID: 8980669213659470633}
-  - component: {fileID: 8980669213659470635}
   - component: {fileID: 1512167554}
   m_Layer: 0
   m_Name: MapController
@@ -47,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSize: 1
   spacing: 1
-  startPos: {x: 0.5, y: 0, z: 0.5}
+  startPos: {x: 0, y: 0, z: 0}
   gridX: 10
   gridZ: 10
   floor: {fileID: 5617804783886285068, guid: fc6656dbcc963c940824231257e2af05, type: 3}
@@ -58,18 +57,6 @@ MonoBehaviour:
   blockHeight: 1
   outerWall: {fileID: 1748031504211757037, guid: cf93201e4c3297d48b378dc0687d15de,
     type: 3}
---- !u!114 &8980669213659470635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980669213659470638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9d4ee39596b9d4c9dc9eaeb2936768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1512167554
 MonoBehaviour:
   m_ObjectHideFlags: 0

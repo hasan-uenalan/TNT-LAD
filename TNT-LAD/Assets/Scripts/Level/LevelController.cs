@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 //[ExecuteInEditMode]
 public class LevelController : MonoBehaviour
@@ -28,10 +29,9 @@ public class LevelController : MonoBehaviour
   public GameObject outerWall;
 
   private GameObject[,] floorMap;
-  private GameObject[,] blockMap;
+  public GameObject[,] blockMap { set; get; }
   private GameObject[,] wallMap;
 
-  
   //For scene  structure
   private GameObject floorBlocks;
   private GameObject levelBlocks;
@@ -39,16 +39,19 @@ public class LevelController : MonoBehaviour
 
   private HandleLevelFile handleLevelFile;
 
+  public string currentFile { get; set; }
+
   //public enum blockType {DESTRUCTIBLE, DEFAULT};
 
   // Start is called before the first frame update
   void Start()
   {
-    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
-    
-
+    handleLevelFile = new HandleLevelFile();
     CreateSceneStructure();
-    Construct();
+    if (SceneManager.GetActiveScene().name == "Editor")
+    {
+      Construct();
+    }
   }
 
   //creating scene structure
@@ -67,27 +70,35 @@ public class LevelController : MonoBehaviour
   public void Construct()
   {
     ClearBlocks(true);
-    if (File.Exists(handleLevelFile.GetFilePath()))
-    {
-      updateMapParams();
-      blockMap = new GameObject[gridX, gridZ];
-      floorMap = new GameObject[gridX, gridZ];
-      wallMap = new GameObject[gridX + 2, gridZ + 2];
-      PlaceLevelBlocks();
-    }
-    else
-    {
-      blockMap = new GameObject[gridX, gridZ];
-      floorMap = new GameObject[gridX, gridZ];
-      wallMap = new GameObject[gridX + 2, gridZ + 2];
-    }
+    blockMap = new GameObject[gridX, gridZ];
+    floorMap = new GameObject[gridX, gridZ];
+    wallMap = new GameObject[gridX + 2, gridZ + 2];
     GenerateFloor();
     GenerateWall();
   }
 
-  private void updateMapParams()
+  public void ConstructByFile()
   {
-    string[] blockLine = handleLevelFile.GetFileData();
+    if (File.Exists(handleLevelFile.GetFilePath(currentFile)))
+    {
+      ClearBlocks(true);
+      UpdateMapParams();
+      blockMap = new GameObject[gridX, gridZ];
+      floorMap = new GameObject[gridX, gridZ];
+      wallMap = new GameObject[gridX + 2, gridZ + 2];
+      PlaceLevelBlocks();
+      GenerateFloor();
+      GenerateWall();
+    }
+    else
+    {
+      Debug.LogError("Level file doesn't exist");
+    }
+  }
+
+  private void UpdateMapParams()
+  {
+    string[] blockLine = handleLevelFile.GetFileData(currentFile);
     gridX = blockLine.Length;
     gridZ = blockLine[0].ToCharArray().Length; //whitespace is also part of the array
   }
@@ -125,6 +136,15 @@ public class LevelController : MonoBehaviour
         floorMap[x, z].transform.parent = floorBlocks.transform;
       }
     }
+  }
+
+  public bool OutOfBoundsCheck(int x, int z)
+  {
+    if(x >= gridX || z >= gridZ)
+    {
+      return true;
+    }
+    return false;
   }
 
   //sets the block at specified location
@@ -168,18 +188,18 @@ public class LevelController : MonoBehaviour
   private void PlaceLevelBlocks()
   {
 
-    string[] blockLine = handleLevelFile.GetFileData();
+    string[] blockLine = handleLevelFile.GetFileData(currentFile);
 
     for (int x = 0; x < blockLine.Length; x++)
     {
       char[] blocks = blockLine[x].ToCharArray();
       for (int z = 0; z < blocks.Length; z++)
       {
-        if (blocks[z] == handleLevelFile.GetCharDestructible())
+        if (blocks[z] == handleLevelFile.charDestructible)
         {
           SetBlock(x, z, BlockData.BlockType.DESTRUCTIBLE);
         }
-        if (blocks[z] == handleLevelFile.GetCharDefault())
+        if (blocks[z] == handleLevelFile.charDefault)
         {
           SetBlock(x, z, BlockData.BlockType.DEFAULT);
         }
@@ -187,7 +207,7 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  public void deleteBlock(int x, int z)
+  public void DeleteBlock(int x, int z)
   {
     if(blockMap[x, z] != null)
     {
@@ -199,7 +219,7 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  private void ClearBlocks(bool clearAll)
+  public void ClearBlocks(bool clearAll)
   {
     if (blockMap != null)
     {
@@ -236,83 +256,86 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  [CustomEditor(typeof(LevelController))]
-  class DecalMeshHelperEditor : Editor
-  {
-    LevelController levelController;
-    HandleLevelFile handleLevelFile;
-    int xBlock = 0;
-    int zBlock = 0;
+  //[CustomEditor(typeof(LevelController))]
+  //class DecalMeshHelperEditor : Editor
+  //{
+  //  LevelController levelController;
+  //  HandleLevelFile handleLevelFile;
+  //  int xBlock = 0;
+  //  int zBlock = 0;
 
-    private void OnEnable()
-    {
-      levelController = (LevelController)target;
-      handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
-    }
-    
-    public override void OnInspectorGUI()
-    {
-      DrawDefaultInspector();
+  //  private void OnEnable()
+  //  {
+  //    levelController = (LevelController)target;
+  //    handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
+  //  }
 
-      //Seperator
-      Rect rect = EditorGUILayout.GetControlRect(false, 1);
-      rect.height = 1;
-      EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
+  //  public override void OnInspectorGUI()
+  //  {
+  //    DrawDefaultInspector();
+
+  //    //Seperator
+  //    Rect rect = EditorGUILayout.GetControlRect(false, 1);
+  //    rect.height = 1;
+  //    EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
+
+  //    if (Application.isPlaying)
+  //    {
+  //      if (GUILayout.Button("Reconstruct"))
+  //      {
+  //        levelController.Construct();
+  //      }
+  //      if (GUILayout.Button("Construct By File"))
+  //      {
+  //        levelController.ConstructByFile();
+  //      }
+
+  //      xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
+  //      zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
+
+  //      GUILayout.BeginHorizontal();
+  //      if (GUILayout.Button("Default"))
+  //      {
+
+  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
+
+  //      }
+  //      if (GUILayout.Button("Destructible"))
+  //      {
+
+  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
+
+  //      }
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Delete"))
+  //      {
+  //        levelController.DeleteBlock(xBlock, zBlock);
+  //      }
+  //      GUILayout.EndHorizontal();
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Clear Blocks"))
+  //      {
+  //        levelController.ClearBlocks(false);
+  //      }
+  //      GUI.backgroundColor = Color.red;
+  //      if (GUILayout.Button("Clear All"))
+  //      {
+  //        levelController.ClearBlocks(true);
+  //      }
+  //      if (GUILayout.Button("Delete Level File"))
+  //      {
+  //        handleLevelFile.DeleteFile();
+  //      }
+  //      GUI.backgroundColor = Color.green;
+  //      if (GUILayout.Button("Save Map"))
+  //      {
+  //        handleLevelFile.SaveMapFile(levelController.blockMap);
+  //      }
+  //    }
+
+  //  }
 
 
-      if (Application.isPlaying)
-      {
-        if (GUILayout.Button("Reconstruct"))
-        {
-          levelController.Construct();
-        }
-
-        //GUILayout.BeginHorizontal();
-        xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
-        zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
-        //GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Default"))
-        {
-
-          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
-
-        }
-        if (GUILayout.Button("Destructible"))
-        {
-         
-          levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
-
-        }
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Delete"))
-        {
-          levelController.deleteBlock(xBlock, zBlock);
-        }
-        GUILayout.EndHorizontal();
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Clear Blocks"))
-        {
-          levelController.ClearBlocks(false);
-        }
-        GUI.backgroundColor = Color.red;
-        if (GUILayout.Button("Clear All"))
-        {
-          levelController.ClearBlocks(true);
-        }
-        if (GUILayout.Button("Delete Level File"))
-        {
-          handleLevelFile.deleteFile();
-        }
-        GUI.backgroundColor = Color.green;
-        if (GUILayout.Button("Save Map"))
-        {
-          handleLevelFile.SaveMapFile(levelController.blockMap);
-        }
-      }
-
-    }
-  }
+  //}
 
 }
