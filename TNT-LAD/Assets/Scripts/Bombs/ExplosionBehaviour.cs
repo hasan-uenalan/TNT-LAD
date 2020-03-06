@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class ExplosionBehaviour : MonoBehaviour
 {
+  [Header("Sphere Collider")]
   public float explosionRadius;
   public float expansionSpeed;
   public float expansionOnsetDelay;
+
+  [Header("Point Light")]
+  public float maxLightIntensity;
+  public float lightFadeSpeed;
   
   private SphereCollider explosionCollider;
-  private bool isExploding;
+  private Light pointLight;
+  private bool isColliderExpanding;
+  private bool isLightAnimating;
 
   //Components
   private PlayerData playerData;
@@ -18,18 +25,24 @@ public class ExplosionBehaviour : MonoBehaviour
   void Start()
   {
     explosionCollider = gameObject.GetComponent<SphereCollider>();
-    Invoke("StartExplosion", expansionOnsetDelay);
+    pointLight = gameObject.GetComponent<Light>();
+    Invoke("StartColliderExpansion", expansionOnsetDelay);
+    Invoke("StartLightAnimation", 0);
   }
 
   private void Update()
   {
-    if (isExploding)
+    if (isColliderExpanding)
     {
-      DoExplosionExpansion();
+      DoColliderExpansion();
+    }
+    if (isLightAnimating)
+    {
+      DoLightAnimation();
     }
   }
 
-  void DoExplosionExpansion()
+  void DoColliderExpansion()
   {
     //Expand collider unil final radius is reached
     if (explosionCollider.radius < explosionRadius)
@@ -37,7 +50,18 @@ public class ExplosionBehaviour : MonoBehaviour
       explosionCollider.radius += Time.deltaTime * expansionSpeed;
       return;
     }
-    StopExplosion();
+    StopColliderExpansion();
+  }
+
+  void DoLightAnimation()
+  {
+    //Fade light after explosion
+    if(pointLight.intensity >= 0)
+    {
+      pointLight.intensity -= Time.deltaTime * lightFadeSpeed;
+      return;
+    }
+    StopLightAnimation();
   }
 
   private void OnTriggerEnter(Collider other)
@@ -66,15 +90,28 @@ public class ExplosionBehaviour : MonoBehaviour
     }
   }
 
-  private void StartExplosion()
+  private void StartColliderExpansion()
   {
     explosionCollider.enabled = true;
-    isExploding = true;
+    isColliderExpanding = true;
   }
 
-  private void StopExplosion()
+  private void StopColliderExpansion()
   {
-    isExploding = false;
+    isColliderExpanding = false;
     explosionCollider.enabled = false;
+  }
+
+  private void StartLightAnimation()
+  {
+    pointLight.intensity = maxLightIntensity;
+    pointLight.enabled = true;
+    isLightAnimating = true;
+  }
+
+  private void StopLightAnimation()
+  {
+    isLightAnimating = false;
+    pointLight.enabled = false;
   }
 }
