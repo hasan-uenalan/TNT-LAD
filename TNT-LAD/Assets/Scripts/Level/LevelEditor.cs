@@ -10,7 +10,7 @@ public class LevelEditor : MonoBehaviour
   public bool placeBlocksActive = true;
   private BlockData.BlockType activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
 
-  private string currentFileName = null;
+  //private string currentFileName = null;
 
   //necessary components
   private LevelController levelController;
