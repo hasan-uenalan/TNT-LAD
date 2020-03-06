@@ -10,7 +10,6 @@ public class FetchLevels
   {
     List<string> levelNames;
     levelNames = new List<string>();
-    Debug.Log(HandleLevelFile.GetDirPath());
     DirectoryInfo dirInfo = new DirectoryInfo(HandleLevelFile.GetDirPath());
     FileInfo[] files = dirInfo.GetFiles("*.*");
     foreach (var file in files)

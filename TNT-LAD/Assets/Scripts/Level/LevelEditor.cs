@@ -30,7 +30,9 @@ public class LevelEditor : MonoBehaviour
     levelController = gameObject.GetComponent<LevelController>();
     sceneLoader = gameObject.GetComponent<SceneLoader>();
 
+    SelectDestructibleBlock();
 
+    UIDropdownAddListener();
     LoadUIValues();
   }
 
@@ -80,11 +82,19 @@ public class LevelEditor : MonoBehaviour
 
   public void SelectDefaultBlock()
   {
+    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
+    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
+    buttonDefault.interactable = false;
+    buttonDestructible.interactable = true;
     activeBlockType = BlockData.BlockType.DEFAULT;
   }
 
   public void SelectDestructibleBlock()
   {
+    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
+    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
+    buttonDefault.interactable = true;
+    buttonDestructible.interactable = false;
     activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
   }
 
@@ -126,7 +136,19 @@ public class LevelEditor : MonoBehaviour
 
   private void UIDropdownAddListener()
   {
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    dropDownLevels.onValueChanged.AddListener(delegate
+    {
+      UIDropdownOnValueChanged(dropDownLevels);
+    });
+  }
 
+  private void UIDropdownOnValueChanged(Dropdown change)
+  {
+    if(GetSelectedLevel() != null)
+    {
+      LoadLevelFile();
+    }
   }
 
   //Reads name of map, saves file and updates currently loaded map
@@ -156,11 +178,25 @@ public class LevelEditor : MonoBehaviour
 
   public void LoadLevelFile()
   {
-    levelController.currentFile = GetSelectedLevel();
-    levelController.ConstructByFile();
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    InputField newFileName = GameObject.Find("InputFieldLevelName").GetComponent<InputField>();
+    if(dropDownLevels.value == 0)
+    {
+      levelController.currentFile = null;
+      levelController.Construct();
+      newFileName.text = "";
+    }
+    else
+    {
+      levelController.currentFile = GetSelectedLevel();
+      levelController.ConstructByFile();
+      newFileName.text = GetSelectedLevel();
+    }
+
+    LoadUIGridSize();
   }
 
-
+  //updates UI Values so they adapt to change of map
   private void LoadUIValues()
   {
     LoadUIGridSize();
@@ -199,6 +235,7 @@ public class LevelEditor : MonoBehaviour
   {
     Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
     dropDownLevels.ClearOptions();
+    dropDownLevels.options.Add(new Dropdown.OptionData("-"));
     List<string> fileNames = fetchLevels.LoadLevelNames();
     foreach(string fileName in fileNames)
     {
