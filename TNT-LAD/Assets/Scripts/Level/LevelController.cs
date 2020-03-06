@@ -46,7 +46,7 @@ public class LevelController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
+    handleLevelFile = new HandleLevelFile();
     CreateSceneStructure();
     if (SceneManager.GetActiveScene().name == "Editor")
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class HandleLevelFile : MonoBehaviour
+public class HandleLevelFile
 {
 
   public char charDestructible { set; get; } = '+';
@@ -88,7 +88,7 @@ public class HandleLevelFile : MonoBehaviour
     return Application.dataPath + "/Resources/LevelFiles/" + fileName + ".txt";
   }
 
-  public string GetDirPath()
+  public static string GetDirPath()
   {
     return Application.dataPath + "/Resources/LevelFiles";
   }

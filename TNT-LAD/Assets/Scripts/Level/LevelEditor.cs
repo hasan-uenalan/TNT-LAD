@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,10 +24,12 @@ public class LevelEditor : MonoBehaviour
 
   void Start()
   {
+    handleLevelFile = new HandleLevelFile();
+    fetchLevels = new FetchLevels();
+
     levelController = gameObject.GetComponent<LevelController>();
-    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
-    fetchLevels = gameObject.GetComponent<FetchLevels>();
     sceneLoader = gameObject.GetComponent<SceneLoader>();
+
 
     LoadUIValues();
   }
@@ -36,23 +39,6 @@ public class LevelEditor : MonoBehaviour
   {
     SelectObjectMouse();
   }
-
-  #region UIStuff (should be eventually moved to own script)
-  private void LoadUIValues()
-  {
-    LoadUIGridSize();
-    LoadUIDropdownOptions();
-  }
-
-  private void LoadUIGridSize()
-  {
-    InputField inputFieldX = GameObject.Find("InputFieldMapX").GetComponent<InputField>();
-    InputField inputFieldZ = GameObject.Find("InputFieldMapZ").GetComponent<InputField>();
-
-    inputFieldX.text = levelController.gridX + "";
-    inputFieldZ.text = levelController.gridZ + "";
-  }
-  #endregion
 
   private void SelectObjectMouse()
   {
@@ -92,7 +78,6 @@ public class LevelEditor : MonoBehaviour
     return pos;
   }
 
-  //for UI elements
   public void SelectDefaultBlock()
   {
     activeBlockType = BlockData.BlockType.DEFAULT;
@@ -137,11 +122,19 @@ public class LevelEditor : MonoBehaviour
     return fileName;
   }
 
+  #region UIStuff (should be eventually moved to own script)
+
+  private void UIDropdownAddListener()
+  {
+
+  }
+
   //Reads name of map, saves file and updates currently loaded map
   public void SaveFile()
   {
     handleLevelFile.SaveMapFile(levelController.blockMap, ReadInputFileName());
     LoadUIValues();
+    LoadUIDropdownSetByFileName(ReadInputFileName());
   }
 
   public void UpdateCurrentFile()
@@ -151,9 +144,55 @@ public class LevelEditor : MonoBehaviour
 
   public void LoadLevel()
   {
+    sceneLoader.LoadLevel(GetSelectedLevel());
+  }
+
+  public void DeleteFile()
+  {
+    handleLevelFile.DeleteFile(GetSelectedLevel());
+    LoadUIValues();
+    LoadUIDropdownFirstLevel();
+  }
+
+  public void LoadLevelFile()
+  {
+    levelController.currentFile = GetSelectedLevel();
+    levelController.ConstructByFile();
+  }
+
+
+  private void LoadUIValues()
+  {
+    LoadUIGridSize();
+    LoadUIDropdownOptions();
+  }
+
+  private void LoadUIGridSize()
+  {
+    InputField inputFieldX = GameObject.Find("InputFieldMapX").GetComponent<InputField>();
+    InputField inputFieldZ = GameObject.Find("InputFieldMapZ").GetComponent<InputField>();
+
+    inputFieldX.text = levelController.gridX + "";
+    inputFieldZ.text = levelController.gridZ + "";
+  }
+
+  private string GetSelectedLevel()
+  {
     Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
-    string levelName = dropDownLevels.options[dropDownLevels.value].text;
-    sceneLoader.LoadLevel(levelName);
+    return dropDownLevels.options[dropDownLevels.value].text;
+  }
+
+  private void LoadUIDropdownSetByFileName(string fileName)
+  {
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    dropDownLevels.value = dropDownLevels.options.FindIndex(x => x.text == fileName);
+
+  }
+
+  private void LoadUIDropdownFirstLevel()
+  {
+    Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
+    dropDownLevels.value = 1;
   }
 
   private void LoadUIDropdownOptions()
@@ -168,9 +207,5 @@ public class LevelEditor : MonoBehaviour
       dropDownLevels.options.Add(option);
     }
   }
-
-  public void DeleteFile()
-  {
-
-  }
+  #endregion
 }

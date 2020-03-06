@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class FetchLevels : MonoBehaviour
+public class FetchLevels
 {
-
-  //needed components
-  HandleLevelFile handleLevelFile;
-
-  private void Start()
-  {
-    handleLevelFile = gameObject.GetComponent<HandleLevelFile>();
-    LoadLevelNames();
-  }
 
   public List<string> LoadLevelNames()
   {
     List<string> levelNames;
     levelNames = new List<string>();
-    DirectoryInfo dirInfo = new DirectoryInfo(handleLevelFile.GetDirPath());
+    Debug.Log(HandleLevelFile.GetDirPath());
+    DirectoryInfo dirInfo = new DirectoryInfo(HandleLevelFile.GetDirPath());
     FileInfo[] files = dirInfo.GetFiles("*.*");
     foreach (var file in files)
     {
