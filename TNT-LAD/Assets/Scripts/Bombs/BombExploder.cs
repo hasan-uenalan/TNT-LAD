@@ -14,7 +14,10 @@ public class BombExploder : MonoBehaviour
   {
     var bombCollider = gameObject.GetComponent<BoxCollider>();
     bombCollider.enabled = true;
-    Physics.IgnoreCollision(bombCollider, bombOwner.GetComponent<CharacterController>(), true);
+    if(bombOwner != null)
+    {
+      Physics.IgnoreCollision(bombCollider, bombOwner.GetComponent<CharacterController>(), true);
+    }
     
     //Additional trigger just to detect when player leaves bomb collider
     playerExitTrigger = (BoxCollider)gameObject.AddComponent(typeof(BoxCollider));
