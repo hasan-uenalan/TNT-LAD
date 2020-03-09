@@ -16,7 +16,10 @@ public class PlayerMovement : MonoBehaviour
 
   void Update()
   {
-    MovePlayer();
+    if (characterController.enabled)
+    {
+      MovePlayer();
+    }
   }
 
   void MovePlayer()
