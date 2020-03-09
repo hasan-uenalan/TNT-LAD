@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScoreHandler : MonoBehaviour
 {
-  public int WinCOndition = 3;
+  public int WinCondition = 3;
 
   private int playerCount;
 
@@ -27,7 +27,7 @@ public class PlayerScoreHandler : MonoBehaviour
 
   private void CheckIfPlayerWon(StaticPlayerData staticPlayer)
   {
-    if (staticPlayer.PlayerScore >= 3) {
+    if (staticPlayer.PlayerScore >= WinCondition) {
       SceneManager.LoadScene("WinScreen");
     }
   }
@@ -39,11 +39,7 @@ public class PlayerScoreHandler : MonoBehaviour
 
   private void SpawnStars(StaticPlayerData staticPlayer)
   {
-
-  }
-
-  void Update()
-  {
-
+    Transform player = gameObject.transform.GetChild(staticPlayer.PlayerIndex - 1);
+      player.GetComponent<StarSpawner>().SpawnStars(staticPlayer.PlayerScore, player);
   }
 }
