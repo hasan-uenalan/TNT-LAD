@@ -11,18 +11,19 @@ public class PlayerScoreHandler : MonoBehaviour
 
   void Start()
   {
-    StaticPlayers.staticPlayers.Add(new StaticPlayerData(1, 2));
-    StaticPlayers.staticPlayers.Add(new StaticPlayerData(2, 0));
+    EnablePlayerComponents();
 
-    playerCount = 2;//GUIValues.PlayerList.Count;
-    for (int i = 0; i < playerCount; i++) {
-      gameObject.transform.GetChild(i).gameObject.SetActive(true);
-    }
     foreach (StaticPlayerData staticPlayer in StaticPlayers.staticPlayers) {
       CheckIfPlayerWon(staticPlayer);
-      Transform player = gameObject.transform.GetChild(staticPlayer.PlayerIndex - 1);
-      AddPlayerImages(player);
-      SpawnStars(staticPlayer, player);
+      AddPlayerImages(staticPlayer);
+      SpawnStars(staticPlayer);
+    }
+  }
+  private void EnablePlayerComponents()
+  {
+    playerCount = GUIValues.PlayerList.Count;
+    for (int i = 0; i < playerCount; i++) {
+      gameObject.transform.GetChild(i).gameObject.SetActive(true);
     }
   }
 
@@ -33,13 +34,14 @@ public class PlayerScoreHandler : MonoBehaviour
     }
   }
 
-  private void AddPlayerImages(Transform player)
+  private void AddPlayerImages(StaticPlayerData staticPlayer)
   {
-    player.gameObject.SetActive(true);
+
   }
 
-  private void SpawnStars(StaticPlayerData staticPlayer, Transform player)
-  {    
+  private void SpawnStars(StaticPlayerData staticPlayer)
+  {
+    Transform player = gameObject.transform.GetChild(staticPlayer.PlayerIndex - 1);
     player.GetComponent<StarSpawner>().SpawnStars(staticPlayer.PlayerScore, player);
   }
 }
