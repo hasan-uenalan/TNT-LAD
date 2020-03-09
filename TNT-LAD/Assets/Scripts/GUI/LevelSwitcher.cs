@@ -15,7 +15,7 @@ public class LevelSwitcher : MonoBehaviour
   private void Start()
   {
     LevelImageList = new List<Object>();
-    LevelImageList = Resources.LoadAll("LevelImages", typeof(Sprite)).ToList();
+    LevelImageList = Resources.LoadAll("GUIComponents/LevelImages", typeof(Sprite)).ToList();
     GUIValues.LevelNumber = curLevelNumber;
   }
 
