@@ -898,7 +898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2823790524791486211}
   - component: {fileID: -3808164342784818863}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Destructible-PreShattered
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,6 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 3
+  destroy: 1
 --- !u!1 &1285411750261719721
 GameObject:
   m_ObjectHideFlags: 0

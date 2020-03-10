@@ -5,6 +5,7 @@ using UnityEngine;
 public class DecayAfterTime : MonoBehaviour
 {
   public float lifeTime;
+  public bool destroy;
   Transform destroyedTransform;
 
   void Start()
@@ -31,6 +32,9 @@ public class DecayAfterTime : MonoBehaviour
       }
       yield return null;
     }
-    Destroy(gameObject);
+    if (destroy)
+    {
+      Destroy(gameObject);
+    }
   }
 }
