@@ -13,7 +13,7 @@ public class PlayerScoreHandler : MonoBehaviour
   {
     EnablePlayerComponents();
 
-    foreach (StaticPlayerData staticPlayer in StaticPlayers.staticPlayers) {
+    foreach (PlayerData staticPlayer in StaticPlayers.staticPlayers) {
       CheckIfPlayerWon(staticPlayer);
       AddPlayerImages(staticPlayer);
       SpawnStars(staticPlayer);
@@ -27,19 +27,19 @@ public class PlayerScoreHandler : MonoBehaviour
     }
   }
 
-  private void CheckIfPlayerWon(StaticPlayerData staticPlayer)
+  private void CheckIfPlayerWon(PlayerData staticPlayer)
   {
     if (staticPlayer.PlayerScore >= WinCondition) {
       SceneManager.LoadScene("WinScreen");
     }
   }
 
-  private void AddPlayerImages(StaticPlayerData staticPlayer)
+  private void AddPlayerImages(PlayerData staticPlayer)
   {
 
   }
 
-  private void SpawnStars(StaticPlayerData staticPlayer)
+  private void SpawnStars(PlayerData staticPlayer)
   {
     Transform player = gameObject.transform.GetChild(staticPlayer.PlayerIndex - 1);
     player.GetComponent<StarSpawner>().SpawnStars(staticPlayer.PlayerScore, player);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StarSpawner : MonoBehaviour
+public class StarSpawner : ScriptableObject
 {
   public void SpawnStars(int score, Transform parent)
   {

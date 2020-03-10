@@ -20,7 +20,7 @@ public class ExplosionBehaviour : MonoBehaviour
   private bool isLightAnimating;
 
   //Components
-  private PlayerData playerData;
+  private PlayerHandler playerData;
 
   void Start()
   {
@@ -68,8 +68,8 @@ public class ExplosionBehaviour : MonoBehaviour
   {
     if(other.gameObject.tag == "Player")
     {
-      playerData = other.gameObject.GetComponent<PlayerData>();
-      if (playerData.playerStatus != PlayerData.status.invincible)
+      playerData = other.gameObject.GetComponent<PlayerHandler>();
+      if (playerData.PlayerStatus != PlayerHandler.Status.invincible)
       {
         playerData.RemoveLife();      
       }
