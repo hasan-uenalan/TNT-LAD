@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class LevelEditor : MonoBehaviour
 {
@@ -9,8 +9,6 @@ public class LevelEditor : MonoBehaviour
   //For editor
   public bool placeBlocksActive = true;
   private BlockData.BlockType activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
-
-  //private string currentFileName = null;
 
   //necessary components
   private LevelController levelController;
@@ -44,7 +42,7 @@ public class LevelEditor : MonoBehaviour
 
   private void SelectObjectMouse()
   {
-    if (Input.GetMouseButtonDown(0) && placeBlocksActive)
+    if (Input.GetMouseButtonDown(0) && placeBlocksActive && !IsPointerOverUIElement())
     {
       Vector2 pos = GetMousePositions();
       posX = Mathf.RoundToInt(pos.x);
@@ -54,7 +52,7 @@ public class LevelEditor : MonoBehaviour
         levelController.SetBlock(posX, posZ, activeBlockType);
       }
     }
-    if (Input.GetMouseButtonDown(2) && placeBlocksActive)
+    if (Input.GetMouseButtonDown(2) && placeBlocksActive && !IsPointerOverUIElement())
     {
       Vector2 pos = GetMousePositions();
       posX = Mathf.RoundToInt(pos.x);
@@ -78,24 +76,6 @@ public class LevelEditor : MonoBehaviour
       pos = new Vector2(hit.transform.gameObject.transform.position.x, hit.transform.gameObject.transform.position.z);
     }
     return pos;
-  }
-
-  public void SelectDefaultBlock()
-  {
-    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
-    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
-    buttonDefault.interactable = false;
-    buttonDestructible.interactable = true;
-    activeBlockType = BlockData.BlockType.DEFAULT;
-  }
-
-  public void SelectDestructibleBlock()
-  {
-    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
-    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
-    buttonDefault.interactable = true;
-    buttonDestructible.interactable = false;
-    activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
   }
 
   public void UpdateMapSize()
@@ -133,6 +113,36 @@ public class LevelEditor : MonoBehaviour
   }
 
   #region UIStuff (should be eventually moved to own script)
+  public void SelectDefaultBlock()
+  {
+    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
+    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
+    buttonDefault.interactable = false;
+    buttonDestructible.interactable = true;
+    activeBlockType = BlockData.BlockType.DEFAULT;
+  }
+
+  public void SelectDestructibleBlock()
+  {
+    Button buttonDestructible = GameObject.Find("ButtonDestructible").GetComponent<Button>();
+    Button buttonDefault = GameObject.Find("ButtonDefault").GetComponent<Button>();
+    buttonDefault.interactable = true;
+    buttonDestructible.interactable = false;
+    activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
+  }
+
+  /// <summary>
+  /// Checks if the layer of the clicked gameobject is on a UI layer
+  /// </summary>
+  /// <returns>true if gameobject is on UI layer</returns>
+  public static bool IsPointerOverUIElement()
+  {
+    var eventData = new PointerEventData(EventSystem.current);
+    eventData.position = Input.mousePosition;
+    var results = new List<RaycastResult>();
+    EventSystem.current.RaycastAll(eventData, results);
+    return results.Count > 0;
+  }
 
   private void UIDropdownAddListener()
   {
