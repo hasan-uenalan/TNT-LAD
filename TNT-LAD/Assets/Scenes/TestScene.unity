@@ -923,6 +923,11 @@ PrefabInstance:
       propertyPath: PSystem
       value: 
       objectReference: {fileID: 639205691}
+    - target: {fileID: 639205693, guid: e482cfcb298ec2f47b9948c610b522dc, type: 3}
+      propertyPath: bloodSplash
+      value: 
+      objectReference: {fileID: 7849839690835760145, guid: fb129682a80daa54cb5ead0d5a75c28d,
+        type: 3}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -931,7 +936,7 @@ PrefabInstance:
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.29
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
@@ -1012,6 +1017,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.radiusScale
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590974, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
