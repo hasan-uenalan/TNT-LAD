@@ -80,6 +80,10 @@ public class HandleLevelFile
     var fileContents = sr.ReadToEnd();
     sr.Close();
     string[] blockLine = fileContents.Split("\n"[0]);
+    for(int i=0; i<blockLine.Length; i++)
+    {
+      blockLine[i] = blockLine[i].Trim();
+    }
     return blockLine;
   }
 

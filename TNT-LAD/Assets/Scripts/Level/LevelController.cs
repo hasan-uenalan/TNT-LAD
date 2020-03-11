@@ -140,7 +140,7 @@ public class LevelController : MonoBehaviour
 
   public bool OutOfBoundsCheck(int x, int z)
   {
-    if(x >= gridX || z >= gridZ)
+    if(x >= gridX || z >= gridZ || x < 0 || z < 0)
     {
       return true;
     }
@@ -151,7 +151,7 @@ public class LevelController : MonoBehaviour
   public void SetBlock(int x, int z, BlockData.BlockType blockType)
   {
     //out of bounds check
-    if(x >= gridX || z >= gridZ)
+    if(OutOfBoundsCheck(x,z))
     {
       Debug.LogError("Out of bounds! x:" + x + " z: " + z);
       return;
