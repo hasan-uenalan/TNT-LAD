@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8973220202392590971}
   - component: {fileID: 8973220202392590972}
   - component: {fileID: 8973220202392590973}
+  - component: {fileID: 639205693}
   m_Layer: 0
   m_Name: BloodParticleSystem
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8973220202392590974}
-  m_LocalRotation: {x: -0.7225137, y: -0.04523961, z: 0.6886606, w: -0.040912956}
+  m_LocalRotation: {x: -0.7225124, y: -0.045243207, z: 0.68866163, w: -0.040914107}
   m_LocalPosition: {x: 0.14, y: 0.49, z: -4.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4754,3 +4755,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &639205693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973220202392590974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7c110fdb0fed1489c3a8fb84abb434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
