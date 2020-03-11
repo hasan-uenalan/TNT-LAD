@@ -926,7 +926,7 @@ PrefabInstance:
     - target: {fileID: 639205693, guid: e482cfcb298ec2f47b9948c610b522dc, type: 3}
       propertyPath: bloodSplash
       value: 
-      objectReference: {fileID: 7849839690835760145, guid: fb129682a80daa54cb5ead0d5a75c28d,
+      objectReference: {fileID: 513379862935991895, guid: 39fe87daf0784964e8ffec1a9f401ecc,
         type: 3}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
@@ -1022,6 +1022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CollisionModule.radiusScale
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590974, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}

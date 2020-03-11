@@ -5,7 +5,8 @@ using UnityEngine;
 public class BloodCollision : MonoBehaviour
 {
   public ParticleSystem PSystem;
-  public GameObject bloodSplash;
+  //public GameObject bloodSplash;
+  public ParticleSystem bloodSplash;
   private List<ParticleCollisionEvent> CollisionEvents;
 
 
@@ -18,7 +19,7 @@ public class BloodCollision : MonoBehaviour
 
     foreach(ParticleCollisionEvent collision in CollisionEvents)
     {
-      Instantiate(bloodSplash, collision.intersection, Quaternion.Euler(90, 0, 0));
+      Instantiate(bloodSplash, collision.intersection, Quaternion.identity);
       Debug.Log(collision.intersection);
     }
 
