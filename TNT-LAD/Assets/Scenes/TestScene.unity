@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!198 &639205691 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8973220202827324231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &712248040
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,20 +915,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 639205693, guid: e482cfcb298ec2f47b9948c610b522dc, type: 3}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 639205691}
+    - target: {fileID: 639205693, guid: e482cfcb298ec2f47b9948c610b522dc, type: 3}
+      propertyPath: PSystem
+      value: 
+      objectReference: {fileID: 639205691}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.137
+      value: -3.46
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.489
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.485
+      value: -6.97
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590971, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
@@ -966,7 +980,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
         type: 3}
-      propertyPath: moveWithTransform
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8973220202392590972, guid: e482cfcb298ec2f47b9948c610b522dc,
+        type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8973220202392590974, guid: e482cfcb298ec2f47b9948c610b522dc,
