@@ -7,21 +7,34 @@ using UnityEngine.InputSystem;
 public class PlayerKiller : MonoBehaviour
 {
   public GameObject hat;
-
+  public GameObject bloodParticleSystem;
+  public GameObject visceraSprite;
+  public Vector3 visceraScale = new Vector3(0.025f, 0.025f, 0.025f);
+  [Tooltip("'Bone' has to have at least ONE child bone")]
   public DetachableLimbs[] detachableLimbs;
-  [Header("Ragdoll")]
-  public List<GameObject> bodyParts;
+  public List<GameObject> ragdollBodyParts;
 
   void Start()
   {
-    bodyParts = GetBodyParts();
+    ragdollBodyParts = GetBodyParts();
+  }
+
+  private void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+      Die();
+    }
   }
 
   [ContextMenu("Die")]
   public void Die()
   {
-    SetRagdollActive(true);
-    DetachHat();
+    RemoveLimb(detachableLimbs[0].bone);
+    CreateDetachedLimb(detachableLimbs[0].bone, detachableLimbs[0].prefab);
+    SpawnBloodParticleEffect(detachableLimbs[0].bone);
+    //SetRagdollActive(true);
+    //DetachHat();
   }
 
   private void SetRagdollActive(bool active)
@@ -29,7 +42,7 @@ public class PlayerKiller : MonoBehaviour
     gameObject.GetComponent<CharacterController>().enabled = !active;
     gameObject.GetComponent<PlayerInput>().enabled = !active;
 
-    foreach (GameObject bodyPart in bodyParts)
+    foreach (GameObject bodyPart in ragdollBodyParts)
     {
       bodyPart.GetComponent<Rigidbody>().isKinematic = !active;
       bodyPart.GetComponent<Collider>().enabled = active;
@@ -43,6 +56,10 @@ public class PlayerKiller : MonoBehaviour
     hat.GetComponent<Collider>().enabled = true;
   }
 
+  /// <summary>
+  /// Get all GameObjects of the player that are part of the Ragdoll.
+  /// </summary>
+  /// <returns></returns>
   private List<GameObject> GetBodyParts()
   {
     var parts = new List<GameObject>();
@@ -52,7 +69,49 @@ public class PlayerKiller : MonoBehaviour
     }
     return parts;
   }
+
+  /// <summary>
+  /// Shrink limb to make it seem removed and the cover stump with viscera.
+  /// </summary>
+  /// <param name="bone"></param>
+  private void RemoveLimb(GameObject bone)
+  {
+    if(bone.transform.childCount <= 0)
+    {
+      Debug.LogWarning($"Bone '{bone.name}' for limb detachment does not have a child bone");
+      return;
+    }
+    //shrink bones to appear removed
+    var childBone = bone.transform.GetChild(0).gameObject;
+    childBone.transform.localScale = Vector3.zero;
+    bone.transform.localScale = new Vector3(bone.transform.localScale.x, 0.001f, bone.transform.localScale.z);
+    //instantiate viscera to hide the gliched stump
+    var viscera = Instantiate(visceraSprite);
+    viscera.transform.localScale = visceraScale;
+    viscera.transform.rotation = Quaternion.LookRotation(bone.transform.up);
+    viscera.transform.parent = bone.transform;
+    viscera.transform.localPosition = new Vector3(0, 0.01f, 0);
+  }
+
+  /// <summary>
+  /// Instatiate copy of the detached at the right position.
+  /// </summary>
+  /// <param name="bone"></param>
+  /// <param name="prefab"></param>
+  private void CreateDetachedLimb(GameObject bone, GameObject prefab)
+  {
+    var newLimbRotation = Quaternion.LookRotation(gameObject.transform.forward);
+    Instantiate(prefab, bone.transform.position, newLimbRotation);
+  }
+
+  private void SpawnBloodParticleEffect(GameObject bone)
+  {
+    var particleDirection = Quaternion.LookRotation(bone.transform.up);
+    Instantiate(bloodParticleSystem, bone.transform.position, particleDirection, bone.transform);
+  }
 }
+
+
 
 [Serializable]
 public struct DetachableLimbs

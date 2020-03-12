@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8083162175499766930}
   - component: {fileID: 4864646767087721082}
   - component: {fileID: 1836077078773217408}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8584124772767284722}
-  m_Layer: 0
+  - component: {fileID: 4403616023135162348}
+  - component: {fileID: 4724329662269759169}
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +115,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &4403616023135162348
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718551783603589089}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!135 &4724329662269759169
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718551783603589089}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.37292874
+  m_Center: {x: 0, y: 0.35067683, z: 0.008555591}
 --- !u!1 &5301872902224620880
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +155,7 @@ GameObject:
   - component: {fileID: 8194945265671415274}
   - component: {fileID: 8380543178243969338}
   - component: {fileID: 7829324785862920717}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +235,7 @@ GameObject:
   - component: {fileID: 4504426288474128351}
   - component: {fileID: 5147356733335268380}
   - component: {fileID: 6172664342188141783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +314,7 @@ GameObject:
   - component: {fileID: 4716798388879189938}
   - component: {fileID: 8224040255171702222}
   - component: {fileID: 3539501431111264749}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mustache
   m_TagString: Untagged
   m_Icon: {fileID: 0}

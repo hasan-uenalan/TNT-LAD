@@ -20,7 +20,6 @@ public class BloodCollision : MonoBehaviour
     foreach(ParticleCollisionEvent collision in CollisionEvents)
     {
       Instantiate(bloodSplash, collision.intersection, Quaternion.identity);
-      Debug.Log(collision.intersection);
     }
 
   }
