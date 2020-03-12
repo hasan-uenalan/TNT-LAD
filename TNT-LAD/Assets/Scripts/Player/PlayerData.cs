@@ -72,7 +72,7 @@ public class PlayerData : MonoBehaviour
   {
     playerStatus = status.dead;
     //gameObject.SetActive(false);
-    gameObject.GetComponent<RagdollController>().Die();
+    gameObject.GetComponent<PlayerKiller>().Die();
   }
 
   private void SetInvincible()

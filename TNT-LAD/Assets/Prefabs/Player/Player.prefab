@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4657787324622652377}
   - component: {fileID: 553224111478213787}
   - component: {fileID: -1085653625732597305}
-  - component: {fileID: 989630946}
+  - component: {fileID: 6095798719622292062}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -238,7 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27ab30ee0bdddb4680a1ff1526208e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
   spawnPoint: {x: 0, y: 0, z: 0}
   invincibilityTime: 3
   placedBombs: []
@@ -269,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 2298858851037517202, guid: 02c30050fdafd32448059e99526aa551, type: 3}
---- !u!114 &989630946
+--- !u!114 &6095798719622292062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,11 +277,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 553224111478213788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c7b223c7f82f58479a5d6b717cf67ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 015054df511946840a5c0b1e73c9acee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hat: {fileID: 8441796365988964892}
-  bodyParts: []
 --- !u!1 &674175259352388531
 GameObject:
   m_ObjectHideFlags: 0
