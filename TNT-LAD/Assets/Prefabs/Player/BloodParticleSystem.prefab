@@ -170,7 +170,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 2
-      minScalar: 4
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3730,7 +3730,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 0.1
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
@@ -4768,3 +4768,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PSystem: {fileID: 8973220202392590972}
+  bloodSplash: {fileID: 513379862935991895, guid: 39fe87daf0784964e8ffec1a9f401ecc,
+    type: 3}
