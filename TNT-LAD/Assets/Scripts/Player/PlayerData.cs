@@ -72,7 +72,7 @@ public class PlayerData : MonoBehaviour
   {
     playerStatus = status.dead;
     //gameObject.SetActive(false);
-    gameObject.GetComponent<PlayerKiller>().Die();
+    gameObject.GetComponent<PlayerKiller>().KillPlayer(false);
   }
 
   private void SetInvincible()

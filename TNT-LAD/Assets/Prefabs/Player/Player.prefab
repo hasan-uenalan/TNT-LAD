@@ -280,6 +280,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015054df511946840a5c0b1e73c9acee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hat: {fileID: 8441796365988964892}
+  bloodParticleSystem: {fileID: 8973220202392590974, guid: e482cfcb298ec2f47b9948c610b522dc,
+    type: 3}
+  visceraSprite: {fileID: 7849839690835760145, guid: fb129682a80daa54cb5ead0d5a75c28d,
+    type: 3}
+  visceraScale: {x: 0.025, y: 0.025, z: 0.025}
+  detachableLimbs:
+  - bone: {fileID: 5684726879377814626}
+    prefab: {fileID: 4718551783603589089, guid: 3f3f989c4acdbf54e8ed033095b9734b,
+      type: 3}
+  - bone: {fileID: 4492678084716254528}
+    prefab: {fileID: 5407561887777257681, guid: 1ee7c4b9b7029e6409cf4813e3f19c33,
+      type: 3}
+  - bone: {fileID: 6376760584731919316}
+    prefab: {fileID: 2908380044363797164, guid: 7648153ecb65ece439d8b83f682f6b59,
+      type: 3}
+  - bone: {fileID: 674175259352388531}
+    prefab: {fileID: 2476246726404206723, guid: c8775c706d3cf45438b7562b984a4070,
+      type: 3}
+  - bone: {fileID: 5384290674728494010}
+    prefab: {fileID: 8897625879279879738, guid: c5b79bce45386f544ad37c286dec7885,
+      type: 3}
+  ragdollBodyParts: []
 --- !u!1 &674175259352388531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1373,7 @@ Transform:
   m_GameObject: {fileID: 4492678084716254528}
   m_LocalRotation: {x: 0.0900721, y: -0.7108611, z: 0.27479652, w: 0.6411321}
   m_LocalPosition: {x: -0.00020942005, y: 0.0006690358, z: -0.00016630856}
-  m_LocalScale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 2072844991279305709}
   m_Father: {fileID: 5709870035097223840}
@@ -1912,7 +1935,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -4.365574e-10, y: 0.00072851375, z: 1.16415294e-10}
+  m_ConnectedAnchor: {x: -5.8207654e-11, y: 0.0007285136, z: 1.3096721e-10}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:

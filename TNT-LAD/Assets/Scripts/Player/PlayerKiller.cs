@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +11,7 @@ public class PlayerKiller : MonoBehaviour
   public GameObject visceraSprite;
   public Vector3 visceraScale = new Vector3(0.025f, 0.025f, 0.025f);
   [Tooltip("'Bone' has to have at least ONE child bone")]
-  public DetachableLimbs[] detachableLimbs;
+  public DetachableLimb[] detachableLimbs;
   public List<GameObject> ragdollBodyParts;
 
   void Start()
@@ -19,31 +19,22 @@ public class PlayerKiller : MonoBehaviour
     ragdollBodyParts = GetBodyParts();
   }
 
-  private void Update()
+  public void KillPlayer(bool dismemberAll)
   {
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-      Die();
-    }
-  }
-
-  [ContextMenu("Die")]
-  public void Die()
-  {
-    RemoveLimb(detachableLimbs[0].bone);
-    CreateDetachedLimb(detachableLimbs[0].bone, detachableLimbs[0].prefab);
-    SpawnBloodParticleEffect(detachableLimbs[0].bone);
-    //SetRagdollActive(true);
-    //DetachHat();
+    SetRagdollActive(true);
+    DetachLimbs(dismemberAll);
+    DetachHat();
   }
 
   private void SetRagdollActive(bool active)
   {
+    int noPlayerCollisionLayerIndex = LayerMask.NameToLayer("NoPlayerCollision");
     gameObject.GetComponent<CharacterController>().enabled = !active;
     gameObject.GetComponent<PlayerInput>().enabled = !active;
 
     foreach (GameObject bodyPart in ragdollBodyParts)
     {
+      bodyPart.layer = noPlayerCollisionLayerIndex;
       bodyPart.GetComponent<Rigidbody>().isKinematic = !active;
       bodyPart.GetComponent<Collider>().enabled = active;
     }
@@ -71,6 +62,33 @@ public class PlayerKiller : MonoBehaviour
   }
 
   /// <summary>
+  /// Detach limbs of player use <paramref name="complete"/> to control if all limbs should detach.
+  /// </summary>
+  /// <param name="complete">Complete detaching of all limbs, or alternatively random detachment of one or no limbs.</param>
+  private void DetachLimbs(bool complete)
+  {
+    if (!complete)
+    {
+      //randomly choose to detach or not
+      if (UnityEngine.Random.Range(0, 2) == 0)
+      {
+        return;
+      }
+    }
+
+    int randomLimbIndex = UnityEngine.Random.Range(0, detachableLimbs.Length);
+    var limbsToDetach = complete
+      ? new List<DetachableLimb>(detachableLimbs)
+      : new List<DetachableLimb> { detachableLimbs[randomLimbIndex] };
+    foreach (DetachableLimb limb in limbsToDetach)
+    {
+      RemoveLimb(limb.bone);
+      CreateDetachedLimb(limb.bone, limb.prefab);
+      SpawnBloodParticleEffect(limb.bone);
+    }
+  }
+
+  /// <summary>
   /// Shrink limb to make it seem removed and the cover stump with viscera.
   /// </summary>
   /// <param name="bone"></param>
@@ -84,13 +102,14 @@ public class PlayerKiller : MonoBehaviour
     //shrink bones to appear removed
     var childBone = bone.transform.GetChild(0).gameObject;
     childBone.transform.localScale = Vector3.zero;
-    bone.transform.localScale = new Vector3(bone.transform.localScale.x, 0.001f, bone.transform.localScale.z);
-    //instantiate viscera to hide the gliched stump
-    var viscera = Instantiate(visceraSprite);
-    viscera.transform.localScale = visceraScale;
-    viscera.transform.rotation = Quaternion.LookRotation(bone.transform.up);
-    viscera.transform.parent = bone.transform;
-    viscera.transform.localPosition = new Vector3(0, 0.01f, 0);
+    bone.transform.localScale = new Vector3(bone.transform.localScale.x, 0f, bone.transform.localScale.z);
+    
+    // //instantiate viscera to hide the gliched stump  //TODO: z-fighting because y scale is zero -> sprite can't be moved along y to solve this.
+    // var viscera = Instantiate(visceraSprite);
+    // viscera.transform.localScale = visceraScale;
+    // viscera.transform.rotation = Quaternion.LookRotation(bone.transform.up);
+    // viscera.transform.parent = bone.transform;
+    // viscera.transform.localPosition = new Vector3(0, 0.01f, 0);
   }
 
   /// <summary>
@@ -111,10 +130,8 @@ public class PlayerKiller : MonoBehaviour
   }
 }
 
-
-
 [Serializable]
-public struct DetachableLimbs
+public struct DetachableLimb
 {
   public GameObject bone;
   public GameObject prefab;
