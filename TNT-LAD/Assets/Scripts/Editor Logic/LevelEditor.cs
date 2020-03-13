@@ -33,6 +33,8 @@ public class LevelEditor : MonoBehaviour
 
     SelectDestructibleBlock();
 
+    UIButtonLoadLevelInteractable(false);
+
     UIDropdownAddListener();
     LoadUIValues();
   }
@@ -162,6 +164,20 @@ public class LevelEditor : MonoBehaviour
     {
       LoadLevelFile();
     }
+    if(GetSelectedLevel() == "-")
+    {
+      UIButtonLoadLevelInteractable(false);
+    }
+    else
+    {
+      UIButtonLoadLevelInteractable(true);
+    }
+  }
+
+  public void UIButtonLoadLevelInteractable(bool value)
+  {
+    Button buttonLoadLevel = GameObject.Find("ButtonLoadLevel").GetComponent<Button>();
+    buttonLoadLevel.interactable = value;
   }
 
   //Reads name of map, saves file and updates currently loaded map

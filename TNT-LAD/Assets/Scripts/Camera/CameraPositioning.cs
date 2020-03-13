@@ -12,7 +12,6 @@ public class CameraPositioning : MonoBehaviour
   public void CenterCameraPosition()
   {
     LevelController lvlController = FindObjectOfType<LevelController>();
-    Debug.Log(lvlController.gridX);
     float maxExtends = Mathf.Max(lvlController.gridX, lvlController.gridZ) / 2;
     maxExtends += 2.5f;
     float angle = (Camera.main.fieldOfView / 2) * Mathf.Deg2Rad;
