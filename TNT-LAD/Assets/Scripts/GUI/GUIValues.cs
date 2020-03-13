@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class GUIValues
 {
-  public static int LevelNumber { get; set; }
+  public static int LevelIndex { get; set; }
 
   public static List<LobbyPlayerValues> PlayerList { get; set; }
 
