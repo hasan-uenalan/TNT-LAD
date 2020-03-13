@@ -28,9 +28,10 @@ public class LevelController : MonoBehaviour
   [Header("Outer Wall")]
   public GameObject outerWall;
 
-  private GameObject[,] floorMap;
   public GameObject[,] blockMap { set; get; }
+  private GameObject[,] floorMap;
   private GameObject[,] wallMap;
+  public Vector2[] playerSpawns;
 
   //For scene  structure
   private GameObject floorBlocks;
@@ -52,6 +53,7 @@ public class LevelController : MonoBehaviour
     {
       Construct();
     }
+    InitPlayerSpawnCoordinates();
   }
 
   //creating scene structure
@@ -73,6 +75,7 @@ public class LevelController : MonoBehaviour
     blockMap = new GameObject[gridX, gridZ];
     floorMap = new GameObject[gridX, gridZ];
     wallMap = new GameObject[gridX + 2, gridZ + 2];
+    playerSpawns = new Vector2[4];
     GenerateFloor();
     GenerateWall();
   }
@@ -101,6 +104,28 @@ public class LevelController : MonoBehaviour
     string[] blockLine = handleLevelFile.GetFileData(currentFile);
     gridX = blockLine.Length;
     gridZ = blockLine[0].ToCharArray().Length; //whitespace is also part of the array
+  }
+
+  private void InitPlayerSpawnCoordinates()
+  {
+    Vector2 spawn;
+    spawn.x = floorMap[0, 0].transform.position.x;
+    spawn.y = floorMap[0, 0].transform.position.z;
+    playerSpawns[0] = spawn;
+    spawn.x = floorMap[floorMap.GetLength(0) - 1, floorMap.GetLength(1) - 1].transform.position.x;
+    spawn.y = floorMap[floorMap.GetLength(0) - 1, floorMap.GetLength(1) - 1].transform.position.z;
+    playerSpawns[1] = spawn;
+    spawn.x = floorMap[floorMap.GetLength(0) - 1, 0].transform.position.x;
+    spawn.y = floorMap[floorMap.GetLength(0) - 1, 0].transform.position.z;
+    playerSpawns[2] = spawn;
+    spawn.x = floorMap[0, floorMap.GetLength(1) - 1].transform.position.x;
+    spawn.y = floorMap[0, floorMap.GetLength(1) - 1].transform.position.z;
+    playerSpawns[3] = spawn;
+
+    foreach(Vector2 v in playerSpawns)
+    {
+      Debug.Log("x: " + v.x + " z: " + v.y);
+    }
   }
 
   //Generates outer wall of play area
@@ -255,87 +280,4 @@ public class LevelController : MonoBehaviour
       }
     }
   }
-
-  //[CustomEditor(typeof(LevelController))]
-  //class DecalMeshHelperEditor : Editor
-  //{
-  //  LevelController levelController;
-  //  HandleLevelFile handleLevelFile;
-  //  int xBlock = 0;
-  //  int zBlock = 0;
-
-  //  private void OnEnable()
-  //  {
-  //    levelController = (LevelController)target;
-  //    handleLevelFile = levelController.gameObject.GetComponent<HandleLevelFile>();
-  //  }
-
-  //  public override void OnInspectorGUI()
-  //  {
-  //    DrawDefaultInspector();
-
-  //    //Seperator
-  //    Rect rect = EditorGUILayout.GetControlRect(false, 1);
-  //    rect.height = 1;
-  //    EditorGUI.DrawRect(rect, new Color(0.5f, 0.5f, 0.5f, 1));
-
-  //    if (Application.isPlaying)
-  //    {
-  //      if (GUILayout.Button("Reconstruct"))
-  //      {
-  //        levelController.Construct();
-  //      }
-  //      if (GUILayout.Button("Construct By File"))
-  //      {
-  //        levelController.ConstructByFile();
-  //      }
-
-  //      xBlock = EditorGUILayout.IntField("X", xBlock, GUILayout.ExpandWidth(false));
-  //      zBlock = EditorGUILayout.IntField("Z", zBlock, GUILayout.ExpandWidth(false));
-
-  //      GUILayout.BeginHorizontal();
-  //      if (GUILayout.Button("Default"))
-  //      {
-
-  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DEFAULT);
-
-  //      }
-  //      if (GUILayout.Button("Destructible"))
-  //      {
-
-  //        levelController.SetBlock(xBlock, zBlock, BlockData.BlockType.DESTRUCTIBLE);
-
-  //      }
-  //      GUI.backgroundColor = Color.red;
-  //      if (GUILayout.Button("Delete"))
-  //      {
-  //        levelController.DeleteBlock(xBlock, zBlock);
-  //      }
-  //      GUILayout.EndHorizontal();
-  //      GUI.backgroundColor = Color.red;
-  //      if (GUILayout.Button("Clear Blocks"))
-  //      {
-  //        levelController.ClearBlocks(false);
-  //      }
-  //      GUI.backgroundColor = Color.red;
-  //      if (GUILayout.Button("Clear All"))
-  //      {
-  //        levelController.ClearBlocks(true);
-  //      }
-  //      if (GUILayout.Button("Delete Level File"))
-  //      {
-  //        handleLevelFile.DeleteFile();
-  //      }
-  //      GUI.backgroundColor = Color.green;
-  //      if (GUILayout.Button("Save Map"))
-  //      {
-  //        handleLevelFile.SaveMapFile(levelController.blockMap);
-  //      }
-  //    }
-
-  //  }
-
-
-  //}
-
 }
