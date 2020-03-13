@@ -533,56 +533,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 614450406}
     m_Modifications:
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSizeY.scalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSizeZ.scalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSize.minMaxState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSizeY.minMaxState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSizeZ.minMaxState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 889692957719238500, guid: 8a6812c79baad7244b696a13158553ec,
-        type: 3}
-      propertyPath: InitialModule.startSizeY.minScalar
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 1134676801766988899, guid: 8a6812c79baad7244b696a13158553ec,
         type: 3}
       propertyPath: m_Name
@@ -591,17 +541,17 @@ PrefabInstance:
     - target: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.029
+      value: -0.183
       objectReference: {fileID: 0}
     - target: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.801
+      value: 0.737
       objectReference: {fileID: 0}
     - target: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.927
+      value: -0.887
       objectReference: {fileID: 0}
     - target: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
         type: 3}
