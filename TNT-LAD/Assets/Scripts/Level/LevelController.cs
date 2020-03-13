@@ -37,7 +37,7 @@ public class LevelController : MonoBehaviour
   private GameObject levelBlocks;
   private GameObject wallBlocks;
 
-  private HandleLevelFile handleLevelFile;
+  private HandleLevelFiles handleLevelFile;
 
   public string currentFile { get; set; }
 
@@ -46,7 +46,7 @@ public class LevelController : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    handleLevelFile = new HandleLevelFile();
+    handleLevelFile = new HandleLevelFiles();
     CreateSceneStructure();
     if (SceneManager.GetActiveScene().name == "Editor")
     {
@@ -79,7 +79,7 @@ public class LevelController : MonoBehaviour
 
   public void ConstructByFile()
   {
-    if (File.Exists(handleLevelFile.GetFilePath(currentFile)))
+    if (File.Exists(handleLevelFile.GetFilePath(currentFile, ".txt")))
     {
       ClearBlocks(true);
       UpdateMapParams();

@@ -6,20 +6,16 @@ using System.IO;
 public class FetchLevels
 {
 
-  public List<string> LoadLevelNames()
+  public List<string> LoadLevelNames(string directory)
   {
     List<string> levelNames;
     levelNames = new List<string>();
-    if (Directory.Exists(HandleLevelFile.GetDirPath()))
+    if (Directory.Exists(directory))
     {
-      DirectoryInfo dirInfo = new DirectoryInfo(HandleLevelFile.GetDirPath());
-      FileInfo[] files = dirInfo.GetFiles("*.*");
+      DirectoryInfo dirInfo = new DirectoryInfo(directory);
+      FileInfo[] files = dirInfo.GetFiles("*.txt");
       foreach (var file in files)
       {
-        if (file.ToString().Contains(".meta"))
-        {
-          continue;
-        }
         levelNames.Add(Path.GetFileNameWithoutExtension(file.ToString()));
       }
     }

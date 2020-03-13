@@ -24,12 +24,6 @@ namespace MLAgents
 
     float m_TotalRun = 1.0f;
 
-    void Awake()
-    {
-      transform.position = new Vector3(0, 8, -32);
-      //transform.rotation = Quaternion.Euler(25, 0, 0);
-    }
-
     void Update()
     {
       if (Input.GetMouseButtonDown(1))

@@ -12,7 +12,7 @@ public class LevelEditor : MonoBehaviour
 
   //necessary components
   private LevelController levelController;
-  private HandleLevelFile handleLevelFile;
+  private HandleLevelFiles handleLevelFile;
   private FetchLevels fetchLevels;
   private SceneLoader sceneLoader;
 
@@ -20,9 +20,12 @@ public class LevelEditor : MonoBehaviour
   private int posX;
   private int posZ;
 
+  //camera for level preview image
+  public Camera previewCam;
+
   void Start()
   {
-    handleLevelFile = new HandleLevelFile();
+    handleLevelFile = new HandleLevelFiles();
     fetchLevels = new FetchLevels();
 
     levelController = gameObject.GetComponent<LevelController>();
@@ -164,7 +167,9 @@ public class LevelEditor : MonoBehaviour
   //Reads name of map, saves file and updates currently loaded map
   public void SaveFile()
   {
-    handleLevelFile.SaveMapFile(levelController.blockMap, ReadInputFileName());
+    previewCam.GetComponent<CameraPositioning>().CenterCameraPosition();
+    var imageBytes = previewCam.GetComponent<LevelPreview>().TakePreviewImage( 512, 512 );
+    handleLevelFile.SaveLevelFiles(levelController.blockMap, imageBytes, ReadInputFileName());
     LoadUIValues();
     LoadUIDropdownSetByFileName(ReadInputFileName());
   }
@@ -181,7 +186,7 @@ public class LevelEditor : MonoBehaviour
 
   public void DeleteFile()
   {
-    handleLevelFile.DeleteFile(GetSelectedLevel());
+    handleLevelFile.DeleteLevelFile(GetSelectedLevel());
     LoadUIValues();
     LoadUIDropdownFirstLevel();
   }
@@ -246,7 +251,7 @@ public class LevelEditor : MonoBehaviour
     Dropdown dropDownLevels = GameObject.Find("DropdownMapSelection").GetComponent<Dropdown>();
     dropDownLevels.ClearOptions();
     dropDownLevels.options.Add(new Dropdown.OptionData("-"));
-    List<string> fileNames = fetchLevels.LoadLevelNames();
+    List<string> fileNames = fetchLevels.LoadLevelNames(handleLevelFile.directory);
     foreach(string fileName in fileNames)
     {
       Dropdown.OptionData option = new Dropdown.OptionData();

@@ -525,10 +525,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 347653382, guid: 261e8112944027644905f63d5f136738, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 553224111478213786, guid: 261e8112944027644905f63d5f136738,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -588,21 +584,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1945129405618505174, guid: 261e8112944027644905f63d5f136738,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5328470632145694908, guid: 261e8112944027644905f63d5f136738,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6376760584731919316, guid: 261e8112944027644905f63d5f136738,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 261e8112944027644905f63d5f136738, type: 3}
