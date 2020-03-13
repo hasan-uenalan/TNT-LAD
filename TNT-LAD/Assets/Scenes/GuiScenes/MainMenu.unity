@@ -2080,9 +2080,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67a7892007681f489c8f54cbbfe8438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSpawn1: {x: -5, y: 0.5, z: 1}
-  bombSpawn2: {x: 1, y: 0.5, z: -4}
+  bombSpawn1: {x: -2, y: 0.5, z: 1}
+  bombSpawn2: {x: 1, y: 0.5, z: 1}
   bomb: {fileID: 2298858851037517202, guid: 02c30050fdafd32448059e99526aa551, type: 3}
+  destructibleBox: {fileID: 1926794924618004227, guid: 7b260c6a926286e498cbb413ffa2cbd1,
+    type: 3}
 --- !u!1001 &625520450
 PrefabInstance:
   m_ObjectHideFlags: 0
