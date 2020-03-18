@@ -34,4 +34,9 @@ public class ScenesSwitcher : MonoBehaviour
   {
     SceneManager.LoadScene("LevelSelectionScene");
   }
+
+  public void SwitchToCloudLevelSelection()
+  {
+    SceneManager.LoadScene("CloudLevelSelectionScene");
+  }
 }
