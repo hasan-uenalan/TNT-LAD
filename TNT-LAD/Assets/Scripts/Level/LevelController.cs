@@ -53,7 +53,6 @@ public class LevelController : MonoBehaviour
     {
       Construct();
     }
-    InitPlayerSpawnCoordinates();
   }
 
   //creating scene structure
@@ -75,7 +74,6 @@ public class LevelController : MonoBehaviour
     blockMap = new GameObject[gridX, gridZ];
     floorMap = new GameObject[gridX, gridZ];
     wallMap = new GameObject[gridX + 2, gridZ + 2];
-    playerSpawns = new Vector2[4];
     GenerateFloor();
     GenerateWall();
   }
@@ -92,6 +90,7 @@ public class LevelController : MonoBehaviour
       PlaceLevelBlocks();
       GenerateFloor();
       GenerateWall();
+      InitPlayerSpawnCoordinates();
     }
     else
     {
@@ -108,6 +107,7 @@ public class LevelController : MonoBehaviour
 
   private void InitPlayerSpawnCoordinates()
   {
+    playerSpawns = new Vector2[4];
     Vector2 spawn;
     spawn.x = floorMap[0, 0].transform.position.x;
     spawn.y = floorMap[0, 0].transform.position.z;

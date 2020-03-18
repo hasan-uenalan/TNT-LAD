@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class LevelSwitcher : MonoBehaviour
 {
-  public GameObject LevelInformation;
-
   private List<Object> LevelImageList;
 
   private int curLevelIndex = 0;
@@ -26,9 +24,8 @@ public class LevelSwitcher : MonoBehaviour
 
   private void UpdateLevelSelectionValues()
   {
-    GUIValues.LevelIndex = curLevelIndex;
-    string levelName = LevelImageList[curLevelIndex].name;
-    GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = levelName;
+    GUIValues.LevelName = LevelImageList[curLevelIndex].name;
+    GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = GUIValues.LevelName;
     GameObject.FindGameObjectWithTag("GUILevelPreview").GetComponent<Image>().sprite = (Sprite)LevelImageList[curLevelIndex];
   }
 

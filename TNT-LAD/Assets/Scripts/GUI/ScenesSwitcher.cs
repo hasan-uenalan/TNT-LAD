@@ -7,7 +7,7 @@ public class ScenesSwitcher : MonoBehaviour
 {
   public void SwitchToGame()
   {
-    SceneManager.LoadScene("Level");
+    gameObject.GetComponent<SceneLoader>().LoadLevel(GUIValues.LevelName);
   }
 
   public void SwitchToMainMenu()
