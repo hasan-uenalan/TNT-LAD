@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 
-public class PlayerJoining : MonoBehaviour
+public class DebugPlayerJoining : MonoBehaviour
 {
   [HideInInspector]
   public InputDevice[] inputDevices;
@@ -66,12 +66,12 @@ public class Player
   }
 }
 
-[CustomEditor(typeof(PlayerJoining))]
+[CustomEditor(typeof(DebugPlayerJoining))]
 public class CustomInspector : Editor
 {
   public override void OnInspectorGUI()
   {
-    var playerJoining = target as PlayerJoining;
+    var playerJoining = target as DebugPlayerJoining;
     string[] inputDeviceStrings;
 
     DrawDefaultInspector();
