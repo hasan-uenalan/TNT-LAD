@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class StaticPlayers
 {
-  public static List<StaticPlayerData> staticPlayers = new List<StaticPlayerData>();
+  public static List<PlayerData> staticPlayers = new List<PlayerData>();
 }
