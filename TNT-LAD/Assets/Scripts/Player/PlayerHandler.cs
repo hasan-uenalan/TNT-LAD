@@ -23,8 +23,6 @@ public class PlayerHandler : MonoBehaviour
   /// <summary>
   /// player status data
   /// </summary>
-  public int Lifes { get; set; }
-
   public bool PowerUpMoveBombs;
 
   public Status PlayerStatus { get; set; }
@@ -38,11 +36,10 @@ public class PlayerHandler : MonoBehaviour
   public void InitPlayerData()
   {
     //PlayerIndex has to be set
-    PlayerValues = new PlayerData( 1, 0, SpawnPoint, InvincibilityTime);
+    PlayerValues = new PlayerData( 1, 0, SpawnPoint, InvincibilityTime, 3);
     BombCount = 1;
     BombStrength = 1;
     PlayerStatus = Status.alive;
-    Lifes = 3;
 
     PowerUpMoveBombs = false;
   }
@@ -59,12 +56,12 @@ public class PlayerHandler : MonoBehaviour
   //removes a life and checks if player is dead
   public void RemoveLife()
   {
-    Lifes -= 1;
-    if(Lifes == 0)
+    PlayerValues.Lifes -= 1;
+    if(PlayerValues.Lifes == 0)
     {
       KillPlayer();
     }
-    Debug.Log("lifes: " + Lifes);
+    Debug.Log("lifes: " + PlayerValues.Lifes);
     SetInvincible();
   }
 
@@ -91,5 +88,4 @@ public class PlayerHandler : MonoBehaviour
     this.PlayerStatus = playerStatus;
     Debug.Log("player not invincible anymore");
   }
-
 }

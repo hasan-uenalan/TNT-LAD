@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,13 @@ public class GameController : MonoBehaviour
   {
     levelController = FindObjectOfType<LevelController>();
     JoinAllPlayers();
+  }
+
+  void Update()
+  {
+    if (CheckGameEnd()) {
+      SceneManager.LoadScene("RoundScoreboard");
+    }
   }
 
   private void JoinAllPlayers()
@@ -31,5 +39,22 @@ public class GameController : MonoBehaviour
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
     playerInput.gameObject.transform.position = spawnPoint;
+  }
+
+  private bool CheckGameEnd()
+  {
+    List<PlayerData> playerListCopy = new List<PlayerData>(StaticPlayers.staticPlayers);
+    foreach (PlayerData curPlayer in playerListCopy) {
+      if(curPlayer.Lifes <= 0) 
+      {
+        playerListCopy.Remove(curPlayer);
+      }
+    }
+    if(playerListCopy.Count <= 1) 
+    {
+      playerListCopy[0].PlayerScore++;
+      return true;
+    }
+    return false;
   }
 }

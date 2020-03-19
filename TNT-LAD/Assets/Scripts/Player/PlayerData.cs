@@ -10,13 +10,16 @@ public class PlayerData
 
   public float InvincibilityTime;
 
+  public int Lifes;
+
   public Vector3 SpawnPoint;
 
-  public PlayerData(int playerIndex, int playerScore, Vector3 spawnPoint, float invincibilityTime)
+  public PlayerData(int playerIndex, int playerScore, Vector3 spawnPoint, float invincibilityTime, int lifes)
   {
     PlayerIndex = playerIndex;
     PlayerScore = playerScore;
     SpawnPoint = spawnPoint;
     InvincibilityTime = invincibilityTime;
+    Lifes = lifes;
   }
 }
