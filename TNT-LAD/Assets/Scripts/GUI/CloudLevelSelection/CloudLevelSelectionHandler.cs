@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class CloudLevelSelectionHandler : MonoBehaviour
 {
   public CloudActionHandler cloudActionHandler;
-  public List<CloudLevel> cloudLevels;
+  public List<CloudLevel> cloudLevels = new List<CloudLevel>();
   public Text pageLabelText;
 
+  public GameObject levelCardPrefab;
   public GameObject[] levelCardSlots = new GameObject[3];
 
   private int currentPageIndex = 0;
@@ -17,10 +18,14 @@ public class CloudLevelSelectionHandler : MonoBehaviour
   void Start()
   {
     cloudActionHandler = new CloudActionHandler();
-    StartCoroutine(cloudActionHandler.RequestLevelIds(SetLevelIds));
+    StartCoroutine(cloudActionHandler.RequestLevelIds(SetLevelIdsCallback)); //Start request 
   }
 
-  private void SetLevelIds(List<int> levelIds)
+  /// <summary>
+  /// Callback handler after request for level ids is complete. Starts setup of cloud level selection.
+  /// </summary>
+  /// <param name="levelIds"></param>
+  private void SetLevelIdsCallback(List<int> levelIds)
   {
     if(levelIds == null)
     {
@@ -40,6 +45,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     levelPages = (cloudLevels.Count / 3) + 1;
     Debug.Log(levelPages);
     UpdatePageLabel();
+    UpdateLevelCards();
   }
 
   public void PageRight()
@@ -48,6 +54,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     {
       currentPageIndex++;
       UpdatePageLabel();
+      UpdateLevelCards();
     }
   }
 
@@ -57,6 +64,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     {
       currentPageIndex--;
       UpdatePageLabel();
+      UpdateLevelCards();
     }
   }
 
@@ -65,17 +73,29 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     pageLabelText.text = $"{currentPageIndex + 1}/{levelPages}";
   }
 
+  /// <summary>
+  /// Updates all cloud level card slots and content.
+  /// </summary>
   private void UpdateLevelCards()
   {
-    var cloudLevelsToDisplay = new List<CloudLevel>();
+    List<CloudLevel> cloudLevelsToDisplay;
     if (currentPageIndex == levelPages - 1)
     {
       var occupiedSlots = cloudLevels.Count % levelCardSlots.Length;
       cloudLevelsToDisplay = cloudLevels.Skip(Mathf.Max(0, cloudLevels.Count - occupiedSlots)).ToList();
     }
-    //TODO: implement not only last page
-    throw new System.NotImplementedException();
+    else
+    {
+      int displayIndex = currentPageIndex * levelCardSlots.Length;
+      cloudLevelsToDisplay = cloudLevels.GetRange(displayIndex, levelCardSlots.Length);
+    }
+    AssignLevelCardContents(cloudLevelsToDisplay);
   }
+
+  /// <summary>
+  /// Displays cloud levels on current page
+  /// </summary>
+  /// <param name="levelsToDisplay">cloud levels that need to be displayed on current page. If this list has more entries than slots are available the rest is ignored</param>
 
   private void AssignLevelCardContents(List<CloudLevel> levelsToDisplay)
   {
@@ -83,9 +103,46 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     {
       if(i > levelsToDisplay.Count - 1)
       {
-        //delete cloud level card
+        PlaceLevelCardGameObject(levelCardSlots[i]);
+        continue;
       }
-      //assign cloudlevel gameobject to slot
+
+      var currCloudLevel = levelsToDisplay[i];
+      PlaceLevelCardGameObject(levelCardSlots[i], currCloudLevel);
+
+      if (!currCloudLevel.isInitialized)
+      {
+        StartCoroutine(cloudActionHandler.RequestLevelDetails(currCloudLevel.levelId, currCloudLevel.Initialize));
+        currCloudLevel.isInitialized = true; //HACK if request fails still initialized, fix pls
+      }
+    }
+  }
+
+  /// <summary>
+  /// Instantiates level card for a cloud level in the specified slot
+  /// </summary>
+  /// <param name="slot">Target slot for the level card</param>
+  /// <param name="cloudLevel">cloud level which's guiCard should be displayed. Leave empty to delete card in <paramref name="slot"/></param>
+  private void PlaceLevelCardGameObject(GameObject slot, CloudLevel cloudLevel = null)
+  {
+    GameObject currCard = (slot.transform.childCount != 0) ? slot.transform.GetChild(0).gameObject : null;
+    if(currCard != null)
+    {
+      Destroy(currCard.gameObject);
+    }
+    if(cloudLevel == null)
+    {
+      return; //only delete card, cancel rest
+    }
+
+    if(cloudLevel.guiCard == null)
+    {
+      var newCard = Instantiate(levelCardPrefab, slot.transform.position, Quaternion.identity, slot.transform);
+      cloudLevel.guiCard = newCard;
+    }
+    else
+    {
+      Instantiate(cloudLevel.guiCard, slot.transform.position, Quaternion.identity, slot.transform);
     }
   }
 }
