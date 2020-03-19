@@ -72,6 +72,7 @@ public class PlayerHandler : MonoBehaviour
   {
     PlayerStatus = Status.dead;
     gameObject.SetActive(false);
+    gameObject.GetComponent<PlayerKiller>().KillPlayer(false);
   }
 
   private void SetInvincible()

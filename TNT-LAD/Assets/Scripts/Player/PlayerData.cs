@@ -8,14 +8,9 @@ public class PlayerData
 
   public int PlayerIndex;
 
-  public Vector3 SpawnPoint;
+  public float InvincibilityTime;
 
-  private void KillPlayer()
-  {
-    playerStatus = status.dead;
-    //gameObject.SetActive(false);
-    gameObject.GetComponent<PlayerKiller>().KillPlayer(false);
-  }
+  public Vector3 SpawnPoint;
 
   public PlayerData(int playerIndex, int playerScore, Vector3 spawnPoint, float invincibilityTime)
   {
