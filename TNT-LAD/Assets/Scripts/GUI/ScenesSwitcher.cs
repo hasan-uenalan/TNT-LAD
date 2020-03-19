@@ -12,6 +12,7 @@ public class ScenesSwitcher : MonoBehaviour
 
   public void SwitchToMainMenu()
   {
+    ResetStatics();
     SceneManager.LoadScene("MainMenu");
   }
 
@@ -33,5 +34,13 @@ public class ScenesSwitcher : MonoBehaviour
   public void SwitchToLevelSettings()
   {
     SceneManager.LoadScene("LevelSelectionScene");
+  }
+
+  private void ResetStatics()
+  {
+    StaticPlayers.Players = new List<PlayerData>();
+    StaticPlayers.roundOne = true;
+    GUIValues.PlayerList = new List<LobbyPlayerValues>();
+    GUIValues.LevelName = "";
   }
 }
