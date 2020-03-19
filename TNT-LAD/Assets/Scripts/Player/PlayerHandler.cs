@@ -12,8 +12,6 @@ public class PlayerHandler : MonoBehaviour
   };
 
   public PlayerData PlayerValues;
-  public Vector3 SpawnPoint;
-  public float InvincibilityTime;
 
   //Bomb data
   public List<GameObject> PlacedBombs = new List<GameObject>();
@@ -30,13 +28,11 @@ public class PlayerHandler : MonoBehaviour
   void Start()
   {
     InitPlayerData();
-    StaticPlayers.staticPlayers.Add(PlayerValues);
   }
 
   public void InitPlayerData()
   {
     //PlayerIndex has to be set
-    PlayerValues = new PlayerData( 1, 0, SpawnPoint, InvincibilityTime, 3);
     BombCount = 1;
     BombStrength = 1;
     PlayerStatus = Status.alive;

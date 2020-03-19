@@ -4,5 +4,14 @@ using UnityEngine;
 
 public static class StaticPlayers
 {
-  public static List<PlayerData> staticPlayers = new List<PlayerData>();
+  public static List<PlayerData> Players = new List<PlayerData>();
+
+  public static bool roundOne = true;
+
+  public static void SetLifes(int lifes)
+  {
+    foreach (PlayerData curPlayer in Players) {
+      curPlayer.Lifes = lifes;
+    }
+  }
 }

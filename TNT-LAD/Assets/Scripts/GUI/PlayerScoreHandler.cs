@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScoreHandler : MonoBehaviour
 {
@@ -12,8 +13,7 @@ public class PlayerScoreHandler : MonoBehaviour
   void Start()
   {
     EnablePlayerComponents();
-
-    foreach (PlayerData staticPlayer in StaticPlayers.staticPlayers) {
+    foreach (PlayerData staticPlayer in StaticPlayers.Players) {
       CheckIfPlayerWon(staticPlayer);
       AddPlayerImages(staticPlayer);
       SpawnStars(staticPlayer);
@@ -42,6 +42,10 @@ public class PlayerScoreHandler : MonoBehaviour
   private void SpawnStars(PlayerData staticPlayer)
   {
     Transform player = gameObject.transform.GetChild(staticPlayer.PlayerIndex - 1);
-    player.GetComponent<StarSpawner>().SpawnStars(staticPlayer.PlayerScore, player);
+    for (int curScorePoint = 1; curScorePoint <= staticPlayer.PlayerScore; curScorePoint++) {
+      GameObject starPrefab = (GameObject)Resources.Load("GUIComponents/Star");
+      GameObject starPic = Instantiate(starPrefab, player);
+      starPic.transform.GetComponent<Image>().rectTransform.localPosition = new Vector3(-262 + curScorePoint * 80, 0, 0);
+    }
   }
 }

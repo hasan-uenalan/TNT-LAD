@@ -14,11 +14,17 @@ public class PlayerData
 
   public Vector3 SpawnPoint;
 
-  public PlayerData(int playerIndex, int playerScore, Vector3 spawnPoint, float invincibilityTime, int lifes)
+  /// <summary>
+  /// Instantiates Values for a player
+  /// </summary>
+  /// <param name="playerIndex"></param>
+  /// <param name="playerScore"></param>
+  /// <param name="invincibilityTime"></param>
+  /// <param name="lifes"></param>
+  public PlayerData(int playerIndex, int playerScore, float invincibilityTime, int lifes)
   {
     PlayerIndex = playerIndex;
     PlayerScore = playerScore;
-    SpawnPoint = spawnPoint;
     InvincibilityTime = invincibilityTime;
     Lifes = lifes;
   }
