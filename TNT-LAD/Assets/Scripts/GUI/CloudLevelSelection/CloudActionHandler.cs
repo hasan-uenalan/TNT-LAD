@@ -11,7 +11,7 @@ public class CloudActionHandler
   public IEnumerator RequestLevelIds(Action<List<int>> callback = null)
   {
     string idUrl = url + "GetCloudLevelIds.php";
-    var request = UnityWebRequest.Get(idUrl);
+    var request = UnityWebRequest.Post(idUrl, new WWWForm());
     yield return request.SendWebRequest();
 
     var data = request.downloadHandler.text;
@@ -29,8 +29,10 @@ public class CloudActionHandler
 
   public IEnumerator RequestLevelDetails(int id, Action<string, string, string> callback = null)
   {
-    string detailUrl = url + "GetCloudLevelDetails.php/get?levelId=" + id;
-    var request = UnityWebRequest.Get(detailUrl);
+    WWWForm form = new WWWForm();
+    form.AddField("levelId", id.ToString());
+    string detailUrl = url + "GetCloudLevelDetails.php";
+    var request = UnityWebRequest.Post(detailUrl,form);
     yield return request.SendWebRequest();
 
     var data = request.downloadHandler.text;
@@ -45,4 +47,29 @@ public class CloudActionHandler
       callback?.Invoke(null, null, null);
     }
   }
+
+  public IEnumerator UploadLevelToCloud(string levelName, string previewImage, string levelContent, Action<bool> callback = null)
+  {
+    WWWForm form = new WWWForm();
+    form.AddField("levelName", levelName);
+    form.AddField("previewImage", previewImage);
+    form.AddField("levelContent", levelContent);
+    string detailUrl = url + "UploadLevelToCloud.php";
+    var request = UnityWebRequest.Post(detailUrl,form);
+    yield return request.SendWebRequest();
+
+    var data = request.downloadHandler.text;
+
+    ResponseCloudLevelDetails response = JsonUtility.FromJson<ResponseCloudLevelDetails>(data);
+    if (response.success)
+    {
+      Debug.Log("Upload finished");
+      callback?.Invoke(true);
+    }
+    else
+    {
+      callback?.Invoke(false);
+    }
+  }
+
 }

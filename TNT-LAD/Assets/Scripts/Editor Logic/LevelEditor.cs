@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,6 +16,7 @@ public class LevelEditor : MonoBehaviour
   private LevelController levelController;
   private HandleLevelFiles handleLevelFile;
   private FetchLevels fetchLevels;
+  private CloudActionHandler cloudActionHandler;
 
   //Pos for mouse pointer
   private int posX;
@@ -27,6 +29,7 @@ public class LevelEditor : MonoBehaviour
   {
     handleLevelFile = new HandleLevelFiles();
     fetchLevels = new FetchLevels();
+    cloudActionHandler = new CloudActionHandler();
 
     levelController = gameObject.GetComponent<LevelController>();
 
@@ -187,6 +190,14 @@ public class LevelEditor : MonoBehaviour
     handleLevelFile.SaveLevelFiles(levelController.blockMap, imageBytes, ReadInputFileName());
     LoadUIValues();
     LoadUIDropdownSetByFileName(ReadInputFileName());
+  }
+
+  public void UploadMapToCloud()
+  {
+    previewCam.GetComponent<CameraPositioning>().CenterCameraPosition();
+    var imageBytes = previewCam.GetComponent<LevelPreview>().TakePreviewImage(128, 128);
+    string levelContent = handleLevelFile.CreateLevelTxt(levelController.blockMap);
+    StartCoroutine(cloudActionHandler.UploadLevelToCloud(ReadInputFileName(), Convert.ToBase64String(imageBytes), levelContent)); //TODO: meldung wenn success oder fail
   }
 
   public void UpdateCurrentFile()
