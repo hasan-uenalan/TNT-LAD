@@ -10,24 +10,20 @@
         echo $response;
         exit();
     }
+    
+    $level_name = $_POST["levelName"];
+    $preview_image = $_POST["previewImage"];
+    $level_content = $_POST["levelContent"];
 
-    $query = "SELECT level_id FROM cloudlevels";
-    $result = mysqli_query($link, $query);
+    $query = "INSERT INTO cloudlevels (level_name, preview_image, level_content) VALUES (?, ?, ?)";
+    $stmt = mysqli_prepare($link, $query);
+    mysqli_stmt_bind_param($stmt, "sss", $level_name, $preview_image, $level_content);
     
-    /* numeric array */
-    while($row = mysqli_fetch_array($result)) {
-        $rows[] = $row["level_id"];
-    }
-    
-    if(count($rows) != 0){
+    if(mysqli_stmt_execute($stmt)){
         $response["success"] = true;
-        $response["levelIds"] = $rows;
     }else{
-        $response["success"] = false;
+        $response["success"] = false;   
     }
-
-    /* free result set */
-    mysqli_free_result($result);
 
     /* close connection */
     mysqli_close($link);
