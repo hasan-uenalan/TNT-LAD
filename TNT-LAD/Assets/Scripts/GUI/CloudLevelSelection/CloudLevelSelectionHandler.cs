@@ -42,8 +42,9 @@ public class CloudLevelSelectionHandler : MonoBehaviour
 
   private void SetupLevelPages()
   {
-    levelPages = (cloudLevels.Count / 3) + 1;
-    Debug.Log(levelPages);
+    int mod = cloudLevels.Count % levelCardSlots.Length;
+    int raw = (cloudLevels.Count / levelCardSlots.Length);
+    levelPages = (mod == 0) ? raw : raw + 1;
     UpdatePageLabel();
     UpdateLevelCards();
   }
@@ -100,16 +101,11 @@ public class CloudLevelSelectionHandler : MonoBehaviour
   private void UpdateLevelCards()
   {
     List<CloudLevel> cloudLevelsToDisplay;
-    if (currentPageIndex == levelPages - 1)
-    {
-      var occupiedSlots = cloudLevels.Count % levelCardSlots.Length;
-      cloudLevelsToDisplay = cloudLevels.Skip(Mathf.Max(0, cloudLevels.Count - occupiedSlots)).ToList();
-    }
-    else
-    {
-      int displayIndex = currentPageIndex * levelCardSlots.Length;
-      cloudLevelsToDisplay = cloudLevels.GetRange(displayIndex, levelCardSlots.Length);
-    }
+    int mod = cloudLevels.Count % levelCardSlots.Length;
+    int lastPageRange = (mod == 0) ? levelCardSlots.Length : mod;
+    int range = (currentPageIndex == levelPages - 1) ? lastPageRange : levelCardSlots.Length;
+    int displayIndex = currentPageIndex * levelCardSlots.Length;
+    cloudLevelsToDisplay = cloudLevels.GetRange(displayIndex, range);
     AssignLevelCardContents(cloudLevelsToDisplay);
   }
 
@@ -146,10 +142,10 @@ public class CloudLevelSelectionHandler : MonoBehaviour
   /// <param name="cloudLevel">cloud level which's guiCard should be displayed. Leave empty to delete card in <paramref name="slot"/></param>
   private void PlaceLevelCardGameObject(GameObject slot, CloudLevel cloudLevel = null)
   {
-    GameObject currCard = (slot.transform.childCount != 0) ? slot.transform.GetChild(0).gameObject : null;
+    GameObject currCard = GetActiveLevelCard(slot);
     if(currCard != null)
     {
-      Destroy(currCard.gameObject);
+      currCard.SetActive(false);
     }
     if(cloudLevel == null)
     {
@@ -163,7 +159,19 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     }
     else
     {
-      Instantiate(cloudLevel.guiCard, slot.transform.position, Quaternion.identity, slot.transform);
+      cloudLevel.guiCard.SetActive(true);
     }
+  }
+
+  private GameObject GetActiveLevelCard(GameObject slot)
+  {
+    foreach(Transform child in slot.transform)
+    {
+      if (child.gameObject.activeSelf)
+      {
+        return child.gameObject;
+      }
+    }
+    return null;
   }
 }

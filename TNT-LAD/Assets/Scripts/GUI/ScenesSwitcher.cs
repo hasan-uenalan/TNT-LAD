@@ -43,8 +43,8 @@ public class ScenesSwitcher : MonoBehaviour
 
   private void ResetStatics()
   {
-    GUIValues.PlayerList = new List<LobbyPlayerValues>();
-    GUIValues.LevelName = "";
+    CrossSceneInformation.PlayerList = new List<LobbyPlayerValues>();
+    CrossSceneInformation.currentLevel = new LevelInfo();
   }
   
   public void SwitchToCloudLevelSelection()
