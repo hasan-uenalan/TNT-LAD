@@ -17,10 +17,10 @@ public class GameController : MonoBehaviour
 
   private void JoinAllPlayers()
   {
-    for(int i = 0; i < GUIValues.PlayerList.Count; i++)
+    for(int i = 0; i < CrossSceneInformation.PlayerList.Count; i++)
     {
       Vector3 spawn = new Vector3(levelController.playerSpawns[i].x, 0.2f, levelController.playerSpawns[i].y);
-      InputDevice inputDevice = GUIValues.PlayerList[i].PlayerInputDevice;
+      InputDevice inputDevice = CrossSceneInformation.PlayerList[i].PlayerInputDevice;
       JoinPlayer(defaultPlayer, inputDevice, spawn);
     }
   }

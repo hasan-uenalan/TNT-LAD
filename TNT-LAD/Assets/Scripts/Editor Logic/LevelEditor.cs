@@ -9,12 +9,12 @@ public class LevelEditor : MonoBehaviour
   //For editor
   public bool placeBlocksActive = true;
   private BlockData.BlockType activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
+  public ScenesSwitcher sceneSwitcher;
 
   //necessary components
   private LevelController levelController;
   private HandleLevelFiles handleLevelFile;
   private FetchLevels fetchLevels;
-  private SceneLoader sceneLoader;
 
   //Pos for mouse pointer
   private int posX;
@@ -29,7 +29,6 @@ public class LevelEditor : MonoBehaviour
     fetchLevels = new FetchLevels();
 
     levelController = gameObject.GetComponent<LevelController>();
-    sceneLoader = gameObject.GetComponent<SceneLoader>();
 
     SelectDestructibleBlock();
 
@@ -197,7 +196,8 @@ public class LevelEditor : MonoBehaviour
 
   public void LoadLevel()
   {
-    sceneLoader.LoadLevel(GetSelectedLevel());
+    CrossSceneInformation.currentLevel.SetLevel(GetSelectedLevel());
+    sceneSwitcher.SwitchToGame();
   }
 
   public void DeleteFile()

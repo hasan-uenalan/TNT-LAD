@@ -21,7 +21,7 @@ public class PlayerScoreHandler : MonoBehaviour
   }
   private void EnablePlayerComponents()
   {
-    playerCount = GUIValues.PlayerList.Count;
+    playerCount = CrossSceneInformation.PlayerList.Count;
     for (int i = 0; i < playerCount; i++) {
       gameObject.transform.GetChild(i).gameObject.SetActive(true);
     }

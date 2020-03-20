@@ -83,11 +83,12 @@ public class LevelController : MonoBehaviour
     if (File.Exists(handleLevelFile.GetFilePath(currentFile, ".txt")))
     {
       ClearBlocks(true);
-      UpdateMapParams();
+      string[] blockLine = handleLevelFile.GetFileData(currentFile);
+      UpdateMapParams(blockLine);
       blockMap = new GameObject[gridX, gridZ];
       floorMap = new GameObject[gridX, gridZ];
       wallMap = new GameObject[gridX + 2, gridZ + 2];
-      PlaceLevelBlocks();
+      PlaceLevelBlocks(blockLine);
       GenerateFloor();
       GenerateWall();
       InitPlayerSpawnCoordinates();
@@ -98,9 +99,26 @@ public class LevelController : MonoBehaviour
     }
   }
 
-  private void UpdateMapParams()
+  public void ConstructCloudLevel(CloudLevel cloudLevel)
   {
-    string[] blockLine = handleLevelFile.GetFileData(currentFile);
+    ClearBlocks(true);
+    string[] blockLine = cloudLevel.levelContent.Split('\n');
+    for(int i = 0; i < blockLine.Length; i++)
+    {
+      blockLine[i] = blockLine[i].Trim();
+    }
+    UpdateMapParams(blockLine);
+    blockMap = new GameObject[gridX, gridZ];
+    floorMap = new GameObject[gridX, gridZ];
+    wallMap = new GameObject[gridX + 2, gridZ + 2];
+    PlaceLevelBlocks(blockLine);
+    GenerateFloor();
+    GenerateWall();
+    InitPlayerSpawnCoordinates();
+  }
+
+  private void UpdateMapParams(string[] blockLine)
+  {
     gridX = blockLine.Length;
     gridZ = blockLine[0].ToCharArray().Length; //whitespace is also part of the array
   }
@@ -210,11 +228,8 @@ public class LevelController : MonoBehaviour
   }
 
   //places the blocks in the according .txt file
-  private void PlaceLevelBlocks()
+  private void PlaceLevelBlocks(string[] blockLine)
   {
-
-    string[] blockLine = handleLevelFile.GetFileData(currentFile);
-
     for (int x = 0; x < blockLine.Length; x++)
     {
       char[] blocks = blockLine[x].ToCharArray();

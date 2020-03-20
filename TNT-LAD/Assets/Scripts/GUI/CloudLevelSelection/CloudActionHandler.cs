@@ -27,7 +27,7 @@ public class CloudActionHandler
     }
   }
 
-  public IEnumerator RequestLevelDetails(int id, Action<string, string> callback = null)
+  public IEnumerator RequestLevelDetails(int id, Action<string, string, string> callback = null)
   {
     string detailUrl = url + "GetCloudLevelDetails.php/get?levelId=" + id;
     var request = UnityWebRequest.Get(detailUrl);
@@ -38,11 +38,11 @@ public class CloudActionHandler
     ResponseCloudLevelDetails response = JsonUtility.FromJson<ResponseCloudLevelDetails>(data);
     if (response.success)
     {
-      callback?.Invoke(response.levelName, response.previewImage);
+      callback?.Invoke(response.levelName, response.previewImage, response.levelContent);
     }
     else
     {
-      callback?.Invoke(null, null);
+      callback?.Invoke(null, null, null);
     }
   }
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class GUIValues
+public static class CrossSceneInformation
 {
-  public static string LevelName { get; set; }
-
+  public static LevelInfo currentLevel { get; set; } = new LevelInfo();
   public static List<LobbyPlayerValues> PlayerList { get; set; }
 
 }

@@ -68,6 +68,27 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     }
   }
 
+  public void SelectLevelCard(GameObject guiCard)
+  {
+    CloudLevel selectedCloudLevel = cloudLevels.FirstOrDefault(x => x.guiCard == guiCard);
+    if (string.IsNullOrEmpty(selectedCloudLevel.levelContent))
+    {
+      return; //content not yet loaded, selection shouldn't work
+    }
+
+    if (CrossSceneInformation.currentLevel.cloudLevel != null)
+    {
+      UpdateSelectionInGUI(false, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
+    }
+    CrossSceneInformation.currentLevel.cloudLevel = selectedCloudLevel;
+    UpdateSelectionInGUI(true, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
+  }
+
+  private void UpdateSelectionInGUI(bool select, GameObject levelCardToSelect)
+  {
+    levelCardToSelect.transform.GetChild(0).gameObject.SetActive(select);
+  }
+
   private void UpdatePageLabel()
   {
     pageLabelText.text = $"{currentPageIndex + 1}/{levelPages}";

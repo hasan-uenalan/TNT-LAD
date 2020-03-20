@@ -26,6 +26,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: bfb59339818575a419e161196aa6632f
+  - enabled: 1
+    path: Assets/Scenes/GuiScenes/RoundScoreboard.unity
+    guid: 0c078bf7a11526b49b88759e1d807882
+  - enabled: 1
+    path: Assets/Scenes/GuiScenes/WinScreen.unity
+    guid: 85da3fbca4c265e4689157f5fcd2a65a
+  - enabled: 1
+    path: Assets/Scenes/GuiScenes/CloudLevelSelectionScene.unity
+    guid: c89c031fd020f3943b88af2caadd3393
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 25adf983ecb65bb499bc3c5dd5ea0d02,
       type: 2}

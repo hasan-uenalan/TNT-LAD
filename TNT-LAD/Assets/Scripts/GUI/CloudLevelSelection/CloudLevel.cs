@@ -10,6 +10,7 @@ public class CloudLevel
   public int levelId  { get; set; }
   public string levelName { get; set; }
   public Sprite previewImage { get; set; }
+  public string levelContent { get; set; }
   public GameObject guiCard { get; set; }
 
   public CloudLevel(int levelId) 
@@ -17,15 +18,17 @@ public class CloudLevel
     this.levelId = levelId;
   }
 
-  public void Initialize(string levelName, string previewImageBaseString)
+  public void Initialize(string levelName, string previewImageBaseString, string levelContent)
   {
     this.levelName = levelName;
     SetPreviewImage(previewImageBaseString);
 
-    guiCard.transform.GetChild(1).GetComponent<Text>().text = levelName;
-    var image = guiCard.transform.GetChild(2).GetComponent<Image>();
+    guiCard.transform.GetChild(2).GetComponent<Text>().text = levelName;
+    var image = guiCard.transform.GetChild(3).GetComponent<Image>();
     image.enabled = true;
     image.sprite = previewImage;
+
+    this.levelContent = levelContent;
   }
 
   private void SetPreviewImage(string imageString)

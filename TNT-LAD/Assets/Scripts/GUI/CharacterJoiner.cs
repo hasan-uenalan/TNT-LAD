@@ -26,7 +26,7 @@ public class CharacterJoiner : MonoBehaviour
         newPlayer.PlayerInputDevice = curInputDevice;
         playerList.Add(newPlayer);
       }
-      GUIValues.PlayerList = playerList;
+      CrossSceneInformation.PlayerList = playerList;
     }
     if (playerList.Count >= 2) {
       StartGame.interactable = true;

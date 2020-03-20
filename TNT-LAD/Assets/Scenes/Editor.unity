@@ -1914,18 +1914,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 555078836}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &942863675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942863673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba47ccfcef8e6e488e15127eaaf6fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &942863676 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
@@ -1951,6 +1939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeBlocksActive: 1
+  sceneSwitcher: {fileID: 2548088635057416889, guid: de9be5004b0395544bfb824dbd15a5a9,
+    type: 3}
   previewCam: {fileID: 558024836}
 --- !u!1 &991232986
 GameObject:
