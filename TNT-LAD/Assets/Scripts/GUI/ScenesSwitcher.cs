@@ -12,6 +12,11 @@ public class ScenesSwitcher : MonoBehaviour
 
   public void SwitchToMainMenu()
   {
+    SceneManager.LoadScene("MainMenu");
+  }
+
+  public void ResetToMainMenu()
+  {
     ResetStatics();
     SceneManager.LoadScene("MainMenu");
   }
