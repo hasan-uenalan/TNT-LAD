@@ -41,6 +41,11 @@ public class ScenesSwitcher : MonoBehaviour
     SceneManager.LoadScene("LevelSelectionScene");
   }
 
+  public void SwitchToLeveleditor()
+  {
+    SceneManager.LoadScene("Editor");
+  }
+
   private void ResetStatics()
   {
     CrossSceneInformation.PlayerList = new List<LobbyPlayerValues>();
