@@ -30,6 +30,7 @@ public class PlayerScoreHandler : MonoBehaviour
   private void CheckIfPlayerWon(PlayerData staticPlayer)
   {
     if (staticPlayer.PlayerScore >= WinCondition) {
+      StaticPlayers.Winner = staticPlayer;
       SceneManager.LoadScene("WinScreen");
     }
   }

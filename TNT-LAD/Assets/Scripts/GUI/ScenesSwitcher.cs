@@ -38,8 +38,6 @@ public class ScenesSwitcher : MonoBehaviour
 
   private void ResetStatics()
   {
-    StaticPlayers.Players = new List<PlayerData>();
-    StaticPlayers.roundOne = true;
     GUIValues.PlayerList = new List<LobbyPlayerValues>();
     GUIValues.LevelName = "";
   }
