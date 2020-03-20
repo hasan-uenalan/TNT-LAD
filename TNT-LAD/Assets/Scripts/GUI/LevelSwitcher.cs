@@ -24,8 +24,8 @@ public class LevelSwitcher : MonoBehaviour
 
   private void UpdateLevelSelectionValues()
   {
-    GUIValues.LevelName = LevelImageList[curLevelIndex].name;
-    GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = GUIValues.LevelName;
+    CrossSceneInformation.currentLevel.SetLevel(LevelImageList[curLevelIndex].name);
+    GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = CrossSceneInformation.currentLevel.levelFileName;
     GameObject.FindGameObjectWithTag("GUILevelPreview").GetComponent<Image>().sprite = (Sprite)LevelImageList[curLevelIndex];
   }
 

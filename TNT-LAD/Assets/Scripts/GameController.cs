@@ -26,10 +26,10 @@ public class GameController : MonoBehaviour
 
   private void JoinAllPlayers()
   {
-    for(int playerIndex = 0; playerIndex < GUIValues.PlayerList.Count; playerIndex++)
+    for(int playerIndex = 0; playerIndex < CrossSceneInformation.PlayerList.Count; playerIndex++)
     {
       Vector3 spawn = new Vector3(levelController.playerSpawns[playerIndex].x, 0.2f, levelController.playerSpawns[playerIndex].y);
-      InputDevice inputDevice = GUIValues.PlayerList[playerIndex].PlayerInputDevice;
+      InputDevice inputDevice = CrossSceneInformation.PlayerList[playerIndex].PlayerInputDevice;
       JoinPlayer(defaultPlayer, inputDevice, spawn, playerIndex);
     }
   }

@@ -7,7 +7,7 @@ public class ScenesSwitcher : MonoBehaviour
 {
   public void SwitchToGame()
   {
-    gameObject.GetComponent<SceneLoader>().LoadLevel(GUIValues.LevelName);
+    SceneManager.LoadScene("Level");
   }
 
   public void SwitchToMainMenu()
@@ -45,5 +45,10 @@ public class ScenesSwitcher : MonoBehaviour
   {
     GUIValues.PlayerList = new List<LobbyPlayerValues>();
     GUIValues.LevelName = "";
+  }
+  
+  public void SwitchToCloudLevelSelection()
+  {
+    SceneManager.LoadScene("CloudLevelSelectionScene");
   }
 }

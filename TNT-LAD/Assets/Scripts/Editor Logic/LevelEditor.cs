@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,12 +10,13 @@ public class LevelEditor : MonoBehaviour
   //For editor
   public bool placeBlocksActive = true;
   private BlockData.BlockType activeBlockType = BlockData.BlockType.DESTRUCTIBLE;
+  public ScenesSwitcher sceneSwitcher;
 
   //necessary components
   private LevelController levelController;
   private HandleLevelFiles handleLevelFile;
   private FetchLevels fetchLevels;
-  private SceneLoader sceneLoader;
+  private CloudActionHandler cloudActionHandler;
 
   //Pos for mouse pointer
   private int posX;
@@ -27,9 +29,9 @@ public class LevelEditor : MonoBehaviour
   {
     handleLevelFile = new HandleLevelFiles();
     fetchLevels = new FetchLevels();
+    cloudActionHandler = new CloudActionHandler();
 
     levelController = gameObject.GetComponent<LevelController>();
-    sceneLoader = gameObject.GetComponent<SceneLoader>();
 
     SelectDestructibleBlock();
 
@@ -190,6 +192,14 @@ public class LevelEditor : MonoBehaviour
     LoadUIDropdownSetByFileName(ReadInputFileName());
   }
 
+  public void UploadMapToCloud()
+  {
+    previewCam.GetComponent<CameraPositioning>().CenterCameraPosition();
+    var imageBytes = previewCam.GetComponent<LevelPreview>().TakePreviewImage(128, 128);
+    string levelContent = handleLevelFile.CreateLevelTxt(levelController.blockMap);
+    StartCoroutine(cloudActionHandler.UploadLevelToCloud(ReadInputFileName(), Convert.ToBase64String(imageBytes), levelContent)); //TODO: meldung wenn success oder fail
+  }
+
   public void UpdateCurrentFile()
   {
     LoadUIValues();
@@ -197,7 +207,8 @@ public class LevelEditor : MonoBehaviour
 
   public void LoadLevel()
   {
-    sceneLoader.LoadLevel(GetSelectedLevel());
+    CrossSceneInformation.currentLevel.SetLevel(GetSelectedLevel());
+    sceneSwitcher.SwitchToGame();
   }
 
   public void DeleteFile()

@@ -9,6 +9,7 @@
 /TNT-LAD/[Bb]uilds/
 /TNT-LAD/[Ll]ogs/
 /TNT-LAD/[Mm]emoryCaptures/
+/TNT-LAD/[Pp]ackages/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/TNT-LAD/[Aa]ssets/**/*.meta

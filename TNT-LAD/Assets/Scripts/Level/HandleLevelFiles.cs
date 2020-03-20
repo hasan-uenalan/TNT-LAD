@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System;
+using System.Text;
 
 public class HandleLevelFiles
 {
@@ -28,7 +29,8 @@ public class HandleLevelFiles
   private void OverwriteLevelFiles(GameObject[,] blocks, byte[] previewImage, string fileName)
   {
     DeleteLevelFile(fileName);
-    CreateLevelTxt(blocks, fileName);
+    string levelTxt = CreateLevelTxt(blocks);
+    File.WriteAllText(GetFilePath(fileName, ".txt"), levelTxt);
     CreateLevelImage(previewImage, fileName);
   }
 
@@ -52,36 +54,36 @@ public class HandleLevelFiles
     }
   }
 
-  private void CreateLevelTxt(GameObject[,] blocks, string fileName)
+  public string CreateLevelTxt(GameObject[,] blocks)
   {
-    var sr = File.CreateText(GetFilePath(fileName, ".txt")); //creates file with scene name
+    StringBuilder sb = new StringBuilder();
     for (int x = 0; x < blocks.GetLength(0); x++)
     {
       for (int z = 0; z < blocks.GetLength(1); z++)
       {
         if (blocks[x, z] == null)
         {
-          sr.Write(charNone);
+          sb.Append(charNone);
         }
         else
         {
           if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DESTRUCTIBLE)
           {
-            sr.Write(charDestructible);
+            sb.Append(charDestructible);
           }
           if (blocks[x, z].gameObject.GetComponent<BlockData>().GetBlockType() == BlockData.BlockType.DEFAULT)
           {
-            sr.Write(charDefault);
+            sb.Append(charDefault);
           }
         }
 
       }
       if (x < blocks.GetLength(0) - 1) //not starting a new line at the end of document
       {
-        sr.Write("\n");
+        sb.Append("\n");
       }
     }
-      sr.Close();
+    return sb.ToString();
   }
 
   public string[] GetFileData(string fileName)
