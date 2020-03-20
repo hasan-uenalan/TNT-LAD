@@ -26,20 +26,20 @@ public class ScenesSwitcher : MonoBehaviour
     SceneManager.LoadScene("OptionsScene");
   }
 
-  public void SwitchToPlayerSettings()
-  {
-    SceneManager.LoadScene("PlayerJoinScreen");
-  }
+  //public void SwitchToPlayerSettings()
+  //{
+  //  SceneManager.LoadScene("PlayerJoinScreen");
+  //}
 
   public void SwitchToControls()
   {
     SceneManager.LoadScene("ControlsScene");
   }
 
-  public void SwitchToLevelSettings()
-  {
-    SceneManager.LoadScene("LevelSelectionScene");
-  }
+  //public void SwitchToLevelSettings()
+  //{
+  //  SceneManager.LoadScene("LevelSelectionScene");
+  //}
 
   public void SwitchToLeveleditor()
   {
@@ -52,8 +52,8 @@ public class ScenesSwitcher : MonoBehaviour
     CrossSceneInformation.currentLevel = new LevelInfo();
   }
   
-  public void SwitchToCloudLevelSelection()
-  {
-    SceneManager.LoadScene("CloudLevelSelectionScene");
-  }
+  //public void SwitchToCloudLevelSelection()
+  //{
+  //  SceneManager.LoadScene("CloudLevelSelectionScene");
+  //}
 }

@@ -85,7 +85,7 @@ public class CharacterJoiner : MonoBehaviour
   private void RestoreDefaultGUI(GameObject targetGameObject)
   {
     targetGameObject.transform.GetChild(0).GetComponent<Text>().text = "Press Space/Start\nto Join";
-    targetGameObject.transform.GetChild(1).GetComponent<Image>().enabled = true;
+    targetGameObject.transform.GetChild(1).gameObject.SetActive(false);
   }
 
   private bool IsInputDeviceUnused(InputDevice playerInputDevice)
@@ -112,7 +112,7 @@ public class CharacterJoiner : MonoBehaviour
   {
     GameObject curPlayerSelection = GameObject.FindGameObjectsWithTag("GUIPlayer")[valuesOfCurPlayer.PlayerNumber - 1];
     curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
-    curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false; //TODO: picture of character
+    curPlayerSelection.transform.GetChild(1).gameObject.SetActive(true); //TODO: picture of character
     valuesOfCurPlayer.JoinPlayerGameObject = curPlayerSelection;
   }
 

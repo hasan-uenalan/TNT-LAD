@@ -81,7 +81,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     {
       UpdateSelectionInGUI(false, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
     }
-    CrossSceneInformation.currentLevel.cloudLevel = selectedCloudLevel;
+    CrossSceneInformation.currentLevel.SetLevel(selectedCloudLevel);
     UpdateSelectionInGUI(true, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
   }
 
@@ -154,7 +154,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
 
     if(cloudLevel.guiCard == null)
     {
-      var newCard = Instantiate(levelCardPrefab, slot.transform.position, Quaternion.identity, slot.transform);
+      var newCard = Instantiate(levelCardPrefab, slot.transform.position, slot.transform.rotation, slot.transform);
       cloudLevel.guiCard = newCard;
     }
     else
