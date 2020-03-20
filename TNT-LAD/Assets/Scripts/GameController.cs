@@ -46,7 +46,6 @@ public class GameController : MonoBehaviour
     string controlScheme = (device is Gamepad) ? "Gamepad" : "Keyboard";
     PlayerData playerValues = GetPlayerValues(playerIndex + 1);
     AddToStaticPlayers(playerValues);
-    player.GetComponent<PlayerHandler>().PlayerValues = playerValues;
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
     playerInput.gameObject.GetComponent<PlayerHandler>().PlayerValues = playerValues;
