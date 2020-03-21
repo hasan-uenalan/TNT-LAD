@@ -16,6 +16,7 @@ public class Countdown : MonoBehaviour
       gameObject.GetComponent<Text>().text = timeLeft.ToString("0");
     }
     else {
+      gameObject.GetComponent<Text>().color = Color.red;
       gameObject.GetComponent<Text>().text = (Time.deltaTime - 300.0f).ToString("0");
     }
   }
