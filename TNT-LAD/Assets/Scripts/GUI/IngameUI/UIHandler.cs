@@ -17,7 +17,7 @@ public class UIHandler : MonoBehaviour
     foreach (PlayerData curPlayer in StaticPlayers.Players) 
     {
       GameObject curPlayerUI = GameObject.Instantiate(PlayerUI, gameObject.transform);
-      curPlayerUI.transform.localPosition = new Vector3(40f + (curPlayer.PlayerIndex * 110), -18f, 0f);
+      curPlayerUI.transform.localPosition = new Vector3(115f + (curPlayer.PlayerIndex * 110), -18f, 0f);
       curPlayerUI.transform.GetChild(1).GetComponent<Text>().text = "P" + curPlayer.PlayerIndex;
       curPlayerUI.transform.GetChild(3).GetComponent<Text>().text = curPlayer.PlayerScore.ToString();
       playerUIs.Add(new PlayerUIElement(curPlayer.PlayerIndex, curPlayerUI));

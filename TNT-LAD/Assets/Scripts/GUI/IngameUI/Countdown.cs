@@ -22,7 +22,7 @@ public class Countdown : MonoBehaviour
     }
     else {
       gameObject.GetComponent<Text>().color = Color.red;
-      gameObject.GetComponent<Text>().text = (Time.deltaTime - 300.0f).ToString("0");
+      gameObject.GetComponent<Text>().text = "Sudden Death";
     }
   }
 }
