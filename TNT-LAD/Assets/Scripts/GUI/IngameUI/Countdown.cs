@@ -8,6 +8,11 @@ public class Countdown : MonoBehaviour
 
   private float timeLeft = 300.0f;
 
+  private void Start()
+  {
+    gameObject.GetComponent<Text>().text = timeLeft.ToString("0");
+  }
+
   // Update is called once per frame
   void Update()
   {

@@ -11,6 +11,7 @@ TagManager:
   - Bomb
   - Floor
   - LevelCard
+  - IngamePlayerUI
   layers:
   - Default
   - TransparentFX
