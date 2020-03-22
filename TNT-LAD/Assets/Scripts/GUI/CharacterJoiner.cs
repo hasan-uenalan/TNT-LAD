@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class CharacterJoiner : MonoBehaviour
 {
-  public Button StartGame; 
-
+  public Button levelButton; 
+  public GameObject buttonDisabledCross;
+  
   private List<LobbyPlayerValues> playerList;
-
   private int playerCount = 1;
-
+  
   private void Start()
   {
     playerList = new List<LobbyPlayerValues>();
@@ -29,10 +29,12 @@ public class CharacterJoiner : MonoBehaviour
       CrossSceneInformation.PlayerList = playerList;
     }
     if (playerList.Count >= 2) {
-      StartGame.interactable = true;
+      levelButton.interactable = true;
+      buttonDisabledCross.SetActive(false);
     }
     else {
-      StartGame.interactable = false;
+      levelButton.interactable = false;
+      buttonDisabledCross.SetActive(true);
     }
   }
 
@@ -84,8 +86,8 @@ public class CharacterJoiner : MonoBehaviour
 
   private void RestoreDefaultGUI(GameObject targetGameObject)
   {
-    targetGameObject.transform.GetChild(0).GetComponent<Text>().text = "Press Space/Start\nto Join";
-    targetGameObject.transform.GetChild(1).GetComponent<Image>().enabled = true;
+    targetGameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Press Space/Start";
+    targetGameObject.transform.GetChild(1).gameObject.SetActive(false);
   }
 
   private bool IsInputDeviceUnused(InputDevice playerInputDevice)
@@ -111,8 +113,8 @@ public class CharacterJoiner : MonoBehaviour
   private void SetGUIComponentsForActivePlayer(LobbyPlayerValues valuesOfCurPlayer)
   {
     GameObject curPlayerSelection = GameObject.FindGameObjectsWithTag("GUIPlayer")[valuesOfCurPlayer.PlayerNumber - 1];
-    curPlayerSelection.transform.GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
-    curPlayerSelection.transform.GetChild(1).GetComponent<Image>().enabled = false; //TODO: picture of character
+    curPlayerSelection.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
+    curPlayerSelection.transform.GetChild(1).gameObject.SetActive(true); //TODO: picture of character
     valuesOfCurPlayer.JoinPlayerGameObject = curPlayerSelection;
   }
 
