@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5889871178473439014}
   - component: {fileID: 180583561197487071}
   - component: {fileID: 3238168828264207823}
-  - component: {fileID: 5304900980795423733}
   - component: {fileID: -7410537885914863424}
   - component: {fileID: 7443730669039686736}
+  - component: {fileID: 7735549578107248432}
   m_Layer: 0
   m_Name: DestructibleBox
   m_TagString: Untagged
@@ -98,22 +98,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000001, y: 1, z: 1.0000001}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5304900980795423733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926794924618004227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea6366074457501468a32ab3c12fee5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preShatteredObj: {fileID: 1255175388088861968, guid: 9f58f93c5c7694a45a5b9f8562407fbb,
-    type: 3}
-  randomForceMultiplier: 1
-  explosionForce: 4
 --- !u!114 &-7410537885914863424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +127,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7735549578107248432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926794924618004227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6366074457501468a32ab3c12fee5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preShatteredObj: {fileID: 1255175388088861968, guid: 9f58f93c5c7694a45a5b9f8562407fbb,
+    type: 3}
+  randomForceMultiplier: 1
+  explosionForce: 4
+  probability: 0.801
+  powerUp:
+  - {fileID: 5317589983693155880, guid: 2ad943474cd35d04ea8625feca7ce754, type: 3}

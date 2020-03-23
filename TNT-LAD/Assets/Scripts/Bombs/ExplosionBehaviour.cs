@@ -85,7 +85,7 @@ public class ExplosionBehaviour : MonoBehaviour
     {
       if(blockdata.blockType == BlockData.BlockType.DESTRUCTIBLE)
       {
-        other.gameObject.GetComponent<BoxDestroyer>().DestroyBox();
+        other.gameObject.GetComponent<BoxHandler>().DestroyBoxAndSpawnPowerUp();
       }
     }
   }

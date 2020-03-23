@@ -57,7 +57,6 @@ public class PlayerHandler : MonoBehaviour
     {
       KillPlayer();
     }
-    Debug.Log("lifes: " + PlayerValues.Lifes);
     SetInvincible();
   }
 
@@ -71,17 +70,16 @@ public class PlayerHandler : MonoBehaviour
   private void SetInvincible()
   {
     this.PlayerStatus = Status.invincible;
-    Debug.Log("player is invincible");
     if (isActiveAndEnabled) //start only if the player is active
     {
       StartCoroutine(SetStatusTime(Status.alive, PlayerValues.InvincibilityTime));
     }
+
   }
 
   IEnumerator SetStatusTime(PlayerHandler.Status playerStatus, float delay)
   {
     yield return new WaitForSeconds(delay);
     this.PlayerStatus = playerStatus;
-    Debug.Log("player not invincible anymore");
   }
 }
