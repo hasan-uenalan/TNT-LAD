@@ -20,6 +20,11 @@ public class BombDropper : MonoBehaviour
         Debug.Log($"Bomb already on: {placementPosition}");
         return; //Don't drop Bomb if one is already there.
       }
+      if(collider.gameObject.tag == "Explosion")
+      {
+        Debug.Log("Bomb cannot be placed inside an explosion!");
+        return;
+      }
     }
     var bombGameObject = Instantiate(bomb, placementPosition, Quaternion.identity);
     bombGameObject.GetComponent<BombExploder>().bombOwner = gameObject;
