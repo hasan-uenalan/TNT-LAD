@@ -66,6 +66,7 @@ public class Player
   }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(DebugPlayerJoining))]
 public class CustomInspector : Editor
 {
@@ -89,4 +90,5 @@ public class CustomInspector : Editor
     }
   }
 }
+#endif
 #endregion

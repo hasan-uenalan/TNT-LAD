@@ -11,18 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GuiScenes/OptionsScene.unity
     guid: af535e703883f294da616b28c0ef4b8f
-  - enabled: 1
-    path: Assets/Scenes/GuiScenes/PlayerJoinScreen.unity
-    guid: 25aca653921e93140870e748c3db4037
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/GuiScenes/ControlsScene.unity
     guid: 569b33caeedf00741b79d67fdab7e196
   - enabled: 1
     path: Assets/Scenes/Level.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Scenes/GuiScenes/LevelSelectionScene.unity
-    guid: d112fa3780dd4384c9d2a0298b3c909c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Editor.unity
     guid: bfb59339818575a419e161196aa6632f
@@ -32,9 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GuiScenes/WinScreen.unity
     guid: 85da3fbca4c265e4689157f5fcd2a65a
-  - enabled: 1
-    path: Assets/Scenes/GuiScenes/CloudLevelSelectionScene.unity
-    guid: c89c031fd020f3943b88af2caadd3393
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 25adf983ecb65bb499bc3c5dd5ea0d02,
       type: 2}
