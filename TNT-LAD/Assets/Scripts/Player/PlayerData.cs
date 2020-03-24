@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerData
 {
+  public enum OneTimeUse
+  {
+    NONE,
+    RPG
+  }
+
   public int PlayerScore;
 
   public int PlayerIndex;
@@ -13,13 +19,11 @@ public class PlayerData
   public int Lifes;
 
   public Vector3 SpawnPoint;
+  public OneTimeUse oneTimeUse { set; get; }
   public int BombCount { set; get; }
   public int BombStrength { set; get; }
-
-  /// <summary>
-  /// player status data
-  /// </summary>
-  public bool PowerUpMoveBombs { set; get; }
+  public int PlayerSpeed { set; get; }
+  public bool KickBombs { set; get; }
 
 
   /// <summary>
@@ -37,6 +41,8 @@ public class PlayerData
     Lifes = lifes;
     BombCount = 1;
     BombStrength = 1;
-    PowerUpMoveBombs = false;
+    PlayerSpeed = 1;
+    KickBombs = false;
+    oneTimeUse = OneTimeUse.NONE;
   }
 }

@@ -12,17 +12,17 @@ public class PowerUpHandler
         playerData.BombCount += 1;
         break;
       case PowerUpData.PowerUpType.KICKBOMBS:
-        playerData.PowerUpMoveBombs = true;
+        playerData.KickBombs = true;
         break;
       case PowerUpData.PowerUpType.STRENGTHBOMB:
         playerData.BombStrength += 1;
         Debug.Log(playerData.BombStrength);
         break;
       case PowerUpData.PowerUpType.SPEED:
-
+        playerData.PlayerSpeed += 1;
         break;
       case PowerUpData.PowerUpType.RPG:
-
+        playerData.oneTimeUse = PlayerData.OneTimeUse.RPG;
         break;
     }
   }

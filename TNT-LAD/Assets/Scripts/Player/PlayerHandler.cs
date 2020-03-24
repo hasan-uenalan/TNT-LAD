@@ -10,6 +10,7 @@ public class PlayerHandler : MonoBehaviour
     dead,
     invincible
   };
+  
 
   public PlayerData PlayerData;
 
