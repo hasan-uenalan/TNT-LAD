@@ -36,8 +36,8 @@ namespace MLAgents
       {
         m_LastMouse = Input.mousePosition - m_LastMouse;
         m_LastMouse = new Vector3(-m_LastMouse.y * camSens, m_LastMouse.x * camSens, 0);
-        m_LastMouse = new Vector3(transform.eulerAngles.x + m_LastMouse.x,
-            transform.eulerAngles.y + m_LastMouse.y, 0);
+        var xAngle = ClampAngle(transform.eulerAngles.x + m_LastMouse.x, -90, 90);
+        m_LastMouse = new Vector3(xAngle, transform.eulerAngles.y + m_LastMouse.y, 0);
         transform.eulerAngles = m_LastMouse;
         m_LastMouse = Input.mousePosition;
         // Mouse  camera angle done.
@@ -101,6 +101,31 @@ namespace MLAgents
       }
 
       return pVelocity;
+    }
+
+    private float ClampAngle(float angle, float min, float max)
+    {
+      if (angle < 90 || angle > 270)
+      {
+        if (angle > 180)
+        {
+          angle -= 360;
+        }
+        if (max > 180)
+        {
+          max -= 360;
+        }
+        if (min > 180)
+        {
+          min -= 360;
+        }
+      }
+      angle = Mathf.Clamp(angle, min, max);
+      if (angle < 0) 
+      { 
+        angle += 360; 
+      }
+      return angle;
     }
   }
 }
