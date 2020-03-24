@@ -12,6 +12,7 @@ TagManager:
   - Floor
   - LevelCard
   - IngamePlayerUI
+  - powerup
   layers:
   - Default
   - TransparentFX

@@ -11,39 +11,31 @@ public class PlayerHandler : MonoBehaviour
     invincible
   };
 
-  public PlayerData PlayerValues;
+  public PlayerData PlayerData;
 
   //Bomb data
   public List<GameObject> PlacedBombs = new List<GameObject>();
-  public int BombCount { get; set; }
-  public int BombStrength { get; set; }
 
-  /// <summary>
-  /// player status data
-  /// </summary>
-  public bool PowerUpMoveBombs;
+  //Used Components
+  private PowerUpHandler powerUpHandler;
 
   public Status PlayerStatus { get; set; }
 
   void Start()
   {
     InitPlayerData();
+    powerUpHandler = new PowerUpHandler();
   }
 
   public void InitPlayerData()
   {
-    //PlayerIndex has to be set
-    BombCount = 1;
-    BombStrength = 1;
     PlayerStatus = Status.alive;
-
-    PowerUpMoveBombs = false;
   }
 
   //checks if player can place more bombs
   public bool CanPlaceBombs()
   {
-    if(PlacedBombs.Count < BombCount)
+    if(PlacedBombs.Count < PlayerData.BombCount)
     {
       return true;
     }
@@ -52,8 +44,8 @@ public class PlayerHandler : MonoBehaviour
   //removes a life and checks if player is dead
   public void RemoveLife()
   {
-    PlayerValues.Lifes -= 1;
-    if(PlayerValues.Lifes == 0)
+    PlayerData.Lifes -= 1;
+    if(PlayerData.Lifes == 0)
     {
       KillPlayer();
     }
@@ -72,7 +64,7 @@ public class PlayerHandler : MonoBehaviour
     this.PlayerStatus = Status.invincible;
     if (isActiveAndEnabled) //start only if the player is active
     {
-      StartCoroutine(SetStatusTime(Status.alive, PlayerValues.InvincibilityTime));
+      StartCoroutine(SetStatusTime(Status.alive, PlayerData.InvincibilityTime));
     }
 
   }
@@ -82,4 +74,14 @@ public class PlayerHandler : MonoBehaviour
     yield return new WaitForSeconds(delay);
     this.PlayerStatus = playerStatus;
   }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    if(other.gameObject.tag == "powerup")
+    {
+      powerUpHandler.HandlePowerUp(other.gameObject, PlayerData);
+      Destroy(other.gameObject);
+    }
+  }
+
 }

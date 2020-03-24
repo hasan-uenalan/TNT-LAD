@@ -146,3 +146,4 @@ MonoBehaviour:
   probability: 0.801
   powerUp:
   - {fileID: 5317589983693155880, guid: 2ad943474cd35d04ea8625feca7ce754, type: 3}
+  - {fileID: 7194161852291265001, guid: e5e545532c7d88e42a6dace188c20e45, type: 3}

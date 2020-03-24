@@ -25,5 +25,4 @@ public class BlockData : MonoBehaviour
   {
     return blockType;
   }
-
 }

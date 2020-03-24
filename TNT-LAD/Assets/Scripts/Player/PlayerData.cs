@@ -13,6 +13,14 @@ public class PlayerData
   public int Lifes;
 
   public Vector3 SpawnPoint;
+  public int BombCount { set; get; }
+  public int BombStrength { set; get; }
+
+  /// <summary>
+  /// player status data
+  /// </summary>
+  public bool PowerUpMoveBombs { set; get; }
+
 
   /// <summary>
   /// Instantiates Values for a player
@@ -27,5 +35,8 @@ public class PlayerData
     PlayerScore = playerScore;
     InvincibilityTime = invincibilityTime;
     Lifes = lifes;
+    BombCount = 1;
+    BombStrength = 1;
+    PowerUpMoveBombs = false;
   }
 }
