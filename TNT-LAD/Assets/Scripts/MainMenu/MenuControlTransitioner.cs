@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class MenuControlTransitioner : MonoBehaviour
 {
-  MainMenuSceneController mainMenuSceneController;
+
+  public GameObject PlayerInput;
+
+  public GameObject CharacterHandler;
+
+  public GameObject CloudHandler;
+
+  private MainMenuSceneController mainMenuSceneController;
 
   private void Start()
   {
@@ -13,16 +20,19 @@ public class MenuControlTransitioner : MonoBehaviour
 
   public void TransitionToMainControl()
   {
+    PlayerInput.SetActive(false);
     mainMenuSceneController.TransitionToControl(MenuControlType.Main);
   }
 
   public void TransitionToPlayerSelectionControl()
   {
+    PlayerInput.SetActive(true);
     mainMenuSceneController.TransitionToControl(MenuControlType.PlayerSelection);
   }
 
   public void TransitionToLevelSelectionControl()
   {
+    PlayerInput.SetActive(false);
     mainMenuSceneController.TransitionToControl(MenuControlType.LevelSelection);
   }
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterJoiner : MonoBehaviour
 {
-  public Button levelButton; 
+  public Button levelButton;
   public GameObject buttonDisabledCross;
   
   private List<LobbyPlayerValues> playerList;
@@ -13,7 +13,7 @@ public class CharacterJoiner : MonoBehaviour
   
   private void Start()
   {
-    playerList = new List<LobbyPlayerValues>();
+    playerList = CrossSceneInformation.PlayerList is null ? new List<LobbyPlayerValues>() : CrossSceneInformation.PlayerList;
   }
 
   // Update is called once per frame
@@ -114,7 +114,7 @@ public class CharacterJoiner : MonoBehaviour
   {
     GameObject curPlayerSelection = GameObject.FindGameObjectsWithTag("GUIPlayer")[valuesOfCurPlayer.PlayerNumber - 1];
     curPlayerSelection.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Player " + valuesOfCurPlayer.PlayerNumber;
-    curPlayerSelection.transform.GetChild(1).gameObject.SetActive(true); //TODO: picture of character
+    curPlayerSelection.transform.GetChild(1).gameObject.SetActive(true);
     valuesOfCurPlayer.JoinPlayerGameObject = curPlayerSelection;
   }
 

@@ -2835,6 +2835,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8552621412379531773, guid: 357cc984b29ae86449a62ebf8934e7dd,
         type: 3}
+    - target: {fileID: 3948402486521248929, guid: a4c23ed05fb6d11428c3b8f0757921b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3948402486521248931, guid: a4c23ed05fb6d11428c3b8f0757921b1,
         type: 3}
       propertyPath: m_Name
@@ -3640,6 +3645,12 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &808638307 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 914012745313632637, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
+    type: 3}
+  m_PrefabInstance: {fileID: 1382259303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &815404574
 GameObject:
   m_ObjectHideFlags: 0
@@ -5652,6 +5663,12 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &1125200449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3948402486521248931, guid: a4c23ed05fb6d11428c3b8f0757921b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 667285244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1149514823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
@@ -5674,7 +5691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1151857046
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11436,7 +11453,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1382259303}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 808638307}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4e463fcd4426f4e8d29a2849c2778c, type: 3}
@@ -14090,7 +14107,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 667285244}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1125200449}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 270cf10944a957341915c7e622198a47, type: 3}
@@ -31808,6 +31825,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuSceneController
       objectReference: {fileID: 0}
+    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
+        type: 3}
+      propertyPath: PlayerInput
+      value: 
+      objectReference: {fileID: 1151857045}
+    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
+        type: 3}
+      propertyPath: CharacterHandler
+      value: 
+      objectReference: {fileID: 808638307}
+    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
+        type: 3}
+      propertyPath: CloudHandler
+      value: 
+      objectReference: {fileID: 1125200449}
     - target: {fileID: 4907380393607158494, guid: 2a5e63635bda06f46bab7fc206a25726,
         type: 3}
       propertyPath: mainMenuSceneControls.Array.data[0].controlObject

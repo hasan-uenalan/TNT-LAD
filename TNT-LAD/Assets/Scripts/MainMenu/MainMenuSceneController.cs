@@ -9,7 +9,7 @@ public class MainMenuSceneController : MonoBehaviour
   public List<MenuControl> mainMenuSceneControls;
   public GameObject mainCamera; 
 
-  MenuControl currentControl; 
+  private MenuControl currentControl; 
 
   void Start()
   {
