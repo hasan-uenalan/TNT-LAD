@@ -27,6 +27,6 @@ public class BombDropper : MonoBehaviour
       }
     }
     var bombGameObject = Instantiate(bomb, placementPosition, Quaternion.identity);
-    bombGameObject.GetComponent<BombExploder>().bombOwner = gameObject;
+    //bombGameObject.GetComponent<BombExploder>().bombOwner = gameObject;
   }
 }

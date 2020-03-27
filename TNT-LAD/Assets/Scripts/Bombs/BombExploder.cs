@@ -7,18 +7,17 @@ public class BombExploder : MonoBehaviour
   public float fuseTimeSeconds;
   public int explosionRange;
   public GameObject explosion;
-  [HideInInspector] public GameObject bombOwner;
+  [HideInInspector] public List<GameObject> playersInsideBomb;
   private BoxCollider playerExitTrigger;
+  private BoxCollider bombCollider;
 
   void Start()
   {
-    var bombCollider = gameObject.GetComponent<BoxCollider>();
+    bombCollider = gameObject.GetComponent<BoxCollider>();
     bombCollider.enabled = true;
-    if(bombOwner != null)
-    {
-      Physics.IgnoreCollision(bombCollider, bombOwner.GetComponent<CharacterController>(), true);
-    }
-    
+
+    DisableCollisionsForPlayersInsideBomb();
+
     //Additional trigger just to detect when player leaves bomb collider
     playerExitTrigger = (BoxCollider)gameObject.AddComponent(typeof(BoxCollider));
     playerExitTrigger.isTrigger = true;
@@ -28,13 +27,33 @@ public class BombExploder : MonoBehaviour
     Invoke("ExplodeBomb", fuseTimeSeconds);
   }
 
-  void OnTriggerExit(Collider col)
+  private Collider[] GetObjectsCollidingWithBomb()
   {
-    if(col.gameObject == bombOwner)
+    return Physics.OverlapBox(gameObject.transform.position + bombCollider.center, bombCollider.size / 2);
+  }
+
+  void DisableCollisionsForPlayersInsideBomb()
+  {
+    foreach (var col in GetObjectsCollidingWithBomb())
+    {
+      if (col.gameObject.tag == "Player")
+      {
+        Physics.IgnoreCollision(bombCollider, col.GetComponent<CharacterController>(), true);
+        playersInsideBomb.Add(col.gameObject);
+      }
+    }
+  }
+
+  void OnTriggerExit(Collider col)
+  { 
+    if(playersInsideBomb.Contains(col.gameObject))
+    {
+      Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), col.GetComponent<CharacterController>(), false);
+      playersInsideBomb.Remove(col.gameObject);
+    }
+    if(playersInsideBomb.Count == 0)
     {
       Destroy(playerExitTrigger);
-      Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), bombOwner.GetComponent<CharacterController>(), false);
-      bombOwner = null;
     }
   }
 
