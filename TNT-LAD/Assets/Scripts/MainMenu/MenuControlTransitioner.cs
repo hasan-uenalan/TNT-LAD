@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class MenuControlTransitioner : MonoBehaviour
 {
 
   public CharacterJoiner characterJoiner;
+  public LevelSwitcher levelSwitcher;
+  public CloudLevelSelectionHandler cloudLevelSelectionHandler;
 
   private MainMenuSceneController mainMenuSceneController;
 
@@ -16,24 +19,32 @@ public class MenuControlTransitioner : MonoBehaviour
 
   public void TransitionToMainControl()
   {
-    characterJoiner.enabled = false;
     mainMenuSceneController.TransitionToControl(MenuControlType.Main);
+    SetActiveControlScript(null);
   }
 
   public void TransitionToPlayerSelectionControl()
   {
-    characterJoiner.enabled = true;
     mainMenuSceneController.TransitionToControl(MenuControlType.PlayerSelection);
+    SetActiveControlScript(typeof(CharacterJoiner));
   }
 
   public void TransitionToLevelSelectionControl()
   {
-    characterJoiner.enabled = false;
     mainMenuSceneController.TransitionToControl(MenuControlType.LevelSelection);
+    SetActiveControlScript(typeof(LevelSwitcher));
   }
 
   public void TransitionToCloudLevelControl()
   {
     mainMenuSceneController.TransitionToControl(MenuControlType.CloudLevels);
+    SetActiveControlScript(typeof(CloudLevelSelectionHandler));
+  }
+
+  private void SetActiveControlScript(Type type)
+  {
+    characterJoiner.enabled = type == characterJoiner.GetType();
+    levelSwitcher.enabled = type == levelSwitcher.GetType();
+    cloudLevelSelectionHandler.enabled = type == cloudLevelSelectionHandler.GetType();
   }
 }

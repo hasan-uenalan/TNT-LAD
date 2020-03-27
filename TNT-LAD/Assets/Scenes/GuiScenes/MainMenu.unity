@@ -2838,7 +2838,7 @@ PrefabInstance:
     - target: {fileID: 3948402486521248929, guid: a4c23ed05fb6d11428c3b8f0757921b1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3948402486521248931, guid: a4c23ed05fb6d11428c3b8f0757921b1,
         type: 3}
@@ -3645,12 +3645,6 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &808638307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 914012745313632637, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
-    type: 3}
-  m_PrefabInstance: {fileID: 1382259303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &815404574
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,12 +5657,6 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!1 &1125200449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3948402486521248931, guid: a4c23ed05fb6d11428c3b8f0757921b1,
-    type: 3}
-  m_PrefabInstance: {fileID: 667285244}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1149514823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4646637452879296928, guid: 8a6812c79baad7244b696a13158553ec,
@@ -5722,7 +5710,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151857045}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc86ad33cf150f9479d84e7755e70482, type: 3}
   m_Name: 
@@ -11439,6 +11427,11 @@ PrefabInstance:
       propertyPath: LevelInformation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7740981340106480442, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34b0dc7b9f129624ba7f11fa58bf2508, type: 3}
 --- !u!4 &1382259304 stripped
@@ -11453,8 +11446,8 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1382259303}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808638307}
-  m_Enabled: 1
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4e463fcd4426f4e8d29a2849c2778c, type: 3}
   m_Name: 
@@ -14214,8 +14207,8 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 667285244}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125200449}
-  m_Enabled: 1
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 270cf10944a957341915c7e622198a47, type: 3}
   m_Name: 
@@ -32482,24 +32475,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
         type: 3}
-      propertyPath: PlayerInput
-      value: 
-      objectReference: {fileID: 1151857045}
-    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
-        type: 3}
-      propertyPath: CharacterHandler
-      value: 
-      objectReference: {fileID: 808638307}
-    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
-        type: 3}
-      propertyPath: CloudHandler
-      value: 
-      objectReference: {fileID: 1125200449}
-    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
-        type: 3}
       propertyPath: characterJoiner
       value: 
       objectReference: {fileID: 1151857047}
+    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
+        type: 3}
+      propertyPath: levelSwitcher
+      value: 
+      objectReference: {fileID: 1382259305}
+    - target: {fileID: 4907380393607158492, guid: 2a5e63635bda06f46bab7fc206a25726,
+        type: 3}
+      propertyPath: cloudLevelSelectionHandler
+      value: 
+      objectReference: {fileID: 1882368575}
     - target: {fileID: 4907380393607158494, guid: 2a5e63635bda06f46bab7fc206a25726,
         type: 3}
       propertyPath: mainMenuSceneControls.Array.data[0].controlObject

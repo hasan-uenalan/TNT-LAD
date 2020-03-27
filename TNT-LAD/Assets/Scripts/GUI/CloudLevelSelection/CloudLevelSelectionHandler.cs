@@ -12,6 +12,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
   public GameObject levelCardPrefab;
   public GameObject[] levelCardSlots = new GameObject[3];
 
+  private CloudLevel currentSelectedCloudLevel;
   private int currentPageIndex = 0;
   private int levelPages;
 
@@ -19,6 +20,11 @@ public class CloudLevelSelectionHandler : MonoBehaviour
   {
     cloudActionHandler = new CloudActionHandler();
     StartCoroutine(cloudActionHandler.RequestLevelIds(SetLevelIdsCallback)); //Start request 
+  }
+
+  private void OnEnable()
+  {
+    CrossSceneInformation.currentLevel.SetLevel(currentSelectedCloudLevel);
   }
 
   /// <summary>
@@ -71,8 +77,8 @@ public class CloudLevelSelectionHandler : MonoBehaviour
 
   public void SelectLevelCard(GameObject guiCard)
   {
-    CloudLevel selectedCloudLevel = cloudLevels.FirstOrDefault(x => x.guiCard == guiCard);
-    if (string.IsNullOrEmpty(selectedCloudLevel.levelContent))
+    currentSelectedCloudLevel = cloudLevels.FirstOrDefault(x => x.guiCard == guiCard);
+    if (string.IsNullOrEmpty(currentSelectedCloudLevel.levelContent))
     {
       return; //content not yet loaded, selection shouldn't work
     }
@@ -81,7 +87,7 @@ public class CloudLevelSelectionHandler : MonoBehaviour
     {
       UpdateSelectionInGUI(false, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
     }
-    CrossSceneInformation.currentLevel.SetLevel(selectedCloudLevel);
+    CrossSceneInformation.currentLevel.SetLevel(currentSelectedCloudLevel);
     UpdateSelectionInGUI(true, CrossSceneInformation.currentLevel.cloudLevel.guiCard);
   }
 

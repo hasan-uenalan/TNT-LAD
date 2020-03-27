@@ -71,3 +71,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterJoiner: {fileID: 0}
+  levelSwitcher: {fileID: 0}
+  cloudLevelSelectionHandler: {fileID: 0}

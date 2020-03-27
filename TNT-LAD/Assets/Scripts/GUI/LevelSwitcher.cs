@@ -22,6 +22,14 @@ public class LevelSwitcher : MonoBehaviour
     UpdateLevelSelectionValues();
   }
 
+  private void OnEnable()
+  {
+    if(LevelImageList != null)
+    {
+      UpdateLevelSelectionValues();
+    }
+  }
+
   private void UpdateLevelSelectionValues()
   {
     CrossSceneInformation.currentLevel.SetLevel(LevelImageList[curLevelIndex].name);
