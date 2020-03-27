@@ -5,11 +5,7 @@ using UnityEngine;
 public class MenuControlTransitioner : MonoBehaviour
 {
 
-  public GameObject PlayerInput;
-
-  public GameObject CharacterHandler;
-
-  public GameObject CloudHandler;
+  public CharacterJoiner characterJoiner;
 
   private MainMenuSceneController mainMenuSceneController;
 
@@ -20,19 +16,19 @@ public class MenuControlTransitioner : MonoBehaviour
 
   public void TransitionToMainControl()
   {
-    PlayerInput.SetActive(false);
+    characterJoiner.enabled = false;
     mainMenuSceneController.TransitionToControl(MenuControlType.Main);
   }
 
   public void TransitionToPlayerSelectionControl()
   {
-    PlayerInput.SetActive(true);
+    characterJoiner.enabled = true;
     mainMenuSceneController.TransitionToControl(MenuControlType.PlayerSelection);
   }
 
   public void TransitionToLevelSelectionControl()
   {
-    PlayerInput.SetActive(false);
+    characterJoiner.enabled = false;
     mainMenuSceneController.TransitionToControl(MenuControlType.LevelSelection);
   }
 
