@@ -851,6 +851,12 @@ PrefabInstance:
       propertyPath: editorActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
+        type: 3}
+      propertyPath: floor
+      value: 
+      objectReference: {fileID: 1342950313226380593, guid: ab63b96a72c679a45a74a26f136e5e9e,
+        type: 3}
     - target: {fileID: 8980669213659470638, guid: efbac6f3614ce8147a70e1ace24be0ce,
         type: 3}
       propertyPath: m_Name

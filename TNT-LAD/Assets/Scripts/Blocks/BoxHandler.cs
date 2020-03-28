@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BoxDestroyer : MonoBehaviour
+public class BoxHandler : MonoBehaviour
 {
+  [Header("Destruction")]
   public GameObject preShatteredObj;
   public bool randomForceMultiplier;
   public float explosionForce;
 
+  [Header("Power Up")]
+  [Range(0f, 1f)]
+  public float probability = .8f;
+  public List<GameObject> powerUp;
+
   [ContextMenu("Destroy Box")]
-  public void DestroyBox()
+  public void DestroyBoxAndSpawnPowerUp()
   {
     GameObject destroyedBox = Instantiate(preShatteredObj, gameObject.transform.position, Quaternion.identity);
     foreach(Transform boxPart in destroyedBox.transform)
@@ -23,5 +29,16 @@ public class BoxDestroyer : MonoBehaviour
       rb.AddTorque(torque, ForceMode.Impulse);
     }
     Destroy(gameObject);
+    SpawnPowerUp();
   }
+
+  private void SpawnPowerUp()
+  {
+    if(Random.value <= probability)
+    {
+      int randomPowerUp = Random.Range(0, powerUp.Count);
+      Instantiate(powerUp[randomPowerUp], transform.position, Quaternion.identity);
+    }
+  }
+
 }
