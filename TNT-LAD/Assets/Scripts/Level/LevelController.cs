@@ -142,7 +142,6 @@ public class LevelController : MonoBehaviour
 
     foreach(Vector2 v in playerSpawns)
     {
-      Debug.Log("x: " + v.x + " z: " + v.y);
     }
   }
 

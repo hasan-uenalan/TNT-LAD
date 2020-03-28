@@ -36,7 +36,7 @@ public class BoxHandler : MonoBehaviour
   {
     if(Random.value <= probability)
     {
-      int randomPowerUp = Random.Range(0, 2);
+      int randomPowerUp = Random.Range(0, powerUp.Count);
       Instantiate(powerUp[randomPowerUp], transform.position, Quaternion.identity);
     }
   }

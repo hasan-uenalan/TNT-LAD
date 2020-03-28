@@ -16,7 +16,6 @@ public class PowerUpHandler
         break;
       case PowerUpData.PowerUpType.STRENGTHBOMB:
         playerData.BombStrength += 1;
-        Debug.Log(playerData.BombStrength);
         break;
       case PowerUpData.PowerUpType.SPEED:
         playerData.PlayerSpeed += 1;
