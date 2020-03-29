@@ -22,7 +22,7 @@ public class PlayerData
   public OneTimeUse oneTimeUse { set; get; }
   public int BombCount { set; get; }
   public int BombStrength { set; get; }
-  public int PlayerSpeed { set; get; }
+  public float PlayerSpeed { set; get; }
   public bool KickBombs { set; get; }
 
 
@@ -40,8 +40,8 @@ public class PlayerData
     InvincibilityTime = invincibilityTime;
     Lifes = lifes;
     BombCount = 1;
-    BombStrength = 1;
-    PlayerSpeed = 1;
+    BombStrength = 2;
+    PlayerSpeed = 2;
     KickBombs = false;
     oneTimeUse = OneTimeUse.NONE;
   }

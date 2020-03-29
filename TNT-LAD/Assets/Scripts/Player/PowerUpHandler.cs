@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpHandler
 {
-  public void HandlePowerUp(GameObject powerUp, PlayerData playerData)
+  public void HandlePowerUp(GameObject powerUp, PlayerData playerData, GameObject thisGameObject)
   {
     switch (powerUp.GetComponent<PowerUpData>().powerUpType)
     {
@@ -18,7 +18,8 @@ public class PowerUpHandler
         playerData.BombStrength += 1;
         break;
       case PowerUpData.PowerUpType.SPEED:
-        playerData.PlayerSpeed += 1;
+        playerData.PlayerSpeed += .5f;
+        thisGameObject.GetComponent<PlayerMovement>().walkSpeed = playerData.PlayerSpeed; //updating playerspeed
         break;
       case PowerUpData.PowerUpType.RPG:
         playerData.oneTimeUse = PlayerData.OneTimeUse.RPG;

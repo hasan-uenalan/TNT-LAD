@@ -24,8 +24,13 @@ public class PlayerHandler : MonoBehaviour
 
   void Start()
   {
-    InitPlayerData();
     powerUpHandler = new PowerUpHandler();
+    InitPlayerData();
+  }
+
+  private void Update()
+  {
+    PlacedBombs.RemoveAll(item => item == null);
   }
 
   public void InitPlayerData()
@@ -67,7 +72,6 @@ public class PlayerHandler : MonoBehaviour
     {
       StartCoroutine(SetStatusTime(Status.alive, PlayerData.InvincibilityTime));
     }
-
   }
 
   IEnumerator SetStatusTime(PlayerHandler.Status playerStatus, float delay)
@@ -80,9 +84,8 @@ public class PlayerHandler : MonoBehaviour
   {
     if(other.gameObject.tag == "powerup")
     {
-      powerUpHandler.HandlePowerUp(other.gameObject, PlayerData);
+      powerUpHandler.HandlePowerUp(other.gameObject, PlayerData, gameObject);
       Destroy(other.gameObject);
     }
   }
-
 }

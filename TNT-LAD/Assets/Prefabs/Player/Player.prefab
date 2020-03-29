@@ -432,7 +432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacedBombs: []
-  PowerUpMoveBombs: 0
 --- !u!114 &553224111478213787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2313d7734df71ed419125d5f6abd5edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
+  walkSpeed: 2
 --- !u!114 &-1085653625732597305
 MonoBehaviour:
   m_ObjectHideFlags: 0

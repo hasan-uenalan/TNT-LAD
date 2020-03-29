@@ -670,10 +670,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 09cad970-8f35-4a69-b54b-02fb38afb21a
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: TNT-LAD
+  organizationId: pai_7ce
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0
