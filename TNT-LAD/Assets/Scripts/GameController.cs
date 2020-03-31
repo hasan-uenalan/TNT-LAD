@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -30,7 +31,8 @@ public class GameController : MonoBehaviour
     {
       Vector3 spawn = new Vector3(levelController.playerSpawns[playerIndex].x, 0.2f, levelController.playerSpawns[playerIndex].y);
       InputDevice inputDevice = CrossSceneInformation.PlayerList[playerIndex].PlayerInputDevice;
-      JoinPlayer(defaultPlayer, inputDevice, spawn, playerIndex);
+      Color playerColor = CrossSceneInformation.PlayerList[playerIndex].PlayerColor;
+      JoinPlayer(defaultPlayer, inputDevice, spawn, playerIndex, playerColor);
     }
   }
 
@@ -41,10 +43,10 @@ public class GameController : MonoBehaviour
     }
   }
 
-  private void JoinPlayer(GameObject player, InputDevice device, Vector3 spawnPoint, int playerIndex)
+  private void JoinPlayer(GameObject player, InputDevice device, Vector3 spawnPoint, int playerIndex, Color playerColor)
   {
     string controlScheme = (device is Gamepad) ? "Gamepad" : "Keyboard";
-    PlayerData playerValues = GetPlayerValues(playerIndex + 1);
+    PlayerData playerValues = GetPlayerValues(playerIndex + 1, playerColor, spawnPoint);
     AddToStaticPlayers(playerValues);
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
@@ -52,15 +54,17 @@ public class GameController : MonoBehaviour
     playerInput.gameObject.transform.position = spawnPoint;
   }
 
-  private PlayerData GetPlayerValues(int playerIndex)
+
+
+  private PlayerData GetPlayerValues(int playerIndex, Color playerColor, Vector3 spawnPoint)
   {
-    foreach (PlayerData curPlayer in StaticPlayers.Players) {
-      if (curPlayer.PlayerIndex == playerIndex) {
-        curPlayer.Lifes = 3;
-        return curPlayer;
-      }
+    var curPlayer = StaticPlayers.Players.FirstOrDefault(x => x.PlayerIndex == playerIndex);
+    if(curPlayer != null)
+    {
+      curPlayer.Lifes = 3;
+      return curPlayer;
     }
-    return new PlayerData(playerIndex, 0, 1, 3);
+    return new PlayerData(playerIndex, 0, 1, 3, playerColor, spawnPoint);
   }
 
   private bool CheckGameEnd()

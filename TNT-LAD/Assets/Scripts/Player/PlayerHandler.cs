@@ -24,6 +24,7 @@ public class PlayerHandler : MonoBehaviour
 
   void Start()
   {
+    SetIngameHatColor();
     powerUpHandler = new PowerUpHandler();
     InitPlayerData();
   }
@@ -36,6 +37,12 @@ public class PlayerHandler : MonoBehaviour
   public void InitPlayerData()
   {
     PlayerStatus = Status.alive;
+  }
+
+  private void SetIngameHatColor()
+  {
+    gameObject.transform.GetComponent<PlayerKiller>().hat.transform.GetComponent<MeshRenderer>().material.color =
+      PlayerData.PlayerColor;
   }
 
   //checks if player can place more bombs
