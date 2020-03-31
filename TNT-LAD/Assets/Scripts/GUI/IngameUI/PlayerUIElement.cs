@@ -26,6 +26,8 @@ public class PlayerUIElement
   public void Initialize(PlayerData playerData)
   {
     PlayerUI.transform.GetChild(2).GetComponent<Text>().text = "Player " + playerData.PlayerIndex;
+    //Set player color in UI
+    PlayerUI.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = playerData.PlayerColor;
     //Draw rounds/score icons
     DrawIcons(playerData.PlayerScore, PlayerUI.transform.GetChild(3).gameObject, roundsWonIcon);
   }
