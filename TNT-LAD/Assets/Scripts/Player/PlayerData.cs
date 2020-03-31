@@ -30,13 +30,14 @@ public class PlayerData
   /// <param name="playerScore"></param>
   /// <param name="invincibilityTime"></param>
   /// <param name="lifes"></param>
-  public PlayerData(int playerIndex, int playerScore, float invincibilityTime, int lifes, Color playerColor)
+  public PlayerData(int playerIndex, int playerScore, float invincibilityTime, int lifes, Color playerColor, Vector3 spawnPoint)
   {
     PlayerIndex = playerIndex;
     PlayerScore = playerScore;
     PlayerColor = playerColor;
     InvincibilityTime = invincibilityTime;
     Lifes = lifes;
+    SpawnPoint = spawnPoint;
     BombCount = 1;
     BombStrength = 1;
     PlayerSpeed = 1;
