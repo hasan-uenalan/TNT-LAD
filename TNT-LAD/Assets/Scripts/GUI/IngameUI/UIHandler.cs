@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+  [Header("UI-Elements")]
   public GameObject TlUiPrefab;
   public GameObject TrUiPrefab;
   public GameObject BlUiPrefab;
   public GameObject BrUiPrefab;
-
+  [Header("Icons")]
   public GameObject RoundsWonIcon;
   public GameObject LifeIcon;
   

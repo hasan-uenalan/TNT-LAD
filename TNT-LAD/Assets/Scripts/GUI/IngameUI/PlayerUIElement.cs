@@ -25,15 +25,15 @@ public class PlayerUIElement
 
   public void Initialize(PlayerData playerData)
   {
-    PlayerUI.transform.GetChild(1).GetComponent<Text>().text = "Player " + playerData.PlayerIndex;
+    PlayerUI.transform.GetChild(2).GetComponent<Text>().text = "Player " + playerData.PlayerIndex;
     //Draw rounds/score icons
-    DrawIcons(playerData.PlayerScore, PlayerUI.transform.GetChild(2).gameObject, roundsWonIcon);
+    DrawIcons(playerData.PlayerScore, PlayerUI.transform.GetChild(3).gameObject, roundsWonIcon);
   }
 
   public void UpdateUiElement(PlayerData playerData)
   {
     //Draw life icons
-    DrawIcons(playerData.Lifes, PlayerUI.transform.GetChild(3).gameObject, lifeIcon);
+    DrawIcons(playerData.Lifes, PlayerUI.transform.GetChild(4).gameObject, lifeIcon);
   }
 
   private void DrawIcons(int iconCount, GameObject anchor, GameObject sprite)
