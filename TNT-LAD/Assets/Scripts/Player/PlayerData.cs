@@ -19,7 +19,7 @@ public class PlayerData
   public OneTimeUse oneTimeUse { get; set; }
   public int BombCount { get; set; }
   public int BombStrength { get; set; }
-  public int PlayerSpeed { get; set; }
+  public float PlayerSpeed { get; set; }
   public bool KickBombs { get; set; }
 
 
