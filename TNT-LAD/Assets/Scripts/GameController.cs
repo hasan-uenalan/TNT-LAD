@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
     GameObject playerGameObject = winnigPlayer.PlayerGameObject;
     ZoomToPlayer();
     ShowDanceAnimation(playerGameObject);   
-    yield return new WaitForSeconds(10);
+    yield return new WaitForSeconds(10); //TODO: wait for dance animation
     SceneManager.LoadScene("RoundScoreboard");
   }
 
@@ -115,5 +115,6 @@ public class GameController : MonoBehaviour
   {
     //if player is not used you can delete the GameObject out of PlayerData
     //you have to disable the movement of the player
+    //waiting time in coroutine
   }
 }
