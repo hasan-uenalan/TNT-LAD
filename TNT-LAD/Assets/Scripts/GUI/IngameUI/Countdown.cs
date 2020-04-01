@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
-
-  public float timeLeft = 300.0f;
-
+  private double timeLeft;
   private void Start()
   {
-    gameObject.GetComponent<Text>().text = timeLeft.ToString("0");
+    timeLeft = CrossSceneInformation.PlayerLifes;
+    gameObject.GetComponent<Text>().text = CrossSceneInformation.PlayerLifes.ToString();
   }
 
   // Update is called once per frame
