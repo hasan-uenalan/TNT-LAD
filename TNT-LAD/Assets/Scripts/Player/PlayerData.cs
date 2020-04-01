@@ -16,6 +16,7 @@ public class PlayerData
   public float InvincibilityTime { get; set; }
   public int Lifes { get; set; }
   public Vector3 SpawnPoint { get; set; }
+  public GameObject PlayerGameObject { get; set; }
   public OneTimeUse oneTimeUse { get; set; }
   public int BombCount { get; set; }
   public int BombStrength { get; set; }

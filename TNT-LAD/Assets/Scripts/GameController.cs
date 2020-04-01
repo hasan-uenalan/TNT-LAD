@@ -19,8 +19,9 @@ public class GameController : MonoBehaviour
 
   void Update()
   {
-    if (CheckGameEnd()) {
+    if (CheckGameEnd(out PlayerData winningPlayer)) {
       StaticPlayers.roundOne = false;
+      EndRoundOnWinningPlayer(winningPlayer);
       SceneManager.LoadScene("RoundScoreboard");
     }
   }
@@ -50,10 +51,10 @@ public class GameController : MonoBehaviour
     AddToStaticPlayers(playerValues);
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
+    playerValues.PlayerGameObject = playerInput.gameObject;
     playerInput.gameObject.GetComponent<PlayerHandler>().PlayerData = playerValues;
     playerInput.gameObject.transform.position = spawnPoint;
   }
-
 
 
   private PlayerData GetPlayerValues(int playerIndex, Color playerColor, Vector3 spawnPoint)
@@ -67,7 +68,7 @@ public class GameController : MonoBehaviour
     return new PlayerData(playerIndex, 0, 1, 3, playerColor, spawnPoint);
   }
 
-  private bool CheckGameEnd()
+  private bool CheckGameEnd(out PlayerData winningPlayer)
   {
     List<PlayerData> playerListCopy = new List<PlayerData>(StaticPlayers.Players);
     foreach (PlayerData curPlayer in StaticPlayers.Players) {
@@ -76,11 +77,39 @@ public class GameController : MonoBehaviour
         playerListCopy.Remove(curPlayer);
       }
     }
-    if(playerListCopy.Count <= 1) 
+    if(playerListCopy.Count <= 1)
     {
-      playerListCopy[0].PlayerScore++;
+      winningPlayer = playerListCopy[0];
+      winningPlayer.PlayerScore++;
       return true;
     }
+    //will never be used but has to be assigned
+    winningPlayer = null;
     return false;
+  }
+
+  private void EndRoundOnWinningPlayer(PlayerData winnigPlayer)
+  {
+    GameObject playerGameObject = winnigPlayer.PlayerGameObject;
+    ZoomToPlayer();
+    ShowDanceAnimation(playerGameObject);
+  }
+
+  private void ZoomToPlayer()
+  {
+    GameObject cameraPivot = GameObject.FindGameObjectWithTag("CameraPivot");
+    GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    LeanTween.move(mainCamera, cameraPivot.transform.position, 0.8f).setEaseInOutSine();
+    LeanTween.rotate(mainCamera, cameraPivot.transform.rotation.eulerAngles, 0.8f).setEaseInOutSine();
+  }
+
+  /// <summary>
+  /// insert functionality here
+  /// </summary>
+  /// <param name="player"></param>
+  private void ShowDanceAnimation(GameObject player)
+  {
+    //if player is not used you can delete the GameObject out of PlayerData
+    
   }
 }

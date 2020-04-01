@@ -14,6 +14,7 @@ TagManager:
   - IngamePlayerUI
   - powerup
   - Explosion
+  - CameraPivot
   layers:
   - Default
   - TransparentFX
