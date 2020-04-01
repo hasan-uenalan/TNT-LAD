@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeHandler : MonoBehaviour
+public class LifeUIHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
