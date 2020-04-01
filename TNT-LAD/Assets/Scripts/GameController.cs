@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
  
   private LevelController levelController;
 
+  private bool isInCoroutine = false;
+
   void Start()
   {
     levelController = FindObjectOfType<LevelController>();
@@ -19,10 +21,10 @@ public class GameController : MonoBehaviour
 
   void Update()
   {
-    if (CheckGameEnd(out PlayerData winningPlayer)) {
+    if (CheckGameEnd(out PlayerData winningPlayer) && !isInCoroutine) {
       StaticPlayers.roundOne = false;
-      EndRoundOnWinningPlayer(winningPlayer);
-      SceneManager.LoadScene("RoundScoreboard");
+      winningPlayer.PlayerScore++;
+      StartCoroutine(EndRoundOnWinningPlayer(winningPlayer));      
     }
   }
 
@@ -80,7 +82,6 @@ public class GameController : MonoBehaviour
     if(playerListCopy.Count <= 1)
     {
       winningPlayer = playerListCopy[0];
-      winningPlayer.PlayerScore++;
       return true;
     }
     //will never be used but has to be assigned
@@ -88,11 +89,14 @@ public class GameController : MonoBehaviour
     return false;
   }
 
-  private void EndRoundOnWinningPlayer(PlayerData winnigPlayer)
+  IEnumerator EndRoundOnWinningPlayer(PlayerData winnigPlayer)
   {
+    isInCoroutine = true;
     GameObject playerGameObject = winnigPlayer.PlayerGameObject;
     ZoomToPlayer();
-    ShowDanceAnimation(playerGameObject);
+    ShowDanceAnimation(playerGameObject);   
+    yield return new WaitForSeconds(10);
+    SceneManager.LoadScene("RoundScoreboard");
   }
 
   private void ZoomToPlayer()
@@ -110,6 +114,6 @@ public class GameController : MonoBehaviour
   private void ShowDanceAnimation(GameObject player)
   {
     //if player is not used you can delete the GameObject out of PlayerData
-    
+    //you have to disable the movement of the player
   }
 }
