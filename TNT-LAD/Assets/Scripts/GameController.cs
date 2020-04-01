@@ -64,10 +64,10 @@ public class GameController : MonoBehaviour
     var curPlayer = StaticPlayers.Players.FirstOrDefault(x => x.PlayerIndex == playerIndex);
     if(curPlayer != null)
     {
-      curPlayer.Lifes = 3;
+      curPlayer.Lifes = CrossSceneInformation.PlayerLifes;
       return curPlayer;
     }
-    return new PlayerData(playerIndex, 0, 1, 3, playerColor, spawnPoint);
+    return new PlayerData(playerIndex, 0, 1, CrossSceneInformation.PlayerLifes, playerColor, spawnPoint);
   }
 
   private bool CheckGameEnd(out PlayerData winningPlayer)
