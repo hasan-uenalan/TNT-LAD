@@ -8,8 +8,8 @@ public class Countdown : MonoBehaviour
   private double timeLeft;
   private void Start()
   {
-    timeLeft = CrossSceneInformation.PlayerLifes;
-    gameObject.GetComponent<Text>().text = CrossSceneInformation.PlayerLifes.ToString();
+    timeLeft = CrossSceneInformation.RoundTime;
+    gameObject.GetComponent<Text>().text = CrossSceneInformation.RoundTime.ToString();
   }
 
   // Update is called once per frame
