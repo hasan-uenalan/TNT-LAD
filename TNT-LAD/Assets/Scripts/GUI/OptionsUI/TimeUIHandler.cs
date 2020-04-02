@@ -5,18 +5,29 @@ using UnityEngine.UI;
 
 public class TimeUIHandler : MonoBehaviour
 {
+  public GameObject TimeInputField;
 
-  InputField inputField;
+  private InputField inputField;
+
+  private int oldTimeValue;
 
   // Start is called before the first frame update
   void Start()
   {
-    inputField = gameObject.transform.GetChild(0).GetComponent<InputField>();
+    inputField = TimeInputField.GetComponent<InputField>();
     inputField.text = CrossSceneInformation.RoundTime.ToString();
+    oldTimeValue = CrossSceneInformation.RoundTime;
   }
 
   public void SetRoundTime()
   {
-    CrossSceneInformation.RoundTime = System.Int32.Parse(inputField.text);
+    if (System.Int32.Parse(TimeInputField.GetComponent<InputField>().text) >= 0)
+    {
+      CrossSceneInformation.RoundTime = System.Int32.Parse(inputField.text);
+    }
+    else 
+    {
+      TimeInputField.GetComponent<InputField>().text = oldTimeValue.ToString();
+    }
   }
 }
