@@ -73,11 +73,15 @@ public class LevelController : MonoBehaviour
 
   private void LoadLevel()
   {
-    if (CrossSceneInformation.currentLevel.levelFileName != null) {
+    if (CrossSceneInformation.currentLevel.levelFileName != null) 
+    {
       LoadLocalLevel();
+      AnalyticsHandler.LevelSelectEvent(true);
     }
-    else {
+    else 
+    {
       LoadCloudLevel();
+      AnalyticsHandler.LevelSelectEvent(false);
     }
   }
 

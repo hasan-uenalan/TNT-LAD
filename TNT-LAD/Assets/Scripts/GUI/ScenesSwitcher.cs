@@ -7,6 +7,11 @@ public class ScenesSwitcher : MonoBehaviour
 {
   public void SwitchToGame()
   {
+    if (!CrossSceneInformation.gameStarted)
+    {
+      AnalyticsHandler.GameStartEvent(CrossSceneInformation.PlayerList.Count);
+      CrossSceneInformation.gameStarted = true;
+    }
     SceneManager.LoadScene("Level");
   }
 
@@ -50,6 +55,7 @@ public class ScenesSwitcher : MonoBehaviour
   {
     CrossSceneInformation.PlayerList = new List<LobbyPlayerValues>();
     CrossSceneInformation.currentLevel = new LevelInfo();
+    CrossSceneInformation.gameStarted = false;
   }
   
   //public void SwitchToCloudLevelSelection()

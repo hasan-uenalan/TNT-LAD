@@ -1,18 +1,31 @@
-﻿using UnityEngine.Analytics;
+﻿using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public static class AnalyticsHandler
 {
-  static void Start()
+  public static void LevelSelectEvent(bool isLocalLevel)
   {
-    Analytics.CustomEvent("gameStarted");
+    var parameters = new Dictionary<string, object>();
+    string levelType = isLocalLevel ? EventConstants.LevelTypeLocal : EventConstants.LevelTypeCloud;
+    parameters.Add(EventConstants.LevelType, levelType);
+    Analytics.CustomEvent(EventConstants.LevelSelect, parameters);
   }
 
-  private static void lol()
+  public static void GameStartEvent(int playerNumber)
   {
-    //Analytics.CustomEvent("lol", new Dictionary<string, Vector3>
-    //{
-    //  { },
-    //  { }
-    //});
+    var parameters = new Dictionary<string, object>();
+    parameters.Add(EventConstants.PlayersInParty, playerNumber);
+    Analytics.CustomEvent(EventConstants.GameStart, parameters);
   }
+}
+
+public static class EventConstants
+{
+  public const string LevelSelect = "Level Selected";
+  public const string LevelType = "Level Type";
+  public const string LevelTypeLocal = "Local Level";
+  public const string LevelTypeCloud = "Cloud Level";
+  
+  public const string GameStart = "Game Started";
+  public const string PlayersInParty = "Players in Party";
 }
