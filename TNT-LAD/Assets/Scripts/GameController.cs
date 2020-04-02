@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
 
   void Start()
   {
-    //If SPawnPoint broken, FindObjectOfType could be the Problem
     levelController = FindObjectOfType<LevelController>();
     JoinAllPlayers();
   }

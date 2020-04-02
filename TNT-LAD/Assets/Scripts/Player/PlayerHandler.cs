@@ -27,16 +27,20 @@ public class PlayerHandler : MonoBehaviour
     SetIngameHatColor();
     powerUpHandler = new PowerUpHandler();
     InitPlayerData();
+    SetPlayerToSpawn();
   }
 
   private void Update()
   {
+    Debug.Log(gameObject.transform.position);
     PlacedBombs.RemoveAll(item => item == null);
   }
 
   public void SetPlayerToSpawn()
   {
+    gameObject.transform.GetComponent<CharacterController>().enabled = false;
     gameObject.transform.position = PlayerData.SpawnPoint;
+    gameObject.transform.GetComponent<CharacterController>().enabled = true;
   }
 
   public void InitPlayerData()
