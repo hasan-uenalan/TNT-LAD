@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
     if(playerListCopy.Count <= 1)
     {
       winningPlayer = playerListCopy[0];
+      AnalyticsHandler.WinnersPowerUps(winningPlayer);
       return true;
     }
     //will never be used but has to be assigned

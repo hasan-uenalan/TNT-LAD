@@ -17,6 +17,19 @@ public static class AnalyticsHandler
     parameters.Add(EventConstants.PlayersInParty, playerNumber);
     Analytics.CustomEvent(EventConstants.GameStart, parameters);
   }
+
+  public static void WinnersPowerUps(PlayerData playerData)
+  {
+    var powerUps = new Dictionary<string, object>();
+    powerUps.Add("PlayerScore", playerData.PlayerScore);
+    powerUps.Add("PlayerColor", playerData.PlayerColor);
+    powerUps.Add("BombCount", playerData.BombCount);
+    powerUps.Add("BombStrength", playerData.BombStrength);
+    powerUps.Add("PlayerSpeed", playerData.PlayerSpeed);
+    powerUps.Add("KickBombs", playerData.KickBombs);
+    Analytics.CustomEvent(EventConstants.GameEnd, powerUps);
+    //powerUps.Add("", playerData.);
+  }
 }
 
 public static class EventConstants
@@ -28,4 +41,6 @@ public static class EventConstants
   
   public const string GameStart = "Game Started";
   public const string PlayersInParty = "Players in Party";
+
+  public const string GameEnd = "Game Ended";
 }
