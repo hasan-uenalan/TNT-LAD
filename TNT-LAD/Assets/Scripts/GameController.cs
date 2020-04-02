@@ -55,8 +55,8 @@ public class GameController : MonoBehaviour
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { device }); //control scheme has to be set twice?
     playerValues.PlayerGameObject = playerInput.gameObject;
-    playerInput.gameObject.GetComponent<PlayerHandler>().PlayerData = playerValues;
-    playerInput.gameObject.transform.position = spawnPoint;
+    playerValues.PlayerGameObject.GetComponent<PlayerHandler>().PlayerData = playerValues;
+    playerValues.PlayerGameObject.GetComponent<PlayerHandler>().SetPlayerToSpawn();
   }
 
 

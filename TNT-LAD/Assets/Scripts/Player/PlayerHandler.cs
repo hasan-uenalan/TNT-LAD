@@ -34,6 +34,11 @@ public class PlayerHandler : MonoBehaviour
     PlacedBombs.RemoveAll(item => item == null);
   }
 
+  public void SetPlayerToSpawn()
+  {
+    gameObject.transform.position = PlayerData.SpawnPoint;
+  }
+
   public void InitPlayerData()
   {
     PlayerStatus = Status.alive;
