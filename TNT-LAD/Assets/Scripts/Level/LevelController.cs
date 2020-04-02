@@ -53,6 +53,10 @@ public class LevelController : MonoBehaviour
     {
       Construct();
     }
+    if(SceneManager.GetActiveScene().name == "Level")
+    {
+      LoadLevel();
+    }
   }
 
   //creating scene structure
@@ -65,6 +69,28 @@ public class LevelController : MonoBehaviour
     levelBlocks.transform.parent = levelObjects.transform;
     wallBlocks = new GameObject("Wall Blocks");
     wallBlocks.transform.parent = levelObjects.transform;
+  }
+
+  private void LoadLevel()
+  {
+    if (CrossSceneInformation.currentLevel.levelFileName != null) {
+      LoadLocalLevel();
+    }
+    else {
+      LoadCloudLevel();
+    }
+  }
+
+  private void LoadLocalLevel()
+  {
+    currentFile = CrossSceneInformation.currentLevel.levelFileName;
+    ConstructByFile();
+  }
+
+  private void LoadCloudLevel()
+  {
+    currentFile = null;
+    ConstructCloudLevel(CrossSceneInformation.currentLevel.cloudLevel);
   }
 
   //constructs the map
@@ -140,9 +166,9 @@ public class LevelController : MonoBehaviour
     spawn.y = floorMap[0, floorMap.GetLength(1) - 1].transform.position.z;
     playerSpawns[3] = spawn;
 
-    foreach(Vector2 v in playerSpawns)
-    {
-    }
+    //foreach(Vector2 v in playerSpawns)
+    //{
+    //}
   }
 
   //Generates outer wall of play area

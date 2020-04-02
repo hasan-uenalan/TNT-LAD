@@ -217,24 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23be27f6d8f70040a1775f6c8f5bea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &420500247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8980669213659470638, guid: efbac6f3614ce8147a70e1ace24be0ce,
-    type: 3}
-  m_PrefabInstance: {fileID: 8980669211941763637}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &420500248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420500247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f48778d4250ea240b0f1ca38c9b0d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &593455711
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +789,24 @@ PrefabInstance:
       propertyPath: editorActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
+        type: 3}
+      propertyPath: OuterWall
+      value: 
+      objectReference: {fileID: 1748031504211757037, guid: cf93201e4c3297d48b378dc0687d15de,
+        type: 3}
+    - target: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
+        type: 3}
+      propertyPath: DefaultBlock
+      value: 
+      objectReference: {fileID: 5952373980224885808, guid: 41a3ba5ab4fc9f6438ebf7522753e4d7,
+        type: 3}
+    - target: {fileID: 8980669213659470633, guid: efbac6f3614ce8147a70e1ace24be0ce,
+        type: 3}
+      propertyPath: DestructibleBlock
+      value: 
+      objectReference: {fileID: 1255175388088861968, guid: 9f58f93c5c7694a45a5b9f8562407fbb,
+        type: 3}
     - target: {fileID: 8980669213659470638, guid: efbac6f3614ce8147a70e1ace24be0ce,
         type: 3}
       propertyPath: m_Name
