@@ -235,7 +235,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.000022888184}
-  m_SizeDelta: {x: 143.15, y: 30}
+  m_SizeDelta: {x: 150.79, y: 30}
   m_Pivot: {x: -0.000000040978193, y: 0.49999908}
 --- !u!114 &24793353
 MonoBehaviour:
@@ -268,7 +268,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time per Round
+  m_Text: 'Lives per Round
 
 '
 --- !u!222 &24793354
