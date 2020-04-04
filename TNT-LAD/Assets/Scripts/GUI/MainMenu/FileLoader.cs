@@ -13,25 +13,33 @@ public class FileLoader : MonoBehaviour
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
   static void SaveValuesFromOptionsFile()
   {
-    directory = Path.Combine(Application.dataPath, "Resources/LevelFiles");
+    directory = Path.Combine(Application.dataPath, "Resources");
     TextAsset optionsFile = (TextAsset) Resources.Load("Options");
     if (optionsFile == null)
     {
       CreateNewOptionsFile();
+      return;
     }
     SetOptionsFromFile(optionsFile);
   }
 
   private static void CreateNewOptionsFile()
   {
-    string optionsJson = JsonUtility.ToJson(new OptionsData());
+    OptionsData optionsData = new OptionsData();
+    string optionsJson = JsonUtility.ToJson(optionsData);
     File.WriteAllText(Path.Combine(directory, "Options.txt"), optionsJson);
+    SetOptionsFromOptionsData(optionsData);
+  }
+
+  private static void SetOptionsFromOptionsData(OptionsData optionsData)
+  {
+    CrossSceneInformation.PlayerLifes = optionsData.PlayerLifes;
+    CrossSceneInformation.RoundTime = optionsData.RoundTime;
   }
 
   private static void SetOptionsFromFile(TextAsset optionsFile)
   {
     OptionsData optionsData = OptionsData.CreateOptionsData(optionsFile);
-    CrossSceneInformation.PlayerLifes = optionsData.PlayerLifes;
-    CrossSceneInformation.RoundTime = optionsData.RoundTime;
+    SetOptionsFromOptionsData(optionsData);
   }
 }

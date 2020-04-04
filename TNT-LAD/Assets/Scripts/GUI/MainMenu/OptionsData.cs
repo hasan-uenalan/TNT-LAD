@@ -6,9 +6,9 @@ using UnityEngine;
 [System.Serializable]
 public class OptionsData
 {
-  public int RoundTime{ get; private set; }
+  public int RoundTime;
 
-  public int PlayerLifes { get; private set; }
+  public int PlayerLifes;
 
   public OptionsData()
   {
