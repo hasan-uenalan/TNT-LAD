@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,16 @@ public class TimeUIHandler : MonoBehaviour
 
   private int oldTimeValue;
 
+  private OptionsFileWriter optionsFileWriter;
+
+
   // Start is called before the first frame update
   void Start()
   {
     inputField = TimeInputField.GetComponent<InputField>();
     inputField.text = CrossSceneInformation.RoundTime.ToString();
     oldTimeValue = CrossSceneInformation.RoundTime;
+    optionsFileWriter = new OptionsFileWriter();
   }
 
   public void SetRoundTime()
@@ -24,6 +29,7 @@ public class TimeUIHandler : MonoBehaviour
     if (System.Int32.Parse(TimeInputField.GetComponent<InputField>().text) >= 0)
     {
       CrossSceneInformation.RoundTime = System.Int32.Parse(inputField.text);
+      optionsFileWriter.WriteToOptionsFile();
     }
     else 
     {

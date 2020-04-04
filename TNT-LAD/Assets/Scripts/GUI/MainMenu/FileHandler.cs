@@ -6,14 +6,14 @@ using UnityEngine;
 /// <summary>
 /// is only called at the start of the Application!
 /// </summary>
-public class FileLoader : MonoBehaviour
+public class FileHandler : MonoBehaviour
 {
-  private static string directory;
+  private static string FullFileName;
 
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
   static void SaveValuesFromOptionsFile()
   {
-    directory = Path.Combine(Application.dataPath, "Resources");
+    FullFileName = Path.Combine(Application.dataPath, "Resources/Options.txt");
     TextAsset optionsFile = (TextAsset) Resources.Load("Options");
     if (optionsFile == null)
     {
@@ -27,7 +27,7 @@ public class FileLoader : MonoBehaviour
   {
     OptionsData optionsData = new OptionsData();
     string optionsJson = JsonUtility.ToJson(optionsData);
-    File.WriteAllText(Path.Combine(directory, "Options.txt"), optionsJson);
+    File.WriteAllText(FullFileName, optionsJson);
     SetOptionsFromOptionsData(optionsData);
   }
 
