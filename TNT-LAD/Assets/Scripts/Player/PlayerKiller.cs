@@ -41,7 +41,7 @@ public class PlayerKiller : MonoBehaviour
       bodyPart.layer = noPlayerCollisionLayerIndex;
       bodyPart.GetComponent<Rigidbody>().isKinematic = !active;
       bodyPart.GetComponent<Collider>().enabled = active;
-      ApplyForce(bodyPart);
+      ApplyForce(bodyPart, 1f);
     }
   }
 
@@ -50,7 +50,7 @@ public class PlayerKiller : MonoBehaviour
     hat.transform.parent = null;
     hat.GetComponent<Rigidbody>().isKinematic = false;
     hat.GetComponent<Collider>().enabled = true;
-    ApplyForce(hat);
+    ApplyForce(hat, 0.4f);
   }
 
   /// <summary>
@@ -127,7 +127,7 @@ public class PlayerKiller : MonoBehaviour
   {
     var newLimbRotation = Quaternion.LookRotation(gameObject.transform.forward);
     var limb = Instantiate(prefab, bone.transform.position, newLimbRotation);
-    ApplyForce(limb.transform.GetComponentInChildren<Rigidbody>().gameObject);
+    ApplyForce(limb.transform.GetComponentInChildren<Rigidbody>().gameObject, 1f);
   }
 
   private void SpawnBloodParticleEffect(GameObject bone)
@@ -136,12 +136,14 @@ public class PlayerKiller : MonoBehaviour
     Instantiate(bloodParticleSystem, bone.transform.position, particleDirection, bone.transform);
   }
 
-  private void ApplyForce(GameObject obj)
+  private void ApplyForce(GameObject obj, float extraMultiplier)
   {
     Vector3 forceDir = obj.transform.position - bombPosition;
     float strength = Mathf.Clamp(5 - forceDir.magnitude, 1, 5);
     forceDir = forceDir.normalized;
-    obj.GetComponent<Rigidbody>().AddForce(forceDir * (strength * explStrengthMult), ForceMode.Impulse);
+    Vector3 torque = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value) * 8;
+    obj.GetComponent<Rigidbody>().AddForce(forceDir * (strength * (explStrengthMult * extraMultiplier)), ForceMode.Impulse);
+    obj.GetComponent<Rigidbody>().AddTorque(torque);
   }
 }
 

@@ -493,7 +493,7 @@ MonoBehaviour:
     prefab: {fileID: 8897625879279879738, guid: c5b79bce45386f544ad37c286dec7885,
       type: 3}
   ragdollBodyParts: []
-  explStrengthMult: 3
+  explStrengthMult: 4
 --- !u!114 &1072842053
 MonoBehaviour:
   m_ObjectHideFlags: 0

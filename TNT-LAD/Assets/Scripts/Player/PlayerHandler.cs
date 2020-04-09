@@ -68,7 +68,9 @@ public class PlayerHandler : MonoBehaviour
     PlayerData.Lifes -= 1;
     if(PlayerData.Lifes == 0)
     {
+      PlayerStatus = Status.dead;
       KillPlayer(bombPosition);
+      return;
     }
     SetInvincible();
   }
