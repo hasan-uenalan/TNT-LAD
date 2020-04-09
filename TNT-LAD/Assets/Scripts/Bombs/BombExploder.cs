@@ -61,7 +61,8 @@ public class BombExploder : MonoBehaviour
   {
     foreach(Vector3 pos in GetExplosionPositions())
     {
-      Instantiate(explosion, pos, Quaternion.identity);
+      var explosionObj = Instantiate(explosion, pos, Quaternion.identity);
+      explosionObj.GetComponent<ExplosionBehaviour>().originalBombPosition = gameObject.transform.position;
     }
     Destroy(gameObject);
   }
