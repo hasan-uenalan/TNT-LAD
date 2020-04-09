@@ -77,7 +77,7 @@ public class PlayerHandler : MonoBehaviour
   private void KillPlayer()
   {
     PlayerStatus = Status.dead;
-    gameObject.SetActive(false);
+    //gameObject.SetActive(false);
     gameObject.GetComponent<PlayerKiller>().KillPlayer(false);
   }
 

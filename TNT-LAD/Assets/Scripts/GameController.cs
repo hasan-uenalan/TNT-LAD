@@ -93,19 +93,23 @@ public class GameController : MonoBehaviour
   IEnumerator EndRoundOnWinningPlayer(PlayerData winnigPlayer)
   {
     isInCoroutine = true;
+    yield return new WaitForSeconds(2);
     GameObject playerGameObject = winnigPlayer.PlayerGameObject;
-    ZoomToPlayer();
+    ZoomToPlayer(winnigPlayer.PlayerGameObject);
     ShowDanceAnimation(playerGameObject);   
-    yield return new WaitForSeconds(10); //TODO: wait for dance animation
+    yield return new WaitForSeconds(5); //TODO: wait for dance animation
     SceneManager.LoadScene("RoundScoreboard");
   }
 
-  private void ZoomToPlayer()
+  private void ZoomToPlayer(GameObject player)
   {
-    GameObject cameraPivot = GameObject.FindGameObjectWithTag("CameraPivot");
-    GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-    LeanTween.move(mainCamera, cameraPivot.transform.position, 0.8f).setEaseInOutSine();
-    LeanTween.rotate(mainCamera, cameraPivot.transform.rotation.eulerAngles, 0.8f).setEaseInOutSine();
+    GameObject mainCamera = Camera.main.gameObject;
+    Vector3 cameraTargetPosition = player.transform.position;
+    cameraTargetPosition += player.transform.forward * 2.9f;
+    cameraTargetPosition += player.transform.up * 2.2f;
+    Quaternion cameraLookRotation = Quaternion.LookRotation(player.transform.position - cameraTargetPosition, Vector3.up);
+    LeanTween.move(mainCamera, cameraTargetPosition, 0.8f).setEaseInOutSine();
+    LeanTween.rotate(mainCamera, cameraLookRotation.eulerAngles, 0.8f).setEaseInOutSine();
   }
 
   /// <summary>
