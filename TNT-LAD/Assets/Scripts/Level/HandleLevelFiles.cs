@@ -8,7 +8,7 @@ using System.Text;
 
 public class HandleLevelFiles
 {
-
+  //file conventions
   public char charDestructible { set; get; } = '+';
   public char charDefault { set; get; } = '*';
   public char charNone { set; get; } = '-';
@@ -17,7 +17,7 @@ public class HandleLevelFiles
 
   public HandleLevelFiles()
   {
-    directory = Path.Combine(Application.dataPath, "Resources/LevelFiles");
+    directory = Path.Combine(Application.dataPath, "../LevelFiles");
   }
 
   public void SaveLevelFiles(GameObject[,] blocks, byte[] previewImage, string fileName)
