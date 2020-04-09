@@ -14,7 +14,7 @@ public class LevelSwitcher : MonoBehaviour
   private void Start()
   {
     LevelImageList = new List<Object>();
-    DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(Application.dataPath, "Resources/LevelFiles"));
+    DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(Application.dataPath, "../LevelFiles"));
     foreach(var imageFile in dirInfo.GetFiles("*.png"))
     {
       LevelImageList.Add(LoadSprite(imageFile.FullName));
