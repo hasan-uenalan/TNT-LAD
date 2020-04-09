@@ -9681,7 +9681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c11ffd27f37f4e04d93fdf0c7ca2ebfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20edabb35d4b1d14b8f33b73aa19888d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10260,7 +10260,7 @@ PrefabInstance:
     - target: {fileID: 6747275182361726258, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6747275182361726258, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
         type: 3}
@@ -10279,14 +10279,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7740981340106480442, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
         type: 3}
-      propertyPath: LevelInformation
+      propertyPath: previewImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1196286074}
     - target: {fileID: 7740981340106480442, guid: 34b0dc7b9f129624ba7f11fa58bf2508,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: levelNameText
+      value: 
+      objectReference: {fileID: 1533894347}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34b0dc7b9f129624ba7f11fa58bf2508, type: 3}
 --- !u!4 &1382259304 stripped
@@ -10572,7 +10572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 1
+  m_Text: No Levels Found
 --- !u!222 &1533894348
 CanvasRenderer:
   m_ObjectHideFlags: 0

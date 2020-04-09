@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class LevelSwitcher : MonoBehaviour
 {
+  public Image previewImage;
+  public Text levelNameText;
+
   private List<Object> LevelImageList;
 
   private int curLevelIndex = 0;
@@ -33,8 +36,8 @@ public class LevelSwitcher : MonoBehaviour
   private void UpdateLevelSelectionValues()
   {
     CrossSceneInformation.currentLevel.SetLevel(LevelImageList[curLevelIndex].name);
-    GameObject.FindGameObjectWithTag("GUILevelButton").GetComponentInChildren<Text>().text = CrossSceneInformation.currentLevel.levelFileName;
-    GameObject.FindGameObjectWithTag("GUILevelPreview").GetComponent<Image>().sprite = (Sprite)LevelImageList[curLevelIndex];
+    levelNameText.text = CrossSceneInformation.currentLevel.levelFileName;
+    previewImage.sprite = (Sprite)LevelImageList[curLevelIndex];
   }
 
   public void LevelRightClick()
