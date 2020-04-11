@@ -14,13 +14,17 @@ public class PlayerKiller : MonoBehaviour
   public DetachableLimb[] detachableLimbs;
   public List<GameObject> ragdollBodyParts;
 
+  public float explStrengthMult;
+  private Vector3 bombPosition; 
+
   void Start()
   {
     ragdollBodyParts = GetBodyParts();
   }
 
-  public void KillPlayer(bool dismemberAll)
+  public void KillPlayer(bool dismemberAll, Vector3 bombPosition)
   {
+    this.bombPosition = bombPosition; 
     SetRagdollActive(true);
     DetachLimbs(dismemberAll);
     DetachHat();
@@ -37,6 +41,7 @@ public class PlayerKiller : MonoBehaviour
       bodyPart.layer = noPlayerCollisionLayerIndex;
       bodyPart.GetComponent<Rigidbody>().isKinematic = !active;
       bodyPart.GetComponent<Collider>().enabled = active;
+      ApplyForce(bodyPart, 1f);
     }
   }
 
@@ -45,6 +50,7 @@ public class PlayerKiller : MonoBehaviour
     hat.transform.parent = null;
     hat.GetComponent<Rigidbody>().isKinematic = false;
     hat.GetComponent<Collider>().enabled = true;
+    ApplyForce(hat, 0.4f);
   }
 
   /// <summary>
@@ -120,13 +126,24 @@ public class PlayerKiller : MonoBehaviour
   private void CreateDetachedLimb(GameObject bone, GameObject prefab)
   {
     var newLimbRotation = Quaternion.LookRotation(gameObject.transform.forward);
-    Instantiate(prefab, bone.transform.position, newLimbRotation);
+    var limb = Instantiate(prefab, bone.transform.position, newLimbRotation);
+    ApplyForce(limb.transform.GetComponentInChildren<Rigidbody>().gameObject, 1f);
   }
 
   private void SpawnBloodParticleEffect(GameObject bone)
   {
     var particleDirection = Quaternion.LookRotation(bone.transform.up);
     Instantiate(bloodParticleSystem, bone.transform.position, particleDirection, bone.transform);
+  }
+
+  private void ApplyForce(GameObject obj, float extraMultiplier)
+  {
+    Vector3 forceDir = obj.transform.position - bombPosition;
+    float strength = Mathf.Clamp(5 - forceDir.magnitude, 1, 5);
+    forceDir = forceDir.normalized;
+    Vector3 torque = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value) * 8;
+    obj.GetComponent<Rigidbody>().AddForce(forceDir * (strength * (explStrengthMult * extraMultiplier)), ForceMode.Impulse);
+    obj.GetComponent<Rigidbody>().AddTorque(torque);
   }
 }
 

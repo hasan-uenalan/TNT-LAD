@@ -32,7 +32,6 @@ public class PlayerHandler : MonoBehaviour
 
   private void Update()
   {
-    Debug.Log(gameObject.transform.position);
     PlacedBombs.RemoveAll(item => item == null);
   }
 
@@ -64,21 +63,23 @@ public class PlayerHandler : MonoBehaviour
     return false;
   }
   //removes a life and checks if player is dead
-  public void RemoveLife()
+  public void RemoveLife(Vector3 bombPosition)
   {
     PlayerData.Lifes -= 1;
     if(PlayerData.Lifes == 0)
     {
-      KillPlayer();
+      PlayerStatus = Status.dead;
+      KillPlayer(bombPosition);
+      return;
     }
     SetInvincible();
   }
 
-  private void KillPlayer()
+  private void KillPlayer(Vector3 bombPosition)
   {
     PlayerStatus = Status.dead;
     //gameObject.SetActive(false);
-    gameObject.GetComponent<PlayerKiller>().KillPlayer(false);
+    gameObject.GetComponent<PlayerKiller>().KillPlayer(false, bombPosition);
   }
 
   private void SetInvincible()

@@ -13,7 +13,9 @@ public class ExplosionBehaviour : MonoBehaviour
   [Header("Point Light")]
   public float maxLightIntensity;
   public float lightFadeSpeed;
-  
+
+  [HideInInspector] public Vector3 originalBombPosition;
+
   private SphereCollider explosionCollider;
   private Light pointLight;
   private bool isColliderExpanding;
@@ -71,7 +73,7 @@ public class ExplosionBehaviour : MonoBehaviour
       playerData = other.gameObject.GetComponent<PlayerHandler>();
       if (playerData.PlayerStatus != PlayerHandler.Status.invincible)
       {
-        playerData.RemoveLife();      
+        playerData.RemoveLife(originalBombPosition);      
       }
     }
     if(other.gameObject.tag == "Bomb")
