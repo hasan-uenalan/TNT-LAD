@@ -11,7 +11,7 @@ public class WinningSceneController : MonoBehaviour
 
   void Start()
   {
-    string winnerName = "Player " + StaticPlayers.Winner.PlayerIndex;
+    string winnerName = $"Player {StaticPlayers.Winner.PlayerIndex} wins!";
     winningPlayer.text = winnerName;
     ActivatePlayers();
 
