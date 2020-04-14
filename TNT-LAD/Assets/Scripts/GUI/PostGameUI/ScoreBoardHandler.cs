@@ -22,7 +22,6 @@ public class ScoreBoardHandler : MonoBehaviour
       if (player.PlayerScore >= WinCondition)
       {
         StaticPlayers.Winner = player;
-        SceneManager.LoadScene("WinScreen");
       }
     }
   }

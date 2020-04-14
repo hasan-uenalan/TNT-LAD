@@ -1,1 +1,1 @@
-{"RoundTime":300,"PlayerLifes":3}
+{"RoundTime":300,"PlayerLifes":1}
