@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUpHandler
 {
+
   public void HandlePowerUp(GameObject powerUp, PlayerData playerData, GameObject thisGameObject)
   {
     switch (powerUp.GetComponent<PowerUpData>().powerUpType)
@@ -23,6 +24,16 @@ public class PowerUpHandler
         break;
       case PowerUpData.PowerUpType.RPG:
         playerData.oneTimeUse = PlayerData.OneTimeUse.RPG;
+        break;
+    }
+  }
+
+  public void HandleOneTimeUse(PowerUpData.PowerUpType powerUpType)
+  {
+    switch (powerUpType)
+    {
+      case PowerUpData.PowerUpType.RPG:
+        //TODO: Implement firing rocket mechanism
         break;
     }
   }

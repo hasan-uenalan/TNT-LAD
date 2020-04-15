@@ -12,8 +12,16 @@ public class BoxHandler : MonoBehaviour
 
   [Header("Power Up")]
   [Range(0f, 1f)]
-  public float probability = .8f;
+  public float generalDropProbability = .8f;
   public List<GameObject> powerUp;
+
+  public class PowerUpDrop
+  {
+    public string name;
+    public GameObject item;
+    public int dropRarity;
+  }
+
 
   [ContextMenu("Destroy Box")]
   public void DestroyBoxAndSpawnPowerUp()
@@ -34,7 +42,7 @@ public class BoxHandler : MonoBehaviour
 
   private void SpawnPowerUp()
   {
-    if(Random.value <= probability)
+    if(Random.value <= generalDropProbability)
     {
       int randomPowerUp = Random.Range(0, powerUp.Count);
       Instantiate(powerUp[randomPowerUp], transform.position, Quaternion.identity);

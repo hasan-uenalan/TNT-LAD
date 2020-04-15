@@ -105,4 +105,17 @@ public class PlayerHandler : MonoBehaviour
       Destroy(other.gameObject);
     }
   }
+  
+  private void OneTimeUse()
+  {
+    if(PlayerData.oneTimeUse != PlayerData.OneTimeUse.NONE)
+    {
+
+    }
+    else
+    {
+      Debug.Log("Nothing picked up.");
+    }
+  }
+
 }

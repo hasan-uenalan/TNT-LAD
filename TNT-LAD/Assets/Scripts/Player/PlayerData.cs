@@ -18,6 +18,7 @@ public class PlayerData
   public Vector3 SpawnPoint { get; set; }
   public GameObject PlayerGameObject { get; set; }
   public OneTimeUse oneTimeUse { get; set; }
+  public GameObject GOOneTimeUse { get; set; }
   public int BombCount { get; set; }
   public int BombStrength { get; set; }
   public float PlayerSpeed { get; set; }
