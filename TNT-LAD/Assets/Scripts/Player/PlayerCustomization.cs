@@ -12,6 +12,7 @@ public class PlayerCustomization : MonoBehaviour
   void Start()
   {
     hatMat = gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material;
+    hatMat.color = playerColors[Random.Range(0, playerColors.Count)];
   }
 
   private void ColorDown()
