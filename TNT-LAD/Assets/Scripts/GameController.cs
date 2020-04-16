@@ -92,6 +92,8 @@ public class GameController : MonoBehaviour
 
   IEnumerator EndRoundOnWinningPlayer(PlayerData winnigPlayer)
   {
+    MusicHandler musicHandler = GameObject.FindObjectOfType<MusicHandler>();
+    musicHandler.ChangeTrack("EndScreen");
     isInCoroutine = true;
     yield return new WaitForSeconds(2);
     GameObject playerGameObject = winnigPlayer.PlayerGameObject;

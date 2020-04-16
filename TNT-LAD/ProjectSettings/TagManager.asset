@@ -15,6 +15,7 @@ TagManager:
   - powerup
   - Explosion
   - CameraPivot
+  - Music
   layers:
   - Default
   - TransparentFX

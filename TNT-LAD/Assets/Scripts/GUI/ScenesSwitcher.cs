@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ScenesSwitcher : MonoBehaviour
 {
+  private MusicHandler musicHandler;
+
+  void Start()
+  {
+    musicHandler = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicHandler>();
+  }
+
   public void SwitchToGame()
   {
     if(StaticPlayers.Winner != null)
@@ -17,17 +24,20 @@ public class ScenesSwitcher : MonoBehaviour
       AnalyticsHandler.GameStartEvent(CrossSceneInformation.PlayerList.Count);
       CrossSceneInformation.gameStarted = true;
     }
+    musicHandler.ChangeTrack("InGame");
     SceneManager.LoadScene("Level");
   }
 
   public void SwitchToMainMenu()
   {
+    musicHandler.ChangeTrack("MainMenu");
     SceneManager.LoadScene("MainMenu");
   }
 
   public void ResetToMainMenu()
   {
     ResetStatics();
+    musicHandler.ChangeTrack("MainMenu");
     SceneManager.LoadScene("MainMenu");
   }
 

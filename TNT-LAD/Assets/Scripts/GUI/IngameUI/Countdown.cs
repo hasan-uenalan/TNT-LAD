@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
+  private MusicHandler musicHandler;
   private double timeLeft;
   private void Start()
   {
+    musicHandler = FindObjectOfType<MusicHandler>();
     timeLeft = CrossSceneInformation.RoundTime;
     gameObject.GetComponent<Text>().text = CrossSceneInformation.RoundTime.ToString();
   }
@@ -20,6 +22,10 @@ public class Countdown : MonoBehaviour
       gameObject.GetComponent<Text>().text = timeLeft.ToString("0");
     }
     else {
+      if(gameObject.GetComponent<Text>().color != Color.red)
+      {
+        musicHandler.ChangeTrack("SuddonDeath");
+      }
       gameObject.GetComponent<Text>().color = Color.red;
       gameObject.GetComponent<Text>().text = "Sudden Death";
     }
