@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
   public float walkSpeed = 3;
-  public Animator anim;
 
   private Vector2 axis;
   private CharacterController characterController;
@@ -21,22 +20,6 @@ public class PlayerMovement : MonoBehaviour
     if (characterController.enabled)
     {
       MovePlayer();
-      
-    }
-    CheckMovement();
-  }
-
-  void CheckMovement()
-  {
-    if(characterController.velocity != Vector3.zero)
-    {
-      anim.SetBool("movement", true);
-      Debug.Log("moving");
-
-    }
-    else
-    {
-      anim.SetBool("movement", false);
     }
   }
 
