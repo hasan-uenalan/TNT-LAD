@@ -9,22 +9,20 @@ public class ScenesSwitcher : MonoBehaviour
 
   void Start()
   {
-    musicHandler = GameObject.FindGameObjectWithTag("Music").GetComponent<MusicHandler>();
+    musicHandler = FindObjectOfType<MusicHandler>();
   }
 
   public void SwitchToGame()
   {
-    if(StaticPlayers.Winner != null)
-    {
+    if (StaticPlayers.Winner != null) {
       SceneManager.LoadScene("WinScreen");
       return;
     }
-    if (!CrossSceneInformation.gameStarted)
-    {
+    if (!CrossSceneInformation.gameStarted) {
       AnalyticsHandler.GameStartEvent(CrossSceneInformation.PlayerList.Count);
       CrossSceneInformation.gameStarted = true;
     }
-    musicHandler.ChangeTrack("InGame");
+    FindObjectOfType<MusicHandler>().ChangeTrack("InGame");
     SceneManager.LoadScene("Level");
   }
 
@@ -37,7 +35,7 @@ public class ScenesSwitcher : MonoBehaviour
   public void ResetToMainMenu()
   {
     ResetStatics();
-    musicHandler.ChangeTrack("MainMenu");
+    FindObjectOfType<MusicHandler>().ChangeTrack("MainMenu");
     SceneManager.LoadScene("MainMenu");
   }
 
