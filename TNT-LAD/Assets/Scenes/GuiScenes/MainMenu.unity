@@ -11616,6 +11616,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec10d2bdecffe045a2c9499cfa16ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainMenuAudio: {fileID: 8300000, guid: ca0800173350be74ba9174e395d9de36, type: 3}
+  InGameAudio: {fileID: 8300000, guid: 5677a79e1c70573428bb5349f551eea9, type: 3}
+  SuddonDeathAudio: {fileID: 8300000, guid: e5bf76ed9026d4c4f95954346681f676, type: 3}
+  EndScreenAudio: {fileID: 8300000, guid: c365ecf4461ff8444a6f435b1a76b51e, type: 3}
 --- !u!4 &1860952611
 Transform:
   m_ObjectHideFlags: 0

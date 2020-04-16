@@ -6,12 +6,12 @@ public class MusicHandler : MonoBehaviour
 {
   private AudioSource audioSource;
 
-  public AudioSource MainMenuAudio;
-  public AudioSource InGameAudio;
-  public AudioSource SuddonDeathAudio;
-  public AudioSource EndScreenAudio;
+  public AudioClip MainMenuAudio;
+  public AudioClip InGameAudio;
+  public AudioClip SuddonDeathAudio;
+  public AudioClip EndScreenAudio;
 
-  public Dictionary<string, AudioSource> Tracks;
+  public Dictionary<string, AudioClip> Tracks;
 
   void Awake()
   {
@@ -27,19 +27,18 @@ public class MusicHandler : MonoBehaviour
 
   public void ChangeTrack(string trackName)
   {
-    foreach (KeyValuePair<string, AudioSource> curTrack in Tracks) 
+    foreach (KeyValuePair<string, AudioClip> curTrack in Tracks) 
     {
       if(curTrack.Key == trackName)
       {
-        audioSource = curTrack.Value;
-        audioSource.loop = true;
+        audioSource.clip = curTrack.Value;
       }
     }
   }
 
   private void FillTracks()
   {
-    Tracks = new Dictionary<string, AudioSource>();
+    Tracks = new Dictionary<string, AudioClip>();
     Tracks.Add("MainMenu", MainMenuAudio);
     Tracks.Add("InGame", InGameAudio);
     Tracks.Add("SuddonDeath", SuddonDeathAudio);
