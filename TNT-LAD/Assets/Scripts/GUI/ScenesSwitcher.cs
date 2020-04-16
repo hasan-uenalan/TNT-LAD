@@ -28,7 +28,7 @@ public class ScenesSwitcher : MonoBehaviour
 
   public void SwitchToMainMenu()
   {
-    musicHandler.ChangeTrack("MainMenu");
+    FindObjectOfType<MusicHandler>().ChangeTrack("MainMenu");
     SceneManager.LoadScene("MainMenu");
   }
 
