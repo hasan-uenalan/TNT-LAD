@@ -22,7 +22,7 @@ public class AnimationsController : MonoBehaviour
 
   void CheckMovement()
   {
-    if (characterController.velocity != Vector3.zero)
+    if (characterController.enabled && characterController.velocity != Vector3.zero)
     {
       anim.SetBool("movement", true);
     }
