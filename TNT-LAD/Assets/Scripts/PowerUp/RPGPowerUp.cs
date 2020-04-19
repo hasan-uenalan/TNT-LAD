@@ -8,18 +8,18 @@ public class RPGPowerUp : MonoBehaviour
   public Transform firingPoint;
 
 
-  // Update is called once per frame
-  void Update()
-  {
-    if (Input.GetKeyDown(KeyCode.L))
-    {
-      Use();
-    }
-  }
+  //// Update is called once per frame
+  //void Update()
+  //{
+  //  if (Input.GetKeyDown(KeyCode.L))
+  //  {
+  //    Use();
+  //  }
+  //}
 
-  void Use()
+  public void Use()
   {
     Instantiate(rocket, firingPoint.position, firingPoint.rotation);
-    gameObject.SetActive(false);
+    //gameObject.SetActive(false);
   }
 }

@@ -13,20 +13,20 @@ public class PowerUpSwitcher : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.Alpha1))
-    {
-      selectedPowerUp = 0;
-    }
-    if (Input.GetKeyDown(KeyCode.Alpha2))
-    {
-      selectedPowerUp = 1;
-    }
+    //if (Input.GetKeyDown(KeyCode.Alpha1))
+    //{
+    //  selectedPowerUp = 0;
+    //}
+    //if (Input.GetKeyDown(KeyCode.Alpha2))
+    //{
+    //  selectedPowerUp = 1;
+    //}
     SelectPowerUp();
   }
 
   private void SelectPowerUp()
   {
-
+    Debug.Log("Selected Power Up: " + selectedPowerUp);
     int i = 0;
     foreach(Transform powerUp in transform)
     {

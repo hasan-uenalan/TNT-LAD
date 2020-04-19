@@ -26,6 +26,15 @@ public class RPGHandler : MonoBehaviour
     {
       other.gameObject.GetComponent<PlayerHandler>().RemoveLife(gameObject.transform.position);
     }
+    BlockData blockdata;
+    if (other.gameObject.TryGetComponent<BlockData>(out blockdata))
+    {
+      if (blockdata.blockType == BlockData.BlockType.DESTRUCTIBLE)
+      {
+        other.gameObject.GetComponent<BoxHandler>()
+          .DestroyBoxAndSpawnPowerUp();
+      }
+    }
     Destroy(gameObject);
   }
 }
