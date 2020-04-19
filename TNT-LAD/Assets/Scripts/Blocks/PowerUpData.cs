@@ -13,5 +13,11 @@ public class PowerUpData : MonoBehaviour
     RPG
   };
 
+  public enum OneTimeUse
+  {
+    NONE,
+    RPG
+  }
+
   public PowerUpType powerUpType;
 }

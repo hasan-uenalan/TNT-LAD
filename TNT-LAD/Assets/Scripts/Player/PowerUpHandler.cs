@@ -22,7 +22,19 @@ public class PowerUpHandler
         thisGameObject.GetComponent<PlayerMovement>().walkSpeed = playerData.PlayerSpeed; //updating playerspeed
         break;
       case PowerUpData.PowerUpType.RPG:
-        playerData.oneTimeUse = PlayerData.OneTimeUse.RPG;
+        playerData.oneTimeUse = PowerUpData.OneTimeUse.RPG;
+        thisGameObject.GetComponentInChildren<PowerUpSwitcher>().selectedPowerUp = 1;
+        break;
+    }
+  }
+
+  public void HandleOneTimeUse(PowerUpData.OneTimeUse oneTimeUse, GameObject thisGameObject)
+  {
+    switch (oneTimeUse)
+    {
+      case PowerUpData.OneTimeUse.RPG:
+        thisGameObject.GetComponentInChildren<RPGPowerUp>().Use();
+        thisGameObject.GetComponentInChildren<PowerUpSwitcher>().selectedPowerUp = 0;
         break;
     }
   }

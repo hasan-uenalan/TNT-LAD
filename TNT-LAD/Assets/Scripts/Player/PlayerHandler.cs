@@ -33,6 +33,11 @@ public class PlayerHandler : MonoBehaviour
   private void Update()
   {
     PlacedBombs.RemoveAll(item => item == null);
+    if (Input.GetKeyDown(KeyCode.L))
+    {
+      OneTimeUse();
+      
+    }
   }
 
   public void SetPlayerToSpawn()
@@ -105,4 +110,17 @@ public class PlayerHandler : MonoBehaviour
       Destroy(other.gameObject);
     }
   }
+  
+  private void OneTimeUse()
+  {
+    if(PlayerData.oneTimeUse != PowerUpData.OneTimeUse.NONE)
+    {
+      powerUpHandler.HandleOneTimeUse(PlayerData.oneTimeUse, gameObject);
+    }
+    else
+    {
+      Debug.Log("Nothing picked up.");
+    }
+  }
+
 }

@@ -143,9 +143,10 @@ MonoBehaviour:
     type: 3}
   randomForceMultiplier: 1
   explosionForce: 4
-  probability: 0.801
+  generalDropProbability: 1
   powerUp:
-  - {fileID: 5317589983693155880, guid: 2ad943474cd35d04ea8625feca7ce754, type: 3}
   - {fileID: 7194161852291265001, guid: e5e545532c7d88e42a6dace188c20e45, type: 3}
+  - {fileID: 5317589983693155880, guid: 2ad943474cd35d04ea8625feca7ce754, type: 3}
   - {fileID: 7380943833203816128, guid: a9cb1213b1f9552408fcd1f01bf75270, type: 3}
   - {fileID: 51232450935387363, guid: 9330966804e923b4990c253f465eabf8, type: 3}
+  - {fileID: 4933961503999640141, guid: 3de146c1b03174946b6edab6b3586a02, type: 3}

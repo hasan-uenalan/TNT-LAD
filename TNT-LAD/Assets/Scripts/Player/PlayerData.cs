@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerData
 {
-  public enum OneTimeUse
-  {
-    NONE,
-    RPG
-  }
+  //public enum OneTimeUse
+  //{
+  //  NONE,
+  //  RPG
+  //}
 
   public int PlayerScore { get; set; }
   public int PlayerIndex { get; set; }
@@ -17,7 +17,8 @@ public class PlayerData
   public int Lifes { get; set; }
   public Vector3 SpawnPoint { get; set; }
   public GameObject PlayerGameObject { get; set; }
-  public OneTimeUse oneTimeUse { get; set; }
+  public PowerUpData.OneTimeUse oneTimeUse { get; set; }
+  //public GameObject GOOneTimeUse { get; set; }
   public int BombCount { get; set; }
   public int BombStrength { get; set; }
   public float PlayerSpeed { get; set; }
@@ -43,6 +44,6 @@ public class PlayerData
     BombStrength = 2;
     PlayerSpeed = 2;
     KickBombs = false;
-    oneTimeUse = OneTimeUse.NONE;
+    oneTimeUse = PowerUpData.OneTimeUse.NONE;
   }
 }

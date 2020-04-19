@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
   public float walkSpeed = 3;
+
   private Vector2 axis;
   private CharacterController characterController;
-  
 
   private void Start()
   {
