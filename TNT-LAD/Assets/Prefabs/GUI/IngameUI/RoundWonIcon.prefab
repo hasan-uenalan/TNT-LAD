@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1953941151247728391}
   - component: {fileID: 5527257643893639153}
   m_Layer: 0
-  m_Name: RoundWon
+  m_Name: RoundWonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9fe795c6acdfdc144a100db7d36394c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40151ca7f57442a42ab1cfc3f8dba10e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -35,7 +35,7 @@ public class LifeUIHandler : MonoBehaviour
 
   public void AddLife()
   {
-    if (currentLifes <= 6)
+    if (currentLifes <= 3)
     {
       currentLifes++;
       SetNewLifes();
