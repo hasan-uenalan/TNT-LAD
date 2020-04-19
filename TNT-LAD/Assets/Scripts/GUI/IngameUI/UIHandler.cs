@@ -89,14 +89,15 @@ public class UIHandler : MonoBehaviour
       }
       else //right
       {
-        uiPosition = UIPosition.BottomRight;
+        uiPosition = UIPosition.TopLeft;
       }
     }
     else //bottom
     {
       if (z == 0) //left
       {
-        uiPosition = UIPosition.TopLeft;
+        uiPosition = UIPosition.BottomRight;
+        
       }
       else //right
       {

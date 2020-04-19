@@ -27,12 +27,12 @@ public class CharacterJoiner : MonoBehaviour
 
   void Update()
   {
-    if (IsConnectionButtonPressed(out InputDevice curInputDevice)) 
+    if (IsConnectionButtonPressed(out InputDevice curInputDevice, out string controlScheme)) 
     {
-      LobbyPlayerValues newPlayer = GetPlayerInPlayerList(curInputDevice);
+      LobbyPlayerValues newPlayer = GetPlayerInPlayerList(curInputDevice, controlScheme);
       if (newPlayer == null) 
       {
-        JoinPlayer(curInputDevice);
+        JoinPlayer(curInputDevice, controlScheme);
       }
       else
       {
@@ -68,22 +68,21 @@ public class CharacterJoiner : MonoBehaviour
     {
       if(i > playerList.Count - 1)
       {
-        playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Press Space/Start";
+        playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Press C / N / Start";
         continue;
       }
       playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = $"Player {i+1}";
     }
   }
 
-  private LobbyPlayerValues GetPlayerInPlayerList(InputDevice inputDevice)
+  private LobbyPlayerValues GetPlayerInPlayerList(InputDevice inputDevice, string controlScheme)
   {
-    return playerList.FirstOrDefault(x => x.PlayerInputDevice == inputDevice);
+    return playerList.FirstOrDefault(x => (x.PlayerInputDevice == inputDevice && x.ControlScheme == controlScheme));
   }
 
-  private void JoinPlayer(InputDevice inputDevice)
+  private void JoinPlayer(InputDevice inputDevice, string controlScheme)
   {
-    LobbyPlayerValues newPlayer = new LobbyPlayerValues { PlayerInputDevice = inputDevice };
-    string controlScheme = (inputDevice is Gamepad) ? "Gamepad" : "Keyboard";
+    LobbyPlayerValues newPlayer = new LobbyPlayerValues { PlayerInputDevice = inputDevice, ControlScheme = controlScheme };
     PlayerInput playerInput = PlayerInput.Instantiate(playerSelectionPlayerPrefab, controlScheme: controlScheme, pairWithDevice: inputDevice);
     playerInput.SwitchCurrentControlScheme(controlScheme, new InputDevice[] { inputDevice }); //control scheme has to be set twice?
     newPlayer.JoinPlayerGameObject = playerInput.gameObject;
@@ -96,16 +95,24 @@ public class CharacterJoiner : MonoBehaviour
     playerList.Remove(lobbyPlayerValues);
   }
 
-  private bool IsConnectionButtonPressed(out InputDevice inputDevice)
+  private bool IsConnectionButtonPressed(out InputDevice inputDevice, out string controlScheme)
   {
     inputDevice = null;
+    controlScheme = "";
     foreach (InputDevice curInputDevice in InputDevice.all) 
     {
       if (curInputDevice is Keyboard) 
       {
-        if (((Keyboard)curInputDevice).spaceKey.wasPressedThisFrame) 
+        if (((Keyboard)curInputDevice).cKey.wasPressedThisFrame) 
         {
           inputDevice = curInputDevice;
+          controlScheme = "KeyboardWASD";
+          return true;
+        }
+        if (((Keyboard)curInputDevice).nKey.wasPressedThisFrame)
+        {
+          inputDevice = curInputDevice;
+          controlScheme = "KeyboardIJKL";
           return true;
         }
       }
@@ -114,6 +121,7 @@ public class CharacterJoiner : MonoBehaviour
         if (((Gamepad)curInputDevice).startButton.wasPressedThisFrame) 
         {
           inputDevice = curInputDevice;
+          controlScheme = "Gamepad";
           return true;
         }
       }

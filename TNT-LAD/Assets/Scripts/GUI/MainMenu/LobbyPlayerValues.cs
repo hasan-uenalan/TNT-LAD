@@ -7,6 +7,7 @@ public class LobbyPlayerValues
 {
   public Color PlayerColor { get; set; }
   public InputDevice PlayerInputDevice { get; set; }
+  public string ControlScheme { get; set; }
   public GameObject JoinPlayerGameObject { get; set; }
 
   public LobbyPlayerValues()
@@ -17,6 +18,7 @@ public class LobbyPlayerValues
   public void RestoreDefault()
   {
     PlayerInputDevice = null;
+    ControlScheme = null;
     JoinPlayerGameObject = null;
   }
 }

@@ -34,8 +34,9 @@ public class GameController : MonoBehaviour
     {
       Vector3 spawn = new Vector3(levelController.playerSpawns[playerIndex].x, 0.2f, levelController.playerSpawns[playerIndex].y);
       InputDevice inputDevice = CrossSceneInformation.PlayerList[playerIndex].PlayerInputDevice;
+      string controlScheme = CrossSceneInformation.PlayerList[playerIndex].ControlScheme;
       Color playerColor = CrossSceneInformation.PlayerList[playerIndex].PlayerColor;
-      JoinPlayer(defaultPlayer, inputDevice, spawn, playerIndex, playerColor);
+      JoinPlayer(defaultPlayer, inputDevice, controlScheme, spawn, playerIndex, playerColor);
     }
   }
 
@@ -46,9 +47,8 @@ public class GameController : MonoBehaviour
     }
   }
 
-  private void JoinPlayer(GameObject player, InputDevice device, Vector3 spawnPoint, int playerIndex, Color playerColor)
+  private void JoinPlayer(GameObject player, InputDevice device, string controlScheme, Vector3 spawnPoint, int playerIndex, Color playerColor)
   {
-    string controlScheme = (device is Gamepad) ? "Gamepad" : "Keyboard";
     PlayerData playerValues = GetPlayerValues(playerIndex + 1, playerColor, spawnPoint);
     AddToStaticPlayers(playerValues);
     PlayerInput playerInput = PlayerInput.Instantiate(player, controlScheme: controlScheme, pairWithDevice: device);

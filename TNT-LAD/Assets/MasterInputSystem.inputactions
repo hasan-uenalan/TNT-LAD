@@ -20,6 +20,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "OneTimeUse",
+                    "type": "Button",
+                    "id": "3ec8172d-cb20-45e9-8be2-88e72cab3472",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -95,7 +103,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -106,7 +114,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -117,7 +125,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -128,7 +136,62 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "IJKL",
+                    "id": "3c56d266-3332-422b-a9ee-4803b9115e4d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "ad00047a-ab57-47fc-b1c5-1725c87f5463",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "41e05acc-3988-4ea6-9f15-bb0d7ee3e693",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "3dbd76e6-1235-40c3-9325-1104dd55f9ba",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "002a6b26-9d5a-4fe5-9b1f-b7868bc83336",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -150,8 +213,52 @@
                     "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
                     "action": "DropBomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06ba76f6-dfd8-4e5b-8235-492886071540",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
+                    "action": "DropBomb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b9f9553-1053-437a-b966-c162d17c69a6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "OneTimeUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c031714-30c4-4a11-9fd0-3aa129596c06",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardWASD",
+                    "action": "OneTimeUse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82ca9f89-9177-43f7-9256-25d6a76b8645",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
+                    "action": "OneTimeUse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -196,7 +303,18 @@
                     "path": "<Keyboard>/w",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
+                    "action": "ColorSelectionUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc0fc0bb-7118-4d0c-a28b-9aecc35c854c",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
                     "action": "ColorSelectionUp",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -218,7 +336,18 @@
                     "path": "<Keyboard>/s",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "KeyboardWASD",
+                    "action": "ColorSelectionDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c3b3954-d4ed-441d-8d81-9a9250addc95",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardIJKL",
                     "action": "ColorSelectionDown",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -228,8 +357,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
+            "name": "KeyboardWASD",
+            "bindingGroup": "KeyboardWASD",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
@@ -253,6 +382,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "KeyboardIJKL",
+            "bindingGroup": "KeyboardIJKL",
+            "devices": []
         }
     ]
 }
