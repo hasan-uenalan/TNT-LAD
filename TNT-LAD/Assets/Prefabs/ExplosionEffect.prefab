@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2113370622594540840}
   - component: {fileID: 2113370622594540843}
+  - component: {fileID: -2102115841100123633}
+  - component: {fileID: -3808316625110894797}
   - component: {fileID: 2113370622594540842}
   - component: {fileID: 7888119136091170618}
   m_Layer: 0
@@ -4767,6 +4769,37 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-2102115841100123633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113370622594540845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e88015d898966b4aa3ef0a66cdc217d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRadius: 0.45
+  expansionSpeed: 1.3
+  expansionOnsetDelay: 0
+  maxLightIntensity: 0.75
+  lightFadeSpeed: 1.3
+  originalBombPosition: {x: 0, y: 0, z: 0}
+--- !u!135 &-3808316625110894797
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113370622594540845}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!199 &2113370622594540842
 ParticleSystemRenderer:
   serializedVersion: 6
