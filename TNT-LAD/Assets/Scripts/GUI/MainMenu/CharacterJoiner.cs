@@ -68,7 +68,7 @@ public class CharacterJoiner : MonoBehaviour
     {
       if(i > playerList.Count - 1)
       {
-        playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Press C / N / Start";
+        playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Press C / N / Ⓐ";
         continue;
       }
       playerMarkers[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text = $"Player {i+1}";
@@ -118,7 +118,7 @@ public class CharacterJoiner : MonoBehaviour
       }
       if (curInputDevice is Gamepad) 
       {
-        if (((Gamepad)curInputDevice).startButton.wasPressedThisFrame) 
+        if (((Gamepad)curInputDevice).buttonSouth.wasPressedThisFrame) 
         {
           inputDevice = curInputDevice;
           controlScheme = "Gamepad";

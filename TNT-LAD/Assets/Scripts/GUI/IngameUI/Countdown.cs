@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Countdown : MonoBehaviour
 {
+  public bool paused;
+
   private MusicHandler musicHandler;
   private double timeLeft;
   private void Start()
@@ -17,6 +19,10 @@ public class Countdown : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (paused)
+    {
+      return;
+    }
     timeLeft -= Time.deltaTime;
     if (timeLeft >= 0) {
       gameObject.GetComponent<Text>().text = timeLeft.ToString("0");

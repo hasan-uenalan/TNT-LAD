@@ -5718,7 +5718,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2548088635057416889, guid: de9be5004b0395544bfb824dbd15a5a9,
           type: 3}
-        m_MethodName: SwitchToMainMenu
+        m_MethodName: ResetToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
