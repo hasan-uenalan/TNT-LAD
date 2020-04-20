@@ -10,10 +10,13 @@ public class OptionsData
 
   public int PlayerLifes;
 
+  public float MusicVolume;
+
   public OptionsData()
   {
     RoundTime = 300;
     PlayerLifes = 3;
+    MusicVolume = 0.75f;
   }
 
   public static OptionsData CreateOptionsData(TextAsset optionsFile)
