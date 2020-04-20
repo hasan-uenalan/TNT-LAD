@@ -23,5 +23,6 @@ public class MusicUIHandler : MonoBehaviour
   {
     CrossSceneInformation.MusicVolume = (musicSlider.value/100);
     optionsFileWriter.WriteToOptionsFile();
+    FindObjectOfType<MusicHandler>().ChangeVolume();
   }
 }

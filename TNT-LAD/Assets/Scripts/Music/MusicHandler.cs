@@ -22,6 +22,7 @@ public class MusicHandler : MonoBehaviour
       Destroy(this.gameObject);
     }
     audioSource = gameObject.GetComponent<AudioSource>();
+    audioSource.volume = CrossSceneInformation.MusicVolume;
     DontDestroyOnLoad(this.gameObject);
   }
 
@@ -34,6 +35,11 @@ public class MusicHandler : MonoBehaviour
         audioSource.clip = curTrack.Value;
       }
     }
+  }
+
+  public void ChangeVolume()
+  {
+    audioSource.volume = CrossSceneInformation.MusicVolume;   
   }
 
   private void FillTracks()

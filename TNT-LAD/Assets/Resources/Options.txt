@@ -1,1 +1,1 @@
-{"RoundTime":300,"PlayerLifes":3,"MusicVolume":0.75}
+{"RoundTime":300,"PlayerLifes":3,"MusicVolume":0.5699999928474426}
