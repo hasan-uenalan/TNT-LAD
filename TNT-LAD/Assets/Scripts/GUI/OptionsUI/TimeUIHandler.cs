@@ -18,10 +18,10 @@ public class TimeUIHandler : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    optionsFileWriter = new OptionsFileWriter();
     inputField = TimeInputField.GetComponent<InputField>();
     inputField.text = CrossSceneInformation.RoundTime.ToString();
     oldTimeValue = CrossSceneInformation.RoundTime;
-    optionsFileWriter = new OptionsFileWriter();
   }
 
   public void SetRoundTime()

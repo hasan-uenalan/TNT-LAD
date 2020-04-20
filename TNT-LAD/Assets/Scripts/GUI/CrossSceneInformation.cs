@@ -11,4 +11,6 @@ public static class CrossSceneInformation
   public static int RoundTime { get; set; }
   public static int PlayerLifes { get; set; }
 
+  public static float MusicVolume { get; set; }
+
 }

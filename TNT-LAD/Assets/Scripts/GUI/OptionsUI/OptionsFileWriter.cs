@@ -9,6 +9,8 @@ public class OptionsFileWriter
 
   public int PlayerLifes;
 
+  public float MusicVolume;
+
   private readonly string fullFileName;
 
   private readonly OptionsData optionsData;
@@ -23,6 +25,7 @@ public class OptionsFileWriter
   {
     optionsData.RoundTime = CrossSceneInformation.RoundTime;
     optionsData.PlayerLifes = CrossSceneInformation.PlayerLifes;
+    optionsData.MusicVolume = CrossSceneInformation.MusicVolume;
     string optionsJson = JsonUtility.ToJson(optionsData);
     File.WriteAllText(fullFileName, optionsJson);
   }
