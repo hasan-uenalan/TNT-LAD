@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,11 +15,11 @@ public class BoxHandler : MonoBehaviour
   [Header("Power Up")]
   [Range(0f, 1f)]
   public float generalDropProbability = .8f;
-  public List<GameObject> powerUp;
+  public List<PowerUpDrop> powerUpDrops;
 
+  [Serializable]
   public class PowerUpDrop
   {
-    public string name;
     public GameObject item;
     public int dropRarity;
   }
@@ -31,9 +33,9 @@ public class BoxHandler : MonoBehaviour
     {
       Rigidbody rb = boxPart.GetComponent<Rigidbody>();
       Vector3 direction = (boxPart.position - gameObject.transform.position).normalized;
-      float randomMultiplier = randomForceMultiplier ? Random.Range(0.6f, 1.4f) : 1;
+      float randomMultiplier = randomForceMultiplier ? UnityEngine.Random.Range(0.6f, 1.4f) : 1;
       rb.AddForce(direction * explosionForce * randomMultiplier, ForceMode.Impulse);
-      Vector3 torque = new Vector3(Random.value, Random.value, Random.value);
+      Vector3 torque = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
       rb.AddTorque(torque, ForceMode.Impulse);
     }
     Destroy(gameObject);
@@ -42,11 +44,36 @@ public class BoxHandler : MonoBehaviour
 
   private void SpawnPowerUp()
   {
-    if(Random.value <= generalDropProbability)
+    if(UnityEngine.Random.value <= generalDropProbability)
     {
-      int randomPowerUp = Random.Range(0, powerUp.Count);
-      Instantiate(powerUp[randomPowerUp], transform.position, Quaternion.identity);
+      var randomPowerUp = RandomWeightedPick(powerUpDrops);
+      Instantiate(randomPowerUp.item, transform.position, Quaternion.identity);
     }
+  }
+
+  public PowerUpDrop RandomWeightedPick(List<PowerUpDrop> powerUpDrops)
+  {
+    int systemCenterBodyLength = powerUpDrops.Count;
+    List<int> weights = new List<int>();
+    int weightTotal = 0;
+
+    //Fills weights List with keys from the dictionary.
+    //Calculates total weight.
+    foreach (var item in powerUpDrops)
+    {
+      weights.Add(item.dropRarity);
+      weightTotal += item.dropRarity;
+    }
+
+    //Picks a random entry from the dictionary under consideration of the weight AND the seed.
+    int result = 0, total = 0;
+    int randVal = UnityEngine.Random.Range(0, weightTotal + 1);
+    for (result = 0; result < weights.Count; result++)
+    {
+      total += weights[result];
+      if (total >= randVal) break;
+    }
+    return powerUpDrops.ElementAt(result);
   }
 
 }
