@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
   void Update()
   {
     if (CheckGameEnd(out PlayerData winningPlayer) && !isInCoroutine) {
+      GameObject.Find("TogglePauseButton").SetActive(false);
       StaticPlayers.roundOne = false;
       winningPlayer.PlayerScore++;
       StartCoroutine(EndRoundOnWinningPlayer(winningPlayer));      

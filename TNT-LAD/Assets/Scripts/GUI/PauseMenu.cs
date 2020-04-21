@@ -11,11 +11,6 @@ public class PauseMenu : MonoBehaviour
   private bool menuShown;
   private bool menuExpanding;
 
-  void Start()
-  {
-
-  }
-
   public void TogglePauseMenu()
   {
     if (menuExpanding)
@@ -42,7 +37,14 @@ public class PauseMenu : MonoBehaviour
   {
     foreach(var playerObj in GameObject.FindGameObjectsWithTag("Player"))
     {
-      playerObj.GetComponent<PlayerInput>().enabled = !pause;
+      if (pause)
+      {
+        playerObj.GetComponent<PlayerInput>().DeactivateInput();
+      }
+      else
+      {
+        playerObj.GetComponent<PlayerInput>().ActivateInput();
+      }
       var playerHandler = playerObj.GetComponent<PlayerHandler>();
       if (playerHandler.PlayerStatus != PlayerHandler.Status.dead)
       {
