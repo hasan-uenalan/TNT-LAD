@@ -27,7 +27,7 @@ public class RPGHandler : MonoBehaviour
       var playerData = other.gameObject.GetComponent<PlayerHandler>();
       if (playerData.PlayerStatus != PlayerHandler.Status.invincible)
       {
-        other.gameObject.GetComponent<PlayerHandler>().RemoveLife(gameObject.transform.position);
+        other.gameObject.GetComponent<PlayerHandler>().RemoveLife(true, gameObject.transform.position);
       }
     }
     BlockData blockdata;

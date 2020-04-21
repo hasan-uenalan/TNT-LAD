@@ -73,7 +73,7 @@ public class ExplosionBehaviour : MonoBehaviour
       playerData = other.gameObject.GetComponent<PlayerHandler>();
       if (playerData.PlayerStatus != PlayerHandler.Status.invincible)
       {
-        playerData.RemoveLife(originalBombPosition);      
+        playerData.RemoveLife(false, originalBombPosition);      
       }
     }
     if(other.gameObject.tag == "Bomb")

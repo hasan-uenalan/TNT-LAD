@@ -63,23 +63,23 @@ public class PlayerHandler : MonoBehaviour
     return false;
   }
   //removes a life and checks if player is dead
-  public void RemoveLife(Vector3 bombPosition)
+  public void RemoveLife(bool rpgHit, Vector3 bombPosition)
   {
     PlayerData.Lifes -= 1;
     if(PlayerData.Lifes == 0)
     {
       PlayerStatus = Status.dead;
-      KillPlayer(bombPosition);
+      KillPlayer(rpgHit, bombPosition);
       return;
     }
     SetInvincible();
   }
 
-  private void KillPlayer(Vector3 bombPosition)
+  private void KillPlayer(bool rpgHit, Vector3 bombPosition)
   {
     PlayerStatus = Status.dead;
     //gameObject.SetActive(false);
-    gameObject.GetComponent<PlayerKiller>().KillPlayer(false, bombPosition);
+    gameObject.GetComponent<PlayerKiller>().KillPlayer(rpgHit, bombPosition);
   }
 
   private void SetInvincible()
