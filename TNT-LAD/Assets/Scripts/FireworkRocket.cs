@@ -31,6 +31,7 @@ public class FireworkRocket : MonoBehaviour
       duration -= Time.fixedDeltaTime;
       if (duration <= 0)
       {
+        SoundManager.PlaySound(SoundManager.Sound.Firework);
         Instantiate(fireworkExplosion, gameObject.transform.position, Quaternion.identity);
         gameObject.GetComponent<ParticleSystem>().Stop();
         Destroy(gameObject, 2f);

@@ -11,6 +11,8 @@ public class OptionsFileWriter
 
   public float MusicVolume;
 
+  public float SoundVolume;
+
   private readonly string fullFileName;
 
   private readonly OptionsData optionsData;
@@ -26,6 +28,7 @@ public class OptionsFileWriter
     optionsData.RoundTime = CrossSceneInformation.RoundTime;
     optionsData.PlayerLifes = CrossSceneInformation.PlayerLifes;
     optionsData.MusicVolume = CrossSceneInformation.MusicVolume;
+    optionsData.SoundVolume = CrossSceneInformation.SoundVolume;
     string optionsJson = JsonUtility.ToJson(optionsData);
     File.WriteAllText(fullFileName, optionsJson);
   }

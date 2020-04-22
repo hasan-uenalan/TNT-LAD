@@ -33,6 +33,7 @@ public class PowerUpHandler
     switch (oneTimeUse)
     {
       case PowerUpData.OneTimeUse.RPG:
+        SoundManager.PlaySound(SoundManager.Sound.RPG);
         thisGameObject.GetComponentInChildren<RPGPowerUp>().Use();
         thisGameObject.GetComponentInChildren<PowerUpSwitcher>().selectedPowerUp = 0;
         break;

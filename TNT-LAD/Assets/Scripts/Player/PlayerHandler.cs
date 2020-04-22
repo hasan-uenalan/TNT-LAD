@@ -66,6 +66,7 @@ public class PlayerHandler : MonoBehaviour
   public void RemoveLife(bool rpgHit, Vector3 bombPosition)
   {
     PlayerData.Lifes -= 1;
+    SoundManager.PlaySound(SoundManager.Sound.PlayerDamage);
     if(PlayerData.Lifes == 0)
     {
       PlayerStatus = Status.dead;
@@ -101,6 +102,7 @@ public class PlayerHandler : MonoBehaviour
   {
     if(other.gameObject.tag == "powerup")
     {
+      SoundManager.PlaySound(SoundManager.Sound.PowerUp);
       powerUpHandler.HandlePowerUp(other.gameObject, PlayerData, gameObject);
       Destroy(other.gameObject);
     }

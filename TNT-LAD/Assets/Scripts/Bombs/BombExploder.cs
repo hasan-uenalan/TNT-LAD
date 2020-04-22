@@ -64,6 +64,7 @@ public class BombExploder : MonoBehaviour
       var explosionObj = Instantiate(explosion, pos, Quaternion.identity);
       explosionObj.GetComponent<ExplosionBehaviour>().originalBombPosition = gameObject.transform.position;
     }
+    SoundManager.PlaySound(SoundManager.Sound.Explosion);
     Destroy(gameObject);
   }
 

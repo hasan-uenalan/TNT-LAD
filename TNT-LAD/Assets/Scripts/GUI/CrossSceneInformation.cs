@@ -12,5 +12,6 @@ public static class CrossSceneInformation
   public static int PlayerLifes { get; set; }
 
   public static float MusicVolume { get; set; }
+  public static float SoundVolume { get; set; }
 
 }

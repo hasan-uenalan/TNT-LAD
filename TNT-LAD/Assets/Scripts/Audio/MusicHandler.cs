@@ -33,6 +33,7 @@ public class MusicHandler : MonoBehaviour
       if(curTrack.Key == trackName)
       {
         audioSource.clip = curTrack.Value;
+        audioSource.Play();
       }
     }
   }

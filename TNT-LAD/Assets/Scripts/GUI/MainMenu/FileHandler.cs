@@ -36,6 +36,7 @@ public class FileHandler : MonoBehaviour
     CrossSceneInformation.PlayerLifes = optionsData.PlayerLifes;
     CrossSceneInformation.RoundTime = optionsData.RoundTime;
     CrossSceneInformation.MusicVolume = optionsData.MusicVolume;
+    CrossSceneInformation.SoundVolume = optionsData.SoundVolume;
   }
 
   private static void SetOptionsFromFile(TextAsset optionsFile)

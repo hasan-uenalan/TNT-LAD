@@ -11597,8 +11597,9 @@ GameObject:
   - component: {fileID: 1860952611}
   - component: {fileID: 1860952610}
   - component: {fileID: 1860952612}
+  - component: {fileID: 1860952613}
   m_Layer: 0
-  m_Name: MusicHandler
+  m_Name: AudioHandler
   m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11730,6 +11731,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1860952613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860952609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7d474cbe460b540bd2480432775242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundAudioClips:
+  - Sound: 0
+    AudioClip: {fileID: 8300000, guid: 13910f02da183154aab57c36140ea71d, type: 3}
+  - Sound: 1
+    AudioClip: {fileID: 8300000, guid: 76db49c4d185c344a92c3d9cc61e5227, type: 3}
+  - Sound: 2
+    AudioClip: {fileID: 8300000, guid: bada3818fd2fe63479025119a1aa5716, type: 3}
+  - Sound: 3
+    AudioClip: {fileID: 8300000, guid: ca72d0554953bf9499ce9839d7e7fa01, type: 3}
+  - Sound: 4
+    AudioClip: {fileID: 8300000, guid: c7c51fb83ef3973448bb909cadcad144, type: 3}
 --- !u!1 &1868991453
 GameObject:
   m_ObjectHideFlags: 0
